@@ -1,0 +1,105 @@
+@import "palette.css";
+
+
+/* Scroll Bar */
+::-webkit-scrollbar{
+  display: none;
+}
+
+.App{
+
+    font-family: 'Poppins', sans-serif;
+    /* overflow-x: hidden; */
+       /* display: flex;
+      position: relative;  */
+}
+  
+.active{
+  background-color: var(--sidenav-active-background);
+}
+
+  .react-datepicker__month-container {
+    border: 1px solid #ccc;
+    z-index: 999999;
+  }
+  .calender-container{ 
+    overflow: auto;
+    background:var(--calender-button-container-background);
+    color:var(--calender-button-contrast-text);
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 6px 65px 2px var(--shadow);
+    -moz-box-shadow: -2px 6px 65px 2px var(--shadow);
+    box-shadow: -2px 6px 65px 2px var(--shadow);}
+
+
+  /* CSS fix for todays date getting highlited for all month - ignore if disabledKeyboardNavigation is true */
+  /* .react-datepicker__day--keyboard-selected {
+    background: none;
+    color: inherit;
+    &:focus {
+      background-color: #e1e1e1;
+      color: #000000;
+    }
+  } */
+select{
+  border: 1px solid var(--shadow);
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius:5px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  /* box-shadow: 0 10px 15px var(--shadow); */
+}
+select:hover{
+  opacity: 0.8;
+}
+
+.contained-dark:hover{
+  opacity: 0.8;
+}
+
+  .order-status-Completed{
+    background-color: var(--order-completed-background);
+      color: var(--order-completed-text);
+    }
+  
+    .order-status-Pending{
+      background-color: var(--order-pending-background);
+      color: var(--order-pending-text);
+    }
+  
+    .order-status-Accepted{
+      background-color: var(--order-accepted-background);
+      color: var(--order-accepted-text);
+    }
+    .order-status-Ready{
+      background-color: var(--order-ready-background);
+      color: var(--order-ready-text);
+    }
+    .order-status-Collected{
+      background-color: var(--order-collected-background);
+      color: var(--order-collected-text);
+    }
+    .order-status-Cancelled{
+      background-color: var(--order-cancelled-background);
+      color: var(--order-cancelled-text);
+    }
+
+  @media only screen and (max-width: 685px) {
+    .react-datepicker__month-container {
+      float: none;
+    }
+    .calender-container{
+      position: absolute;
+    }
+  }
+
+  /* For screen width 685+ min height of month container should be 40vh to have number of date rows */
+  @media only screen and (min-width: 685px) {
+    .react-datepicker__month-container {
+    border-bottom: none;
+    }
+  }
+  
+  

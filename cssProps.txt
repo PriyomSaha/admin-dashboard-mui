@@ -1,0 +1,14 @@
+<Box display="flex" justifyContent flexDirection alignItems>
+	<Box alignSelf>
+    </Box>
+</Box>
+
+Parent level {
+    justifyContent = Horizontal Align
+    flexDirection = Row / Column
+    alignItems = Vertical Align
+    }
+
+Child level{
+    alignSelf = overWrite Parent Vertical Align
+} 

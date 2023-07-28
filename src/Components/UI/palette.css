@@ -1,0 +1,20 @@
+:root{
+--calender-button-container-background:#216ba5;
+--calender-button-contrast-text:#fff;
+--header-nav-background : #0d121b;
+--sidenav-active-background:#2c3649;
+--header-nav-text:#f5f5f5;
+--shadow:rgba(0,0,0,0.51);
+--order-completed-background:#388e3c;
+--order-completed-text:whitesmoke;
+--order-pending-background:#01579b;
+--order-pending-text:whitesmoke;
+--order-ready-background:#8bc34a;
+--order-ready-text:black;
+--order-collected-background:#607d8b;
+--order-collected-text:whitesmoke;
+--order-cancelled-background:#b71c1c;
+--order-cancelled-text:whitesmoke;
+--order-accepted-background:#cddc39;
+--order-accepted-text:black;
+}
