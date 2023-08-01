@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import { theme } from "Components/UI/themes";
 
 export const drawerWidth = 200;
 
@@ -42,3 +43,41 @@ export const ComponentBody = styled("div")(({ theme }) => ({
   maxWidth: "100vw",
   // [theme.breakpoints.down("md")]: { padding: theme.spacing(2, 1) },
 }));
+
+//This Style is for image in table cell
+export const TableImage = {
+  width: "5vh",
+  height: "5vh",
+  display: "flex",
+  alignSelf: "center",
+  borderRadius: "10px",
+};
+
+//Super Admin login for Merchant and Customer
+export const SuperAdminLoginButton = styled("Button")(({ theme }) => ({
+  boxShadow: theme.shadows[10],
+  background: "var(--super-admin-login-button-background)",
+  color: "var(--super-admin-login-button-text)",
+  border: "1px solid var(--super-admin-login-button-text)",
+  borderRadius: "5px",
+  padding: theme.spacing(1, 2),
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+}));
+
+// Styling for the Modal component
+export const ModalStyle = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 50,
+  p: 2,
+  borderRadius: "10px",
+  [theme.breakpoints.between(0, 400)]: {
+    width: "100%",
+  },
+};

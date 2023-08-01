@@ -134,7 +134,9 @@ export default function SideNav() {
             disablePadding
             sx={{ display: "block" }}
             onClick={() => navigate("/merchants")}
-            className={location.pathname === "/merchants" ? "active" : null}
+            className={
+              location.pathname.includes("merchants") ? "active" : null
+            }
           >
             <ListItemButton
               sx={{

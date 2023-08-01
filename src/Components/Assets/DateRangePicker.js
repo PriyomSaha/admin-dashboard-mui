@@ -51,7 +51,7 @@ function DateRangePicker() {
   ));
   const Container = ({ className, children }) => {
     return (
-      <Box sx={{}} className="calender-container">
+      <Box className="calender-container">
         <CalendarContainer className={className}>
           <Box sx={{ position: "relative" }}>{children}</Box>
         </CalendarContainer>

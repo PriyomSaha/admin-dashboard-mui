@@ -16,8 +16,11 @@ import {
   MdAccountCircle,
   MdLogout,
 } from "react-icons/md";
-import { DrawerHeader } from "../../Assets/GlobalStyles";
-import { useAccountStore, useDrawerStore } from "../../Assets/StateManagement";
+import { DrawerHeader } from "../../../Components/Assets/GlobalStyles";
+import {
+  useAccountStore,
+  useDrawerStore,
+} from "../../../Components/Assets/StateManagement";
 import { Fade } from "@mui/material";
 import { useEffect } from "react";
 
@@ -80,11 +83,6 @@ export default function TopNav() {
   //For profile menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-
-  useEffect(() => {
-    let appbarHeight = document.getElementById("appBar").clientHeight;
-    console.log("appbarHeight", appbarHeight);
-  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

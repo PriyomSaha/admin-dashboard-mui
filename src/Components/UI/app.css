@@ -13,11 +13,12 @@
        /* display: flex;
       position: relative;  */
 }
-  
 .active{
   background-color: var(--sidenav-active-background);
 }
-
+.table-icon{
+font-size: "25px";
+}
   .react-datepicker__month-container {
     border: 1px solid #ccc;
     z-index: 999999;
@@ -101,5 +102,4 @@ select:hover{
     border-bottom: none;
     }
   }
-  
   

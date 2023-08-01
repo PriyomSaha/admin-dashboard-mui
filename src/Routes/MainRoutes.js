@@ -82,7 +82,7 @@ const MainRoutes = {
       element: <Merchants />,
       children: [
         {
-          path: "merchant",
+          path: "",
           element: <Merchant />,
         },
         {
