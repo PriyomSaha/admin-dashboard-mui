@@ -1,5 +1,5 @@
 import React from "react";
-import MerchantTable from "./MerchantTable";
+import MerchantTable from "Components/Navigations/Merchants/Merchant/MerchantTable";
 
 function Merchant() {
   return (

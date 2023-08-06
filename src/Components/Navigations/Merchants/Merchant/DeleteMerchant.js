@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import {
   Box,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
   Fade,
   IconButton,
   Modal,
   Typography,
 } from "@mui/material";
 import { MdClose, MdDelete } from "react-icons/md";
+import { TiWarning } from "react-icons/ti";
 import { ModalStyle } from "Components/Assets/GlobalStyles";
 import { theme } from "Components/UI/themes";
 
@@ -26,12 +22,14 @@ const DeleteMerchant = ({ merchantName }) => {
         style={{ fontSize: "25px", cursor: "pointer" }}
       />
 
-      <Modal open={isDeleteModalOpen} TransitionComponent={Fade}>
+      <Modal open={isDeleteModalOpen}>
         <Box sx={ModalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete Merchant
-          </Typography>
-
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <TiWarning />
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              &nbsp;Delete Merchant
+            </Typography>
+          </Box>
           <IconButton
             aria-label="close"
             onClick={() => setIsDeleteModalOpen(!isDeleteModalOpen)}

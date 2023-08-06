@@ -54,7 +54,7 @@ export const TableImage = {
 };
 
 //Super Admin login for Merchant and Customer
-export const SuperAdminLoginButton = styled("Button")(({ theme }) => ({
+export const SuperAdminLoginButton = styled("button")(({ theme }) => ({
   boxShadow: theme.shadows[10],
   background: "var(--super-admin-login-button-background)",
   color: "var(--super-admin-login-button-text)",
@@ -80,4 +80,23 @@ export const ModalStyle = {
   [theme.breakpoints.between(0, 400)]: {
     width: "100%",
   },
+};
+
+export const FullScreenModalContainer = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+export const FullScreenModalContent = {
+  outline: "none",
+  backgroundColor: theme.palette.grey[200],
+  borderBottomLeftRadius: 5,
+  borderBottomRightRadius: 5,
+  padding: theme.spacing(2),
+  minWidth: "50vw",
+  maxWidth: "100vw",
+  minHeight: "20vh",
+  maxHeight: "80vh",
+  overflow: "auto",
 };

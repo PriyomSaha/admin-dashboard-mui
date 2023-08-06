@@ -10,13 +10,20 @@ import {
 import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { theme } from "Components/UI/themes";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdClear, MdSearch } from "react-icons/md";
+import { useEffect } from "react";
 
 function MerchantsNavigation() {
-  const [selected, setSelected] = useState("Merchant");
+  const [selected, setSelected] = useState("Merchants");
   const navigate = useNavigate();
   const matches = useMediaQuery((theme) => theme.breakpoints.up("md"));
+  const location = useLocation();
+
+  useEffect(() => {
+    const subPath = location.pathname.split("/").slice(-1)[0];
+    setSelected(subPath.charAt(0).toUpperCase() + subPath.slice(1));
+  }, [location]);
 
   // State to manage the search text
   const [searchText, setSearchText] = useState("");
@@ -46,13 +53,13 @@ function MerchantsNavigation() {
             <Button
               onClick={() => {
                 navigate("/merchants");
-                setSelected("Merchant");
+                setSelected("Merchants");
               }}
               variant={
-                selected === "Merchant" ? "contained-dark" : "outlined-dark"
+                selected === "Merchants" ? "contained-dark" : "outlined-dark"
               }
               sx={
-                selected === "Merchant"
+                selected === "Merchants"
                   ? {
                       ":hover": {
                         background: theme.palette.grey[800],

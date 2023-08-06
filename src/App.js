@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
+import "react-phone-input-2/lib/bootstrap.css";
 import "Components/UI/app.css";
 import { ThemeProvider } from "@mui/material/styles";
-import Orders from "Components/Navigations/Orders";
-import Dashboard from "Components/Navigations/Dashboard";
 import { theme } from "Components/UI/themes";
 import { CssBaseline } from "@mui/material";
 import ScrollTop from "Components/ScrollTop";

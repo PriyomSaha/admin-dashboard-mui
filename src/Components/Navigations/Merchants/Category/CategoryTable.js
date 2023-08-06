@@ -1,67 +1,53 @@
-import React from "react";
 import {
+  Box,
+  Divider,
+  Paper,
+  Switch,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
-  Paper,
-  Typography,
-  Checkbox,
-  Switch,
-  Divider,
-  Box,
   TablePagination,
+  TableRow,
+  Typography,
 } from "@mui/material";
-import {
-  SuperAdminLoginButton,
-  TableImage,
-} from "Components/Assets/GlobalStyles";
-import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
-import { FaAngleRight } from "react-icons/fa";
-import "Components/UI/app.css";
-import { getMerchants } from "Components/Assets/UIServices";
-import DeleteMerchant from "Components/Navigations/Merchants/Merchant/DeleteMerchant";
+import { TableImage } from "Components/Assets/GlobalStyles";
+import { getCategories } from "Components/Assets/UIServices";
+import React from "react";
+import CategoryFallBack from "Components/UI/Images/CategoriesFallBack.jpg";
 import { theme } from "Components/UI/themes";
-import EditMerchant from "Components/Navigations/Merchants/Merchant/AddEditMerchant/index";
+import AddEditCategory from "Components/Navigations/Merchants/Category/AddEditCategory/index";
 
-function MerchantTable() {
+function CategoryTable() {
   const columns = [
     { id: "img", label: "Photo", minWidth: 20 },
     {
-      id: "merch",
-      label: "Merchant Name",
-      minWidth: 200,
+      id: "category",
+      label: "Category",
+      minWidth: 250,
     },
     {
-      id: "feature",
-      label: "Featured",
+      id: "sort",
+      label: "Sort Order",
       minWidth: 20,
-    },
-    {
-      id: "sponsored",
-      label: "Sponsored",
-      minWidth: 20,
+      align: "center",
     },
     {
       id: "status",
       label: "Status",
       minWidth: 20,
+      align: "center",
     },
     {
       id: "actions",
       label: "Actions",
       minWidth: 100,
-    },
-    {
-      id: "login",
-      label: "Auto Login",
-      minWidth: 120,
+      align: "center",
     },
   ];
 
-  const [merchants, setMerchants] = React.useState([]);
+  const [categories, setCategories] = React.useState([]);
 
   // State variables for pagination
   const [page, setPage] = React.useState(0);
@@ -79,7 +65,7 @@ function MerchantTable() {
   };
 
   React.useEffect(() => {
-    setMerchants(getMerchants());
+    setCategories(getCategories());
   }, []);
 
   return (
@@ -110,7 +96,7 @@ function MerchantTable() {
             </TableHead>
 
             <TableBody>
-              {merchants
+              {categories
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((value) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={value.id}>
@@ -119,7 +105,7 @@ function MerchantTable() {
                         <img
                           src={
                             value.imgUri.length == 0
-                              ? ShopFallBack
+                              ? CategoryFallBack
                               : value.imgUri
                           }
                           alt="Shop View"
@@ -131,21 +117,13 @@ function MerchantTable() {
                       <Typography variant="body1" fontWeight={500}>
                         {value.name}
                       </Typography>
-                      <Typography
-                        variant="body1"
-                        fontWeight={400}
-                        fontSize={12}
-                      >
-                        {value.address}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Typography variant="body1" fontWeight={500}>
+                        {value.sortOrder}
                       </Typography>
                     </TableCell>
-                    <TableCell>
-                      <Checkbox defaultChecked={value.featured} />
-                    </TableCell>
-                    <TableCell>
-                      <Checkbox defaultChecked={value.sponsored} />
-                    </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Switch
                         defaultChecked={value.status}
                         sx={
@@ -159,19 +137,20 @@ function MerchantTable() {
                         }
                       />
                     </TableCell>
-                    <TableCell>
+                    <TableCell align="center">
                       <Box
                         sx={{
                           display: "flex",
                           alignItems: "center",
-                          width: "fit-content",
+                          width: "100%",
+                          justifyContent: "center",
 
                           "& svg": {
                             m: 1,
                           },
                         }}
                       >
-                        <EditMerchant merchantName={value.name} />
+                        <AddEditCategory />
 
                         <Divider
                           orientation="vertical"
@@ -179,14 +158,8 @@ function MerchantTable() {
                           flexItem
                         />
 
-                        <DeleteMerchant merchantName={value.name} />
+                        {/* <DeleteMerchant merchantName={value.name} /> */}
                       </Box>
-                    </TableCell>
-                    <TableCell>
-                      <SuperAdminLoginButton>
-                        Login &nbsp;
-                        <FaAngleRight />
-                      </SuperAdminLoginButton>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -197,7 +170,7 @@ function MerchantTable() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={merchants.length}
+          count={categories.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -207,5 +180,4 @@ function MerchantTable() {
     </>
   );
 }
-
-export default MerchantTable;
+export default CategoryTable;

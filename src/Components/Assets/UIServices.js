@@ -1,4 +1,4 @@
-import { orders, merchants } from "Components/Assets/DummyData";
+import { orders, merchants, categories } from "Components/Assets/DummyData";
 
 // Object 'orderCount' to store the counts of orders for different statuses
 let orderCount = {
@@ -33,4 +33,8 @@ export const updateOrderCount = () => {
 };
 export const getMerchants = () => {
   return merchants;
+};
+
+export const getCategories = () => {
+  return categories;
 };

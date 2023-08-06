@@ -7,11 +7,7 @@
 }
 
 .App{
-
     font-family: 'Poppins', sans-serif;
-    /* overflow-x: hidden; */
-       /* display: flex;
-      position: relative;  */
 }
 .active{
   background-color: var(--sidenav-active-background);
@@ -85,6 +81,20 @@ select:hover{
     .order-status-Cancelled{
       background-color: var(--order-cancelled-background);
       color: var(--order-cancelled-text);
+    }
+
+    /* Phone input */
+    .react-tel-input .form-control{
+    /* font-size: 16px; */
+    height: 1.4375em;
+    background: transparent;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    }
+    .react-tel-input .form-control:focus {
+    background: transparent;
+    /* border: 1px solid var(--phone-input-border); */
     }
 
   @media only screen and (max-width: 685px) {

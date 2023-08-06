@@ -293,3 +293,29 @@ export let merchants = [
     status: false,
   },
 ];
+
+export let categories = [
+  {
+    id: 1,
+    name: "Bakery",
+    sortOrder: 1,
+    status: true,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/88fbf0da-522b-4834-baf4-936094752877.jpeg",
+  },
+  {
+    id: 2,
+    name: "Beverages",
+    sortOrder: 2,
+    status: false,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/17c87904-2d65-4a06-be79-15f6256f539e.jpeg",
+  },
+  {
+    id: 3,
+    name: "Fish",
+    sortOrder: 5,
+    status: true,
+    imgUri: "",
+  },
+];
