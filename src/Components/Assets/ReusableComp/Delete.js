@@ -12,26 +12,34 @@ import { TiWarning } from "react-icons/ti";
 import { ModalStyle } from "Components/Assets/GlobalStyles";
 import { theme } from "Components/UI/themes";
 
-const DeleteMerchant = ({ merchantName }) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+const Delete = ({ name, type }) => {
+  // State to track whether the delete modal is open or not
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   return (
     <>
+      {/* Delete button icon */}
       <MdDelete
+        // Click event handler to open the delete modal
         onClick={() => setIsDeleteModalOpen(true)}
         style={{ fontSize: "25px", cursor: "pointer" }}
       />
 
+      {/* Delete Confirmation Modal */}
       <Modal open={isDeleteModalOpen}>
         <Box sx={ModalStyle}>
+          {/* Modal header with warning icon and title */}
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <TiWarning />
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              &nbsp;Delete Merchant
+            <Typography variant="h6" component="h2">
+              &nbsp;Delete {type}
             </Typography>
           </Box>
+
+          {/* Close button in the modal */}
           <IconButton
             aria-label="close"
+            // Click event handler to close the delete modal
             onClick={() => setIsDeleteModalOpen(!isDeleteModalOpen)}
             sx={{
               position: "absolute",
@@ -43,15 +51,19 @@ const DeleteMerchant = ({ merchantName }) => {
             <MdClose />
           </IconButton>
 
+          {/* Horizontal line for visual separation */}
           <hr />
 
-          <Typography id="modal-modal-description" sx={{ py: 3 }}>
-            Are you sure you want to delete Merchant
-            <br />" <b>{merchantName}</b> "
+          {/* Message inside the delete modal */}
+          <Typography sx={{ py: 3 }}>
+            Are you sure you want to delete {type}
+            <br />" <b>{name}</b> "
           </Typography>
 
+          {/* Horizontal line for visual separation */}
           <hr />
 
+          {/* Delete button inside the modal */}
           <Button
             variant="contained"
             sx={{
@@ -59,13 +71,16 @@ const DeleteMerchant = ({ merchantName }) => {
               position: "relative",
             }}
             color="error"
+            // Click event handler to confirm the deletion
             onClick={() => {
               setIsDeleteModalOpen(!isDeleteModalOpen);
+              // Perform the actual deletion action here...
             }}
           >
             Delete
           </Button>
 
+          {/* Cancel button inside the modal */}
           <Button
             variant="contained"
             sx={{
@@ -76,6 +91,7 @@ const DeleteMerchant = ({ merchantName }) => {
                 background: `${theme.palette.grey[700]}`,
               },
             }}
+            // Click event handler to close the delete modal without deleting
             onClick={() => setIsDeleteModalOpen(!isDeleteModalOpen)}
           >
             Close
@@ -86,4 +102,4 @@ const DeleteMerchant = ({ merchantName }) => {
   );
 };
 
-export default DeleteMerchant;
+export default Delete;

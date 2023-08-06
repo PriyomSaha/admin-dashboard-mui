@@ -8,7 +8,7 @@ import {
 import { theme } from "Components/UI/themes";
 import { FaRegEdit } from "react-icons/fa";
 import MerchantDetails from "./MerchantDetails";
-import SaveCancelButtons from "../../SaveCancelButtons";
+import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import CommissionConfiguration from "./CommissionConfiguration";
 import SearchEngineOptimization from "./SearchEngineOptimization";
 

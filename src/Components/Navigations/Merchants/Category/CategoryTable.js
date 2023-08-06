@@ -17,7 +17,8 @@ import { getCategories } from "Components/Assets/UIServices";
 import React from "react";
 import CategoryFallBack from "Components/UI/Images/CategoriesFallBack.jpg";
 import { theme } from "Components/UI/themes";
-import AddEditCategory from "Components/Navigations/Merchants/Category/AddEditCategory/index";
+import AddEditCategory from "Components/Navigations/Merchants/Category/AddEditCategory";
+import Delete from "Components/Assets/ReusableComp/Delete";
 
 function CategoryTable() {
   const columns = [
@@ -158,7 +159,7 @@ function CategoryTable() {
                           flexItem
                         />
 
-                        {/* <DeleteMerchant merchantName={value.name} /> */}
+                        <Delete name={value.name} type="Category" />
                       </Box>
                     </TableCell>
                   </TableRow>

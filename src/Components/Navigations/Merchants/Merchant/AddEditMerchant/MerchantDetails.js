@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import PhoneInput from "react-phone-input-2";
 import { theme } from "Components/UI/themes";
-import Countries from "Components/Assets/Countries";
+import Countries from "Components/Assets/ReusableComp/Countries";
 import MerchantCategory from "./MerchantCategory";
 import OrderType from "./OrderType";
 

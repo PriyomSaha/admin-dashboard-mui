@@ -1,7 +1,6 @@
 import {
   Box,
   FormControl,
-  FormLabel,
   Grid,
   IconButton,
   InputLabel,
@@ -19,20 +18,25 @@ import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import SaveCancelButtons from "Components/Navigations/Merchants/SaveCancelButtons";
-import ImageUpload from "Components/Assets/ImageUpload";
+import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
+import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
 
 function AddEditCategory() {
+  // State to control the visibility of the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
+      {/* Icon button to open the modal */}
       <FaRegEdit
         onClick={() => setIsModalOpen(true)}
         style={{ fontSize: "25px", cursor: "pointer" }}
       />
+
+      {/* The modal dialog */}
       <Modal open={isModalOpen} sx={FullScreenModalContainer}>
         <Box>
+          {/* Modal header */}
           <Box
             sx={{
               position: "sticky",
@@ -41,7 +45,6 @@ function AddEditCategory() {
               right: "auto",
               minWidth: "10vw",
               maxWidth: "100vw",
-
               backgroundColor: theme.palette.background.paper,
               padding: theme.spacing(1, 2),
               zIndex: 1,
@@ -50,8 +53,10 @@ function AddEditCategory() {
               borderBottom: `1px solid ${theme.palette.grey[400]}`,
             }}
           >
+            {/* Title of the modal */}
             <Typography variant="h6">Edit Category</Typography>
 
+            {/* Close button */}
             <IconButton
               aria-label="close"
               onClick={() => setIsModalOpen(!isModalOpen)}
@@ -68,14 +73,17 @@ function AddEditCategory() {
             </IconButton>
           </Box>
 
+          {/* Modal content */}
           <Box sx={FullScreenModalContent}>
             <Box>
+              {/* Grid layout for arranging form elements */}
               <Grid
                 container
                 justifyContent="center"
                 alignItems="center"
                 spacing={theme.breakpoints.down("sm") ? 3 : 1}
               >
+                {/* Left side of the form */}
                 <Grid
                   container
                   item
@@ -86,6 +94,7 @@ function AddEditCategory() {
                   flexDirection="column"
                 >
                   <Grid item>
+                    {/* Input field for the category name */}
                     <TextField
                       fullWidth
                       label="Category Name*"
@@ -94,6 +103,7 @@ function AddEditCategory() {
                     />
                   </Grid>
                   <Grid item>
+                    {/* Input field for the sort order */}
                     <TextField
                       fullWidth
                       label="Sort Order*"
@@ -107,8 +117,8 @@ function AddEditCategory() {
                       }}
                     />
                   </Grid>
-
                   <Grid item>
+                    {/* Select field for the category status */}
                     <FormControl fullWidth variant="outlined" size="small">
                       <InputLabel>Status</InputLabel>
                       <Select label="Status">
@@ -118,15 +128,20 @@ function AddEditCategory() {
                     </FormControl>
                   </Grid>
                 </Grid>
+
+                {/* Right side of the form */}
                 <Grid
                   item
                   xs={12}
                   sm={6}
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
+                  {/* Component for image upload */}
                   <ImageUpload />
                 </Grid>
               </Grid>
+
+              {/* Save and cancel buttons */}
               <Box mt={4}>
                 <SaveCancelButtons
                   isModalOpen={isModalOpen}
@@ -142,5 +157,3 @@ function AddEditCategory() {
 }
 
 export default AddEditCategory;
-
-// <ImageUpload />

@@ -22,7 +22,7 @@ import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
 import { FaAngleRight } from "react-icons/fa";
 import "Components/UI/app.css";
 import { getMerchants } from "Components/Assets/UIServices";
-import DeleteMerchant from "Components/Navigations/Merchants/Merchant/DeleteMerchant";
+import Delete from "Components/Assets/ReusableComp/Delete";
 import { theme } from "Components/UI/themes";
 import EditMerchant from "Components/Navigations/Merchants/Merchant/AddEditMerchant/index";
 
@@ -179,7 +179,7 @@ function MerchantTable() {
                           flexItem
                         />
 
-                        <DeleteMerchant merchantName={value.name} />
+                        <Delete name={value.name} type="Merchant" />
                       </Box>
                     </TableCell>
                     <TableCell>

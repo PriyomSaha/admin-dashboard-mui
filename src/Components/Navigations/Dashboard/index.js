@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
-import DateRangePicker from "Components/Assets/DateRangePicker";
+import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
 
 function Dashboard() {
