@@ -44,6 +44,9 @@ const Category = Loadable(
 const Product = Loadable(
   lazy(() => import("Components/Navigations/Merchants/Product"))
 );
+const Settings = Loadable(
+  lazy(() => import("Components/Navigations/Settings"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -94,6 +97,10 @@ const MainRoutes = {
           element: <Category />,
         },
       ],
+    },
+    {
+      path: "settings",
+      element: <Settings />,
     },
     {
       path: "customers",

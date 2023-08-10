@@ -31,7 +31,7 @@ function MerchantTable() {
     { id: "img", label: "Photo", minWidth: 20 },
     {
       id: "merch",
-      label: "Merchant Name",
+      label: "Merchant",
       minWidth: 200,
     },
     {

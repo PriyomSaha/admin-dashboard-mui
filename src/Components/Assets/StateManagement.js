@@ -12,7 +12,7 @@ export const useOrdersLoadingStore = create((set) => ({
 }));
 
 export const useAccountStore = create((set) => ({
-  userData: { userId: "", userName: "" },
-  setUserData: (userId, userName) =>
-    set((state) => ({ userData: { userId, userName } })),
+  userData: { userId: "", userName: "", userToken: "", authStatus: false },
+  setUserData: (userId, userName, userToken, authStatus) =>
+    set((state) => ({ userData: { userId, userName, userToken, authStatus } })),
 }));

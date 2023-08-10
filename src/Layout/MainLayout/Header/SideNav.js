@@ -16,7 +16,7 @@ import {
   BiSolidShoppingBags,
 } from "react-icons/bi";
 import { BsPeopleFill, BsGraphUpArrow } from "react-icons/bs";
-
+import { AiFillSetting } from "react-icons/ai";
 import { TbReportAnalytics } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDrawerStore } from "Components/Assets/StateManagement";
@@ -275,6 +275,27 @@ export default function SideNav() {
                 </ListItem>
               </List>
             </Collapse>
+          </ListItem>
+
+          {/* ===== Settings ===== */}
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => navigate("/settings")}
+            className={location.pathname === "/settings" ? "active" : null}
+          >
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <NavIcon sx={{ mr: open ? 3 : "auto" }}>
+                <AiFillSetting />
+              </NavIcon>
+              <ListItemText primary="Settings" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
           </ListItem>
         </List>
         <Divider />

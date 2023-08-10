@@ -8,6 +8,7 @@
 
 .App{
     font-family: 'Poppins', sans-serif;
+    background-color: var(--component-body-background);
 }
 .active{
   background-color: var(--sidenav-active-background);
@@ -111,5 +112,11 @@ select:hover{
     .react-datepicker__month-container {
     border-bottom: none;
     }
+  }
+  
+  a{
+    text-decoration: none;
+    color: var(--links);
+    font-weight: 500;
   }
   

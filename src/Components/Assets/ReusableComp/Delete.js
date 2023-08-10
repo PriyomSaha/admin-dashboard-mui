@@ -56,7 +56,9 @@ const Delete = ({ name, type }) => {
 
           {/* Message inside the delete modal */}
           <Typography sx={{ py: 3 }}>
-            Are you sure you want to delete {type}
+            Are you sure you want to delete{" "}
+            {/* Type to delete first letter lower case */}
+            {type.charAt(0).toLowerCase() + type.slice(1)}
             <br />" <b>{name}</b> "
           </Typography>
 

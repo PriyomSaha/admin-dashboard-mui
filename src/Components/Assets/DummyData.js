@@ -319,3 +319,54 @@ export let categories = [
     imgUri: "",
   },
 ];
+
+export let products = [
+  {
+    id: 1,
+    name: "Brunswick Chunk Tuna In Oil",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    price: "₹480.00",
+    published: true,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 2,
+    name: "Brunswick Chunk Tuna In Oil",
+    merchant: "Sherwin's Minimart",
+    merchantId: "",
+    price: "₹480.00",
+    published: false,
+    imgUri: "",
+  },
+  {
+    id: 3,
+    name: "Brunswick Chunk Tuna In Oil",
+    merchant: "Sherwin's Minimart",
+    merchantId: "",
+    price: "₹480.00",
+    published: true,
+    imgUri: "",
+  },
+  {
+    id: 4,
+    name: "Brunswick Chunk Tuna In Oil",
+    merchant: "Sherwin's Minimart",
+    merchantId: "",
+    price: "₹480.00",
+    published: false,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 5,
+    name: "Brunswick Chunk Tuna In Oil",
+    merchant: "Sherwin's Minimart",
+    merchantId: "",
+    price: "₹480.00",
+    published: false,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+];

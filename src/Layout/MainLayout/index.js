@@ -3,31 +3,39 @@ import SideNav from "Layout/MainLayout/Header/SideNav";
 import TopNav from "Layout/MainLayout/Header/TopNav";
 import { theme } from "Components/UI/themes";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { useAccountStore } from "Components/Assets/StateManagement";
 
 // Functional component 'MainLayout' representing the main layout of the application
 function MainLayout() {
   // Use the 'useMediaQuery' hook to check if the screen size is small (sm) or below
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const userData = useAccountStore((state) => state.userData);
   return (
     <>
-      {/* Display the TopNav component at the top of the layout */}
-      <TopNav />
+      {!userData.authStatus ? (
+        <Navigate to="/login" />
+      ) : (
+        <>
+          {/* Display the TopNav component at the top of the layout */}
+          <TopNav />
 
-      {/* The main container to hold SideNav and the content */}
-      <Box>
-        {/* Display the SideNav component */}
-        <SideNav />
+          {/* The main container to hold SideNav and the content */}
+          <Box>
+            {/* Display the SideNav component */}
+            <SideNav />
 
-        {/* The main content area */}
-        {/* 'Box' element with 'flexGrow: 1' property takes up remaining horizontal space */}
-        {/* 'ml: 0' sets no left margin on small screens, 'ml: 8' adds a left margin on larger screens */}
-        <Box sx={{ flexGrow: 1, ml: isSmall ? 0 : 8 }}>
-          {/* Display the Outlet component to render the content of the current route */}
-          <Outlet />
-        </Box>
-      </Box>
+            {/* The main content area */}
+            {/* 'Box' element with 'flexGrow: 1' property takes up remaining horizontal space */}
+            {/* 'ml: 0' sets no left margin on small screens, 'ml: 8' adds a left margin on larger screens */}
+            <Box sx={{ flexGrow: 1, ml: isSmall ? 0 : 8 }}>
+              {/* Display the Outlet component to render the content of the current route based on auth status*/}
+              {!userData.authStatus ? <Navigate to="/login" /> : <Outlet />}
+            </Box>
+          </Box>
+        </>
+      )}
     </>
   );
 }
