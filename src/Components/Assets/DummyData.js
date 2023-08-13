@@ -370,3 +370,54 @@ export let products = [
       "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
   },
 ];
+
+export let users = [
+  {
+    id: 1,
+    email: "test@gmail.com",
+    status: "Active",
+    added: "12 May,2023",
+  },
+  {
+    id: 2,
+    email: "test@gmail.com",
+    status: "Active",
+    added: "12 May,2023",
+  },
+  {
+    id: 3,
+    email: "test@gmail.com",
+    status: "Active",
+    added: "12 May,2023",
+  },
+  {
+    id: 4,
+    email: "test@gmail.com",
+    status: "Active",
+    added: "12 May,2023",
+  },
+  {
+    id: 5,
+    email: "test@gmail.com",
+    status: "Pending",
+    added: "12 May,2023",
+  },
+  {
+    id: 6,
+    email: "test@gmail.com",
+    status: "Pending",
+    added: "12 May,2023",
+  },
+  {
+    id: 7,
+    email: "test@gmail.com",
+    status: "Active",
+    added: "12 May,2023",
+  },
+  {
+    id: 8,
+    email: "test@gmail.com",
+    status: "Pending",
+    added: "12 May,2023",
+  },
+];

@@ -14,15 +14,14 @@ const register_user = async (req, res) => {
     const sPassword = await securePass(req.body.password);
 
     const user = new User({
-      name: req.body.name,
-      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      country: req.body.country,
+      phoneNumber: req.body.phoneNumber,
       password: sPassword,
-      // image: req.file.filename,
-      type: req.body.type,
-      mobile: req.body.mobile,
     });
     const userData = await User.findOne({
-      $or: [{ email: req.body.email }, { mobile: req.body.mobile }],
+      $or: [{ phoneNumber: req.body.phoneNumber }],
     });
 
     if (userData) {

@@ -16,7 +16,7 @@ const connectDB = (module.exports = async (req, res) => {
     );
     console.log("Success");
   } catch (error) {
-    console.log("fail");
+    console.log("fail" + error);
   }
 });
 

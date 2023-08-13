@@ -47,6 +47,9 @@ const Product = Loadable(
 const Settings = Loadable(
   lazy(() => import("Components/Navigations/Settings"))
 );
+const UserPermission = Loadable(
+  lazy(() => import("Components/Navigations/Settings/UserPermission/index"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -101,6 +104,12 @@ const MainRoutes = {
     {
       path: "settings",
       element: <Settings />,
+      children: [
+        {
+          path: "permission",
+          element: <UserPermission />,
+        },
+      ],
     },
     {
       path: "customers",

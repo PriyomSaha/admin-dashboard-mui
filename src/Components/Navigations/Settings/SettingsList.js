@@ -4,7 +4,11 @@ import { FaUserLock, FaPalette, FaLanguage } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
 const SettingsList = [
-  { label: "Users & permission", icon: <FaUserLock /> },
+  {
+    label: "Users & permission",
+    icon: <FaUserLock />,
+    path: "/settings/permission",
+  },
   { label: "General", icon: <AiFillSetting /> },
   { label: "Theme", icon: <FaPalette /> },
   { label: "Language", icon: <FaLanguage /> },

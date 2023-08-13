@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import { theme } from "Components/UI/themes";
 
-function SaveCancelButtons({ isModalOpen, setIsModalOpen }) {
+function SaveCancelButtons({ isModalOpen, setIsModalOpen, runOnSave }) {
   return (
     <>
       {/* Horizontal line for visual separation */}
@@ -21,6 +21,7 @@ function SaveCancelButtons({ isModalOpen, setIsModalOpen }) {
           onClick={() => {
             setIsModalOpen(!isModalOpen);
             // Perform the action to save the changes here...
+            runOnSave();
           }}
         >
           Save

@@ -5,7 +5,7 @@ import Select from "@mui/material/Select";
 function Countries({ country, setCountry }) {
   return (
     <FormControl fullWidth variant="outlined" size="small">
-      <InputLabel>Merchant Country</InputLabel>
+      <InputLabel>Country</InputLabel>
       <Select
         label="Select Country"
         value={country}
