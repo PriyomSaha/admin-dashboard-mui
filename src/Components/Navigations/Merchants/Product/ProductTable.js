@@ -18,6 +18,7 @@ import React from "react";
 import ProductFallBack from "Components/UI/Images/ProductFallBack.svg";
 import { theme } from "Components/UI/themes";
 import Delete from "Components/Assets/ReusableComp/Delete";
+import AddEditProduct from "./AddEditProduct";
 
 function ProductTable() {
   const columns = [
@@ -155,12 +156,12 @@ function ProductTable() {
                           },
                         }}
                       >
+                        <AddEditProduct />
                         <Divider
                           orientation="vertical"
                           variant="middle"
                           flexItem
                         />
-
                         <Delete name={value.name} type="Product" />
                       </Box>
                     </TableCell>

@@ -16,6 +16,8 @@ import Delete from "Components/Assets/ReusableComp/Delete";
 import { getUsers } from "Components/Assets/UIServices";
 import React, { useState } from "react";
 import InviteEditUser from "./InviteEditUser";
+import { theme } from "Components/UI/themes";
+import Status from "./Status";
 
 function UserTable() {
   const RowHeight = 100;
@@ -101,33 +103,7 @@ function UserTable() {
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
-                      {value.status === "Active" ? (
-                        <Chip
-                          label="Active"
-                          sx={{
-                            background:
-                              "var(--super-admin-login-button-background)",
-                            color: "var(--super-admin-login-button-text)",
-                            border:
-                              "1px solid var(--super-admin-login-button-text)",
-                            cursor: "pointer",
-                          }}
-                        />
-                      ) : value.status === "Pending" ? (
-                        <Box>
-                          <Typography variant="body1" fontWeight={500}>
-                            Pending
-                          </Typography>
-                          <span
-                            style={{
-                              cursor: "pointer",
-                              color: "var(--links)",
-                            }}
-                          >
-                            (Resend Invite)
-                          </span>
-                        </Box>
-                      ) : null}
+                      <Status oldStatus={value.status} />
                     </TableCell>
                     <TableCell>
                       <Typography variant="body1" fontWeight={500}>

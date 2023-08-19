@@ -393,7 +393,7 @@ export let users = [
   {
     id: 4,
     email: "test@gmail.com",
-    status: "Active",
+    status: "InActive",
     added: "12 May,2023",
   },
   {
