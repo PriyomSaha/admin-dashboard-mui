@@ -16,13 +16,15 @@ import {
   MdAccountCircle,
   MdLogout,
 } from "react-icons/md";
-import { DrawerHeader } from "../../../Components/Assets/GlobalStyles";
+import { DrawerHeader } from "Components/Assets/GlobalStyles";
 import {
   useAccountStore,
   useDrawerStore,
-} from "../../../Components/Assets/StateManagement";
+  useEditProfileStore,
+} from "Components/Assets/StateManagement";
 import { Fade } from "@mui/material";
 import { useEffect } from "react";
+import Edit from "Components/Navigations/EditProfile/Edit";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -80,94 +82,103 @@ export default function TopNav() {
 
   const userData = useAccountStore((state) => state.userData);
 
+  const setIsEditProfile = useEditProfileStore(
+    (state) => state.setIsEditProfile
+  );
+
   //For profile menu
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <DrawerHeader />
-      <AppBar position="fixed" id="appBar">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            onClick={setDrawerOpen}
-          >
-            {isDrawerOpen ? <MdClose /> : <MdMenu />}
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            LOGO
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <MdSearch />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box
-            aria-controls={open ? "fade-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={() => true}
-          >
-            <ProfileButton
+    <>
+      <Box sx={{ flexGrow: 1 }}>
+        <DrawerHeader />
+        <AppBar position="fixed" id="appBar">
+          <Toolbar>
+            <IconButton
               size="large"
-              edge="end"
-              aria-label="account of current user"
+              edge="start"
               color="inherit"
+              aria-label="open drawer"
+              sx={{ mr: 2 }}
+              onClick={setDrawerOpen}
+            >
+              {isDrawerOpen ? <MdClose /> : <MdMenu />}
+            </IconButton>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              LOGO
+            </Typography>
+            <Search>
+              <SearchIconWrapper>
+                <MdSearch />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box
               aria-controls={open ? "fade-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
-              onClick={(e) => {
-                setAnchorEl(e.currentTarget);
-              }}
+              onClick={() => true}
             >
-              <MdAccountCircle />
-              <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                <Typography sx={{ marginLeft: "10px" }}>
-                  {userData.userName}
-                </Typography>
-              </Box>
-            </ProfileButton>
-            <Menu
-              MenuListProps={{
-                "aria-labelledby": "fade-button",
-              }}
-              anchorEl={anchorEl}
-              open={open}
-              TransitionComponent={Fade}
-            >
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
+              <ProfileButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                color="inherit"
+                aria-controls={open ? "fade-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={(e) => {
+                  setAnchorEl(e.currentTarget);
                 }}
               >
-                Edit Profile
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
+                <MdAccountCircle />
+                <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                  <Typography sx={{ marginLeft: "10px" }}>
+                    {userData.userName}
+                  </Typography>
+                </Box>
+              </ProfileButton>
+              <Menu
+                MenuListProps={{
+                  "aria-labelledby": "fade-button",
                 }}
+                anchorEl={anchorEl}
+                open={open}
+                TransitionComponent={Fade}
               >
-                Logout
-              </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box>
+                <MenuItem
+                  onClick={() => {
+                    // setAnchorEl(null);
+                    setIsEditProfile();
+                  }}
+                >
+                  Edit Profile
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    setAnchorEl(null);
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </Box>
+      {/* Edit Profile */}
+      {/* <Edit /> */}
+    </>
   );
 }

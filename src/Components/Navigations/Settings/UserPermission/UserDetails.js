@@ -3,9 +3,7 @@ import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 
-function UserDetails() {
-  const [email, setEmail] = useState("");
-
+function UserDetails({ email, setEmail }) {
   return (
     <>
       <Typography variant="h6" fontWeight={600}>

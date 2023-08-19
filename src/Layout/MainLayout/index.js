@@ -25,7 +25,6 @@ function MainLayout() {
           <Box>
             {/* Display the SideNav component */}
             <SideNav />
-
             {/* The main content area */}
             {/* 'Box' element with 'flexGrow: 1' property takes up remaining horizontal space */}
             {/* 'ml: 0' sets no left margin on small screens, 'ml: 8' adds a left margin on larger screens */}

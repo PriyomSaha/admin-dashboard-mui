@@ -17,15 +17,30 @@ import { MdClose } from "react-icons/md";
 import PermissionList from "./PermissionList";
 import UserDetails from "./UserDetails";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
+import axios from "axios";
 
 function InviteEditUser({ type }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [perms, setPerms] = useState([]);
+  const [email, setEmail] = useState("");
 
-  const runOnSave = async () => {
+  const runOnSave = async (e) => {
     const uniqueElements = await new Set(perms);
     const uniqueArray = [...uniqueElements];
     await alert(uniqueArray);
+
+    // Update
+    const url = `/api/v1/invite?username=${email}`; //endPoint
+    await e.preventDefault();
+    try {
+      const resp = await axios.post(url, {
+        email: email,
+        permissions: uniqueArray,
+      });
+      await console.log(resp);
+    } catch (error) {
+      await console.log(error);
+    }
   };
   return (
     <>
@@ -84,7 +99,7 @@ function InviteEditUser({ type }) {
             </IconButton>
           </Box>
           <Box sx={FullScreenModalContent}>
-            <UserDetails />
+            <UserDetails email={email} setEmail={setEmail} />
             <PermissionList perms={perms} setPerms={setPerms} />
             <Box mt={4}>
               <SaveCancelButtons

@@ -16,3 +16,9 @@ export const useAccountStore = create((set) => ({
   setUserData: (userId, userName, userToken, authStatus) =>
     set((state) => ({ userData: { userId, userName, userToken, authStatus } })),
 }));
+
+export const useEditProfileStore = create((set) => ({
+  isEditProfile: false,
+  setIsEditProfile: () =>
+    set((state) => ({ isEditProfile: !state.isEditProfile })),
+}));
