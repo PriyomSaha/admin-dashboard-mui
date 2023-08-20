@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, Typography, Paper, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  TextField,
+  CircularProgress,
+} from "@mui/material";
 import { theme } from "Components/UI/themes";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import PhoneInput from "react-phone-input-2";
@@ -14,7 +21,10 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (e) => {
+    setIsSubmitting(!isSubmitting);
     await e.preventDefault();
     try {
       const resp = await axios.post(url, {
@@ -28,6 +38,7 @@ const Register = () => {
     } catch (error) {
       await console.log(error);
     }
+    setIsSubmitting(!isSubmitting);
   };
   return (
     <>
@@ -93,8 +104,18 @@ const Register = () => {
                   background: theme.palette.grey[800],
                 },
               }}
+              disabled={isSubmitting}
             >
               Sign Up
+              {isSubmitting ? (
+                <CircularProgress
+                  size={20}
+                  sx={{
+                    color: "var(--header-nav-text)",
+                    ml: 2,
+                  }}
+                />
+              ) : null}
             </Button>
           </form>
         </Box>

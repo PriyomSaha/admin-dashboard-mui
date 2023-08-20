@@ -50,6 +50,11 @@ export const theme = createTheme({
             color: `${defaultTheme.palette.grey[100]}`,
             fontSize: calculateFontSize(),
             textTransform: "capitalize",
+            "&:disabled": {
+              background: `${defaultTheme.palette.grey[800]}`,
+              color: `${defaultTheme.palette.grey[100]}`,
+              pointerEvents: "none",
+            },
           },
         },
         {
