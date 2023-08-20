@@ -8,8 +8,9 @@ import {
 } from "@mui/material";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { theme } from "Components/UI/themes";
 
-function PasswordInput({ password, setPassword }) {
+function PasswordInput({ password, setPassword, disabled, label }) {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,13 +28,23 @@ function PasswordInput({ password, setPassword }) {
   };
 
   return (
-    <div>
+    <>
       <TextField
         size="small"
         margin="normal"
         required
         fullWidth
-        label="Password"
+        disabled={disabled}
+        sx={
+          disabled
+            ? {
+                "& .MuiInputBase-root.Mui-disabled": {
+                  background: theme.palette.grey[300],
+                },
+              }
+            : null
+        }
+        label={label ? label : "Password"}
         type={showPassword ? "text" : "password"}
         autoComplete="current-password"
         value={password}
@@ -84,7 +95,7 @@ function PasswordInput({ password, setPassword }) {
           ),
         }}
       />
-    </div>
+    </>
   );
 }
 
