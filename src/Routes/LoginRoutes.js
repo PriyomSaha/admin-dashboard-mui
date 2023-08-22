@@ -8,7 +8,7 @@ import MinimalLayout from "Layout/MinimalLayout/index";
 const AuthLogin = Loadable(
   lazy(() => import("Components/Authentication/Login"))
 );
-const ChangePassword = Loadable(
+const ResetPassword = Loadable(
   lazy(() => import("Components/Authentication/ResetPassword"))
 );
 const ForgotPassword = Loadable(
@@ -30,7 +30,7 @@ const LoginRoutes = {
     },
     {
       path: "reset",
-      element: <ChangePassword />,
+      element: <ResetPassword />,
     },
     {
       path: "forgotpassword",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useEditProfileStore } from "Components/Assets/StateManagement";
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   Modal,
@@ -15,7 +16,6 @@ import {
 } from "Components/Assets/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import { MdClose } from "react-icons/md";
-import Update from "./Update";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 
 function Edit() {
@@ -27,6 +27,31 @@ function Edit() {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const matches = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPassMatch, setIsPassMatch] = useState(true);
+
+  useEffect(() => {
+    setIsPassMatch(true);
+  }, [password, confirmPassword]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setIsPassMatch(false);
+      setIsSubmitting(false); // Set it to false here
+    } else {
+      setIsSubmitting(true);
+      // Simulate an asynchronous operation with a delay
+      setTimeout(async () => {
+        // Perform your actual asynchronous operations here
+        // For example, API calls or other async tasks
+
+        setIsSubmitting(false); // Stop the circular progress
+      }, 2000); // Delay for 2 seconds (adjust as needed)
+    }
+  };
 
   return (
     <>
@@ -106,6 +131,11 @@ function Edit() {
                   setPassword={setConfirmPassword}
                   label="Confirm Password"
                 />
+                {isPassMatch ? null : (
+                  <Typography color={"error"}>
+                    Passwords Not Matching
+                  </Typography>
+                )}
               </Grid>
             </Grid>
             <Grid container spacing={2} display="flex" justifyContent="start">
@@ -135,7 +165,29 @@ function Edit() {
               </Grid>
             </Grid>
             <Box mt={4}>
-              <Update />
+              <>
+                {/* Horizontal line for visual separation */}
+                <hr />
+
+                {/* Container for the Update buttons */}
+                <Box>
+                  {/* Save button */}
+                  <Button
+                    variant="contained"
+                    sx={{
+                      float: "right",
+                      position: "relative",
+                    }}
+                    // Click event handler to handle the "Update" action
+                    onClick={(e) => {
+                      // setIsEditProfile();
+                      handleSubmit(e);
+                    }}
+                  >
+                    Update
+                  </Button>
+                </Box>
+              </>
             </Box>
           </Box>
         </Box>

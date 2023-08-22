@@ -15,7 +15,7 @@ function App() {
   const setUserData = useAccountStore((state) => state.setUserData);
 
   useEffect(() => {
-    setUserData("0", "Priyom Saha", "00011133324", false);
+    setUserData("0", "Priyom Saha", "00011133324", true);
   }, []);
 
   return (
