@@ -79,9 +79,17 @@ const Register = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
-            <PasswordInput password={password} setPassword={setPassword} />
+            <PasswordInput
+              password={password}
+              setPassword={setPassword}
+              needStrengthValidation={true}
+            />
             <Box m={2} />
-            <Countries country={country} setCountry={setCountry} />
+            <Countries
+              country={country}
+              setCountry={setCountry}
+              needStrengthValidation={true}
+            />
             <Box m={2} />
             <PhoneInput
               country={country.toLowerCase()}

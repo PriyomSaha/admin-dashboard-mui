@@ -10,7 +10,13 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { theme } from "Components/UI/themes";
 
-function PasswordInput({ password, setPassword, disabled, label }) {
+function PasswordInput({
+  password,
+  setPassword,
+  disabled,
+  label,
+  needStrengthValidation,
+}) {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,7 +32,6 @@ function PasswordInput({ password, setPassword, disabled, label }) {
     setPassword(newPassword);
     setIsValidPassword(validatePassword(newPassword));
   };
-
   return (
     <>
       <TextField
@@ -49,38 +54,44 @@ function PasswordInput({ password, setPassword, disabled, label }) {
         autoComplete="current-password"
         value={password}
         onChange={handlePasswordChange}
-        error={!isValidPassword}
+        error={needStrengthValidation ? !isValidPassword : null}
         helperText={
-          !isValidPassword && (
-            <Tooltip
-              title={
-                <div>
-                  <Typography variant="body1">Password must:</Typography>
-                  <Typography variant="body2">
-                    - Be at least 8 characters long
+          needStrengthValidation
+            ? !isValidPassword && (
+                <Tooltip
+                  title={
+                    <div>
+                      <Typography variant="body1">Password must:</Typography>
+                      <Typography variant="body2">
+                        - Be at least 8 characters long
+                      </Typography>
+                      <Typography variant="body2">
+                        - Contain at least one uppercase letter
+                      </Typography>
+                      <Typography variant="body2">
+                        - Contain at least one lowercase letter
+                      </Typography>
+                      <Typography variant="body2">
+                        - Contain at least one digit
+                      </Typography>
+                      <Typography variant="body2">
+                        - Contain at least one special character (@$!%*?&)
+                      </Typography>
+                    </div>
+                  }
+                  placement="right"
+                >
+                  <Typography
+                    color="error"
+                    display={"flex"}
+                    alignItems={"center"}
+                  >
+                    Password requirements not met &nbsp;
+                    <AiFillInfoCircle />
                   </Typography>
-                  <Typography variant="body2">
-                    - Contain at least one uppercase letter
-                  </Typography>
-                  <Typography variant="body2">
-                    - Contain at least one lowercase letter
-                  </Typography>
-                  <Typography variant="body2">
-                    - Contain at least one digit
-                  </Typography>
-                  <Typography variant="body2">
-                    - Contain at least one special character (@$!%*?&)
-                  </Typography>
-                </div>
-              }
-              placement="right"
-            >
-              <Typography color="error" display={"flex"} alignItems={"center"}>
-                Password requirements not met &nbsp;
-                <AiFillInfoCircle />
-              </Typography>
-            </Tooltip>
-          )
+                </Tooltip>
+              )
+            : null
         }
         InputProps={{
           endAdornment: (

@@ -130,6 +130,7 @@ function Edit() {
                   password={confirmPassword}
                   setPassword={setConfirmPassword}
                   label="Confirm Password"
+                  needStrengthValidation={false}
                 />
                 {isPassMatch ? null : (
                   <Typography color={"error"}>

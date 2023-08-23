@@ -36,7 +36,7 @@ const Login = () => {
         </Box>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <EmailInput email={email} setEmail={setEmail} />
-          <PasswordInput password={password} setPassword={setPassword} />
+          <PasswordInput password={password} setPassword={setPassword} needStrengthValidation={false}/>
           <Button
             fullWidth
             variant="contained-dark"

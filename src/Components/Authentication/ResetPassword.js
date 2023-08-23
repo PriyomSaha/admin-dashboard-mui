@@ -64,11 +64,13 @@ function ResetPassword() {
               password={password}
               setPassword={setPassword}
               label={"New Password"}
+              needStrengthValidation={true}
             />
             <PasswordInput
               password={confirmPassword}
               setPassword={setConfirmPassword}
               label={"Confirm Password"}
+              needStrengthValidation={true}
             />
             {isPassMatch ? null : (
               <Typography color={"error"}>Passwords Not Matching</Typography>
