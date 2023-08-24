@@ -7,6 +7,7 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+
 import { theme } from "Components/UI/themes";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import PhoneInput from "react-phone-input-2";
@@ -14,17 +15,21 @@ import Countries from "Components/Assets/ReusableComp/Countries";
 import axios from "axios";
 
 const Register = () => {
-  const url = "/api/register";
+  //const url = `/api/v1/invite?username=${email}`; //endPoint
+
+  const url = "/api/v1/register";
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("IN");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
-    setIsSubmitting(!isSubmitting);
+    await setIsSubmitting(true);
+
     await e.preventDefault();
     try {
       const resp = await axios.post(url, {
@@ -33,12 +38,13 @@ const Register = () => {
         country: country,
         phoneNumber: phoneNumber,
         password: password,
+        username: email,
       });
       await console.log(resp);
     } catch (error) {
       await console.log(error);
     }
-    setIsSubmitting(!isSubmitting);
+    await setIsSubmitting(false);
   };
   return (
     <>
@@ -66,6 +72,16 @@ const Register = () => {
               margin="normal"
               required
               fullWidth
+              label="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <TextField
+              size="small"
+              margin="normal"
+              required
+              fullWidth
               label="Enter your First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
@@ -85,11 +101,7 @@ const Register = () => {
               needStrengthValidation={true}
             />
             <Box m={2} />
-            <Countries
-              country={country}
-              setCountry={setCountry}
-              needStrengthValidation={true}
-            />
+            <Countries country={country} setCountry={setCountry} />
             <Box m={2} />
             <PhoneInput
               country={country.toLowerCase()}
@@ -99,23 +111,23 @@ const Register = () => {
               onChange={(phone) => setPhoneNumber(phone)}
               placeHolder="Enter the phone number"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained-dark"
-              color="primary"
-              sx={{
-                mt: 3,
-                mb: 2,
-                p: 1,
-                ":hover": {
-                  background: theme.palette.grey[800],
-                },
-              }}
-              disabled={isSubmitting}
-            >
-              Sign Up
-              {isSubmitting ? (
+
+            {isSubmitting ? (
+              <Button
+                disabled
+                fullWidth
+                variant="contained-dark"
+                color="primary"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  p: 1,
+                  ":hover": {
+                    background: theme.palette.grey[800],
+                  },
+                }}
+              >
+                Registering...
                 <CircularProgress
                   size={20}
                   sx={{
@@ -123,8 +135,25 @@ const Register = () => {
                     ml: 2,
                   }}
                 />
-              ) : null}
-            </Button>
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained-dark"
+                color="primary"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  p: 1,
+                  ":hover": {
+                    background: theme.palette.grey[800],
+                  },
+                }}
+              >
+                Register
+              </Button>
+            )}
           </form>
         </Box>
       </Paper>
