@@ -4,6 +4,7 @@ import { Stack } from "@mui/material";
 import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
+import Analytics from "Components/Navigations/Dashboard/Graphs/index";
 
 function Dashboard() {
   return (
@@ -34,6 +35,7 @@ function Dashboard() {
 
       <ComponentBody>
         <WelcomeRefreshInterval />
+        <Analytics />
       </ComponentBody>
     </>
   );

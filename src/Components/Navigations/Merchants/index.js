@@ -34,9 +34,9 @@ function Merchants() {
           </Typography>
           {subPathContainMerchant ? (
             <AddNewImportExportButton />
-          ) : (
+          ) : subPath[0].includes("category") ? (
             <Button variant="contained">Add New</Button>
-          )}
+          ) : null}
         </Stack>
       </ComponentHeader>
       <ComponentBody>

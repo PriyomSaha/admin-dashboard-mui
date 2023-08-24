@@ -48,6 +48,7 @@ function ProductTable() {
       id: "actions",
       label: "Actions",
       minWidth: 50,
+      align: "center",
     },
   ];
 
@@ -156,12 +157,12 @@ function ProductTable() {
                           },
                         }}
                       >
-                        <AddEditProduct />
+                        {/* <AddEditProduct />
                         <Divider
                           orientation="vertical"
                           variant="middle"
                           flexItem
-                        />
+                        /> */}
                         <Delete name={value.name} type="Product" />
                       </Box>
                     </TableCell>

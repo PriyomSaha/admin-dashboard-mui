@@ -120,3 +120,9 @@ select:hover{
     font-weight: 500;
   }
   
+  .graphContainer {
+    padding: 0.4rem;
+    height: 45vh;
+    width: 100%;
+  }
+  
