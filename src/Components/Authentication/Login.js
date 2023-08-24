@@ -4,6 +4,8 @@ import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import EmailInput from "Components/Assets/ReusableComp/EmailInput";
+import { useAccountStore } from "Components/Assets/StateManagement";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -11,8 +13,46 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    // Handle login logic here
+  const setUserData = useAccountStore((state) => state.setUserData);
+
+  const url = "/auth/token";
+  const urlUserDetails = "/api/v1/userDetails";
+  // console.log(process.env.TOKEN_URL);
+
+  const handleLogin = async (e) => {
+    await e.preventDefault();
+    try {
+      const resp = await axios.post(url, {
+        username: email,
+        password: password,
+      });
+      handleGetUserdata(resp.data);
+    } catch (error) {
+      await console.log(error);
+    }
+  };
+
+  const handleGetUserdata = async (bToken) => {
+    try {
+      axios
+        .post(
+          urlUserDetails,
+          {
+            username: email,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${bToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          setUserData("0", response.data, "00011133324", true);
+        });
+    } catch (error) {
+      await console.log("Errorrrrrrr");
+      await console.log(error);
+    }
   };
 
   return (
@@ -36,7 +76,11 @@ const Login = () => {
         </Box>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           <EmailInput email={email} setEmail={setEmail} />
-          <PasswordInput password={password} setPassword={setPassword} needStrengthValidation={false}/>
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+            needStrengthValidation={false}
+          />
           <Button
             fullWidth
             variant="contained-dark"
