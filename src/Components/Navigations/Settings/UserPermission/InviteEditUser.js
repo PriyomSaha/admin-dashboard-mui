@@ -31,7 +31,7 @@ function InviteEditUser({ type }) {
 
     // Update
     const url = `/api/v1/invite?username=${email}`; //endPoint
-    await e.preventDefault();
+    // await e.preventDefault();
     try {
       const resp = await axios.post(url, {
         email: email,
