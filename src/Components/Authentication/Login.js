@@ -1,5 +1,13 @@
-import React, { useState } from "react";
-import { Box, Button, Typography, Paper } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  CircularProgress,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
@@ -10,48 +18,73 @@ import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
 
+  // State to hold user input values
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // State to indicate whether there's an error in the form
+  const [havingError, setHavingError] = useState(false);
+
+  // State to track form submission status
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Accessing user data from global state
   const setUserData = useAccountStore((state) => state.setUserData);
 
+  // API endpoints
   const url = "/auth/token";
   const urlUserDetails = "/api/v1/userDetails";
-  // console.log(process.env.TOKEN_URL);
 
-  const handleLogin = async (e) => {
-    await e.preventDefault();
-    try {
-      const resp = await axios.post(url, {
-        username: email,
-        password: password,
-      });
-      handleGetUserdata(resp.data);
-    } catch (error) {
-      await console.log(error);
+  // Clear error status when password or email changes
+  useEffect(() => {
+    setHavingError(false);
+  }, [password, email]);
+
+  // Handle user login
+  const handleLogin = async () => {
+    await setIsSubmitting(true);
+
+    // Validate email and password
+    if (password.length < 8 || !email.includes(".", "@")) {
+      await setHavingError(true);
+    } else {
+      try {
+        await setHavingError(false);
+
+        // Call authentication API to get token
+        const resp = await axios.post(url, {
+          username: email,
+          password: password,
+        });
+
+        // Get user data using token
+        handleGetUserdata(resp.data);
+      } catch (error) {
+        setHavingError(true);
+      }
     }
+    await setIsSubmitting(false);
   };
 
+  // Get user details based on token
   const handleGetUserdata = async (bToken) => {
     try {
-      axios
-        .post(
-          urlUserDetails,
-          {
-            username: email,
+      const response = await axios.post(
+        urlUserDetails,
+        {
+          username: email,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${bToken}`,
           },
-          {
-            headers: {
-              Authorization: `Bearer ${bToken}`,
-            },
-          }
-        )
-        .then((response) => {
-          setUserData("0", response.data, "00011133324", true);
-        });
+        }
+      );
+
+      // Update user data in global state
+      setUserData("0", response.data, "00011133324", true);
     } catch (error) {
-      await console.log("Errorrrrrrr");
-      await console.log(error);
+      setHavingError(true);
     }
   };
 
@@ -62,6 +95,7 @@ const Login = () => {
         sx={{ padding: 2, width: "100%", bgcolor: theme.palette.grey[100] }}
       >
         <Box display="flex" flexDirection="column" justifyContent={"center"}>
+          {/* Login Header */}
           <Typography
             component="h1"
             variant="h5"
@@ -75,30 +109,69 @@ const Login = () => {
           </Typography>
         </Box>
         <Box component="form" noValidate sx={{ mt: 3 }}>
-          <EmailInput email={email} setEmail={setEmail} />
+          {/* Email Input */}
+          <EmailInput
+            email={email}
+            setEmail={setEmail}
+            setHavingError={setHavingError}
+          />
+
+          {/* Password Input */}
           <PasswordInput
             password={password}
             setPassword={setPassword}
             needStrengthValidation={false}
           />
-          <Button
-            fullWidth
-            variant="contained-dark"
-            color="primary"
-            onClick={handleLogin}
-            sx={{
-              mt: 3,
-              mb: 2,
-              p: 1,
-              ":hover": {
-                background: theme.palette.grey[800],
-              },
-            }}
-          >
-            Login
-          </Button>
+
+          {/* Conditional Rendering based on form submission status */}
+          {isSubmitting ? (
+            // Display progress indicator while submitting
+            <Button
+              disabled
+              fullWidth
+              variant="contained-dark"
+              color="primary"
+              sx={{
+                mt: 3,
+                mb: 2,
+                p: 1,
+                ":hover": {
+                  background: theme.palette.grey[800],
+                },
+              }}
+            >
+              Accessing...
+              <CircularProgress
+                size={20}
+                sx={{
+                  color: "var(--header-nav-text)",
+                  ml: 2,
+                }}
+              />
+            </Button>
+          ) : (
+            // Display login button when not submitting
+            <Button
+              onClick={handleLogin}
+              fullWidth
+              variant="contained-dark"
+              color="primary"
+              sx={{
+                mt: 3,
+                mb: 2,
+                p: 1,
+                ":hover": {
+                  background: theme.palette.grey[800],
+                },
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Box>
       </Paper>
+
+      {/* Forgot Password Link */}
       <Typography py={2}>
         Forgot Password?{" "}
         <span
@@ -108,6 +181,16 @@ const Login = () => {
           Click Here
         </span>
       </Typography>
+
+      {/* Display error message in a Snackbar */}
+      <Snackbar
+        open={havingError}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="error" variant="filled">
+          Please check your credentials !!
+        </Alert>
+      </Snackbar>
     </>
   );
 };

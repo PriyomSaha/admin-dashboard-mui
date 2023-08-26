@@ -6,6 +6,7 @@ function EmailInput({ email, setEmail }) {
 
   const validateEmail = (input) => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
     if (input && !emailRegex.test(input)) {
       return "Invalid email address";
     } else {
@@ -18,6 +19,7 @@ function EmailInput({ email, setEmail }) {
     setEmail(newEmail.toLowerCase());
     setEmailError(validateEmail(newEmail));
   };
+
   return (
     <TextField
       margin="normal"

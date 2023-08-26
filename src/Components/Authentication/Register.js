@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -6,6 +6,8 @@ import {
   Paper,
   TextField,
   CircularProgress,
+  Alert,
+  Snackbar,
 } from "@mui/material";
 
 import { theme } from "Components/UI/themes";
@@ -13,11 +15,14 @@ import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import PhoneInput from "react-phone-input-2";
 import Countries from "Components/Assets/ReusableComp/Countries";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  //const url = `/api/v1/invite?username=${email}`; //endPoint
-
+  const navigate = useNavigate();
+  // API endpoint for registration
   const url = "/api/v1/register";
+
+  // State to hold user input values
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("IN");
   const [password, setPassword] = useState("");
@@ -25,27 +30,50 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
+  // State to track form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
-    await setIsSubmitting(true);
+  // State to indicate whether there's an error in the form
+  const [havingError, setHavingError] = useState(false);
 
-    await e.preventDefault();
-    try {
-      const resp = await axios.post(url, {
-        firstName: firstName,
-        lastName: lastName,
-        country: country,
-        phoneNumber: phoneNumber,
-        password: password,
-        username: email,
-      });
-      await console.log(resp);
-    } catch (error) {
-      await console.log(error);
+  // Handle user registration
+  const handleRegister = async () => {
+    await setIsSubmitting(true);
+    // Validate email,phoneNumber,firstName,lastName and password
+    if (
+      password.length < 8 ||
+      !email.includes(".", "@") ||
+      phoneNumber.length < 8 ||
+      firstName < 2 ||
+      lastName < 2
+    ) {
+      await setHavingError(true);
+    } else {
+      try {
+        // Call registration API with user data
+        const resp = await axios.post(url, {
+          firstName: firstName,
+          lastName: lastName,
+          country: country,
+          phoneNumber: phoneNumber,
+          password: password,
+          username: email,
+        });
+        await console.log(resp);
+        navigate("/login");
+      } catch (error) {
+        setHavingError(true);
+        await console.log(error);
+      }
     }
     await setIsSubmitting(false);
   };
+
+  // Clear error status when input values change
+  useEffect(() => {
+    setHavingError(false);
+  }, [phoneNumber, password, firstName, lastName, email]);
+
   return (
     <>
       <Paper
@@ -53,6 +81,7 @@ const Register = () => {
         sx={{ padding: 2, width: "100%", bgcolor: theme.palette.grey[100] }}
       >
         <Box display="flex" flexDirection="column" justifyContent={"center"}>
+          {/* Registration Header */}
           <Typography
             component="h1"
             variant="h5"
@@ -66,97 +95,111 @@ const Register = () => {
           </Typography>
         </Box>
         <Box noValidate sx={{ mt: 3 }}>
-          <form method="post" onSubmit={(e) => handleSubmit(e)}>
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              label="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          {/* Input fields */}
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            label="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              label="Enter your First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <TextField
-              size="small"
-              margin="normal"
-              required
-              fullWidth
-              label="Enter your Last Name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <PasswordInput
-              password={password}
-              setPassword={setPassword}
-              needStrengthValidation={true}
-            />
-            <Box m={2} />
-            <Countries country={country} setCountry={setCountry} />
-            <Box m={2} />
-            <PhoneInput
-              country={country.toLowerCase()}
-              enableSearch={true}
-              countryCodeEditable={false}
-              value={phoneNumber}
-              onChange={(phone) => setPhoneNumber(phone)}
-              placeHolder="Enter the phone number"
-            />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            label="Enter your First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            label="Enter your Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <PasswordInput
+            password={password}
+            setPassword={setPassword}
+            needStrengthValidation={true}
+          />
+          <Box m={2} />
+          {/* Select Country */}
+          <Countries country={country} setCountry={setCountry} />
+          <Box m={2} />
+          {/* Phone Input */}
+          <PhoneInput
+            country={country.toLowerCase()}
+            enableSearch={true}
+            countryCodeEditable={false}
+            value={phoneNumber}
+            onChange={(phone) => setPhoneNumber(phone)}
+            placeHolder="Enter the phone number"
+          />
 
-            {isSubmitting ? (
-              <Button
-                disabled
-                fullWidth
-                variant="contained-dark"
-                color="primary"
+          {/* Conditional Rendering based on form submission status */}
+          {isSubmitting ? (
+            // Display progress indicator while submitting
+            <Button
+              disabled
+              fullWidth
+              variant="contained-dark"
+              color="primary"
+              sx={{
+                mt: 3,
+                mb: 2,
+                p: 1,
+                ":hover": {
+                  background: theme.palette.grey[800],
+                },
+              }}
+            >
+              Registering...
+              <CircularProgress
+                size={20}
                 sx={{
-                  mt: 3,
-                  mb: 2,
-                  p: 1,
-                  ":hover": {
-                    background: theme.palette.grey[800],
-                  },
+                  color: "var(--header-nav-text)",
+                  ml: 2,
                 }}
-              >
-                Registering...
-                <CircularProgress
-                  size={20}
-                  sx={{
-                    color: "var(--header-nav-text)",
-                    ml: 2,
-                  }}
-                />
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained-dark"
-                color="primary"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  p: 1,
-                  ":hover": {
-                    background: theme.palette.grey[800],
-                  },
-                }}
-              >
-                Register
-              </Button>
-            )}
-          </form>
+              />
+            </Button>
+          ) : (
+            // Display register button when not submitting
+            <Button
+              onClick={handleRegister}
+              fullWidth
+              variant="contained-dark"
+              color="primary"
+              sx={{
+                mt: 3,
+                mb: 2,
+                p: 1,
+                ":hover": {
+                  background: theme.palette.grey[800],
+                },
+              }}
+            >
+              Register
+            </Button>
+          )}
         </Box>
       </Paper>
+
+      {/* Display error message in a Snackbar */}
+      <Snackbar
+        open={havingError}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="error" variant="filled">
+          Please check your credentials !!
+        </Alert>
+      </Snackbar>
     </>
   );
 };
