@@ -7,6 +7,7 @@ import {
   CircularProgress,
   Alert,
   Snackbar,
+  Tooltip,
 } from "@mui/material";
 import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
@@ -80,9 +81,8 @@ const Login = () => {
           },
         }
       );
-
       // Update user data in global state
-      setUserData("0", response.data, "00011133324", true);
+      setUserData(response.data, true);
     } catch (error) {
       setHavingError(true);
     }

@@ -421,3 +421,29 @@ export let users = [
     added: "12 May,2023",
   },
 ];
+
+export let topMerchants = [
+  {
+    id: 1,
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 1,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 2,
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 10,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 3,
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 5,
+    imgUri: "",
+  },
+];

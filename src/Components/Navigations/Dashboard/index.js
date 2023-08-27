@@ -5,6 +5,7 @@ import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
 import Analytics from "Components/Navigations/Dashboard/Graphs/index";
+import TopPerformers from "./Tables";
 
 function Dashboard() {
   return (
@@ -36,6 +37,7 @@ function Dashboard() {
       <ComponentBody>
         <WelcomeRefreshInterval />
         <Analytics />
+        <TopPerformers />
       </ComponentBody>
     </>
   );

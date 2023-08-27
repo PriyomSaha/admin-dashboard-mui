@@ -4,6 +4,7 @@ import {
   categories,
   products,
   users,
+  topMerchants,
 } from "Components/Assets/DummyData";
 
 // Object 'orderCount' to store the counts of orders for different statuses
@@ -50,4 +51,7 @@ export const getProducts = () => {
 };
 export const getUsers = () => {
   return users;
+};
+export const getTopMerchants = () => {
+  return topMerchants;
 };

@@ -11,12 +11,7 @@ import { useEffect } from "react";
 import { useAccountStore } from "Components/Assets/StateManagement";
 
 function App() {
-  /* Manage User Data  */
-  const setUserData = useAccountStore((state) => state.setUserData);
-
-  useEffect(() => {
-    setUserData("0", "Priyom Saha", "00011133324", true);
-  }, []);
+  // require("dotenv").config();
 
   return (
     <ThemeProvider theme={theme}>

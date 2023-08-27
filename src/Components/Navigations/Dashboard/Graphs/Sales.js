@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import { data3 } from "../data";
+import { data3 } from "./data";
 
 function Sales() {
   return (

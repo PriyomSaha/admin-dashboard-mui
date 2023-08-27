@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import { data2 } from "../data";
+import { data2 } from "./data";
 
 export const DeliveryFee = () => {
   return (

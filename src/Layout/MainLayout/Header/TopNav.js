@@ -250,7 +250,7 @@ export default function TopNav() {
                 <MenuItem
                   onClick={() => {
                     setAnchorEl(null);
-                    setUserData("", "Priyom Saha", "00011133324", false);
+                    setUserData("", false);
                   }}
                 >
                   <Box

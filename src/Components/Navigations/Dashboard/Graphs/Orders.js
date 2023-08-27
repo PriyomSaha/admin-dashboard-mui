@@ -2,13 +2,14 @@ import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   Paper,
   Tooltip,
   Typography,
 } from "@mui/material";
-import { data } from "../data";
+import { data } from "./data";
 import { FaInfoCircle } from "react-icons/fa";
 import { Md10K } from "react-icons/md";
 
@@ -76,23 +77,33 @@ export const Orders = () => {
   return (
     <Grid item xs={12} sm={12} md={12} lg={4}>
       <Paper elevation={3} className="graphContainer">
-        <Typography
-          variant="h5"
-          align="left"
-          pl={2}
-          pt={1}
-          fontWeight={600}
+        <Box
           textTransform={"capitalize"}
           sx={{ position: "absolute" }}
-          alignItems={"center"}
+          pl={2}
+          pt={1}
         >
-          Orders <FaInfoCircle size={"15px"} />
-          <br />
-          <Typography>
+          <Typography
+            variant="h5"
+            align="left"
+            fontWeight={600}
+            textTransform={"capitalize"}
+            sx={{ position: "absolute" }}
+            alignItems={"center"}
+          >
+            Orders
+          </Typography>
+
+          <Typography sx={{ mt: 4 }}>
             Total :{" "}
             {totalCounts.active + totalCounts.cancelled + totalCounts.completed}
           </Typography>
-        </Typography>
+        </Box>
+        {/* <Tooltip title="Add" arrow>
+            <IconButton sx={{ mt: 1, ml: 12, position: "relative" }}>
+              <FaInfoCircle size={"15px"} />
+            </IconButton>
+          </Tooltip> */}
         <ResponsiveLine
           data={data}
           colors={{ datum: "color" }}

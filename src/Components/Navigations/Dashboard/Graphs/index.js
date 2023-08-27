@@ -11,9 +11,6 @@ function Analytics() {
         <Sales />
         <DeliveryFee />
       </Grid>
-      <Grid container spacing={3} justifyContent={"space-around"} mt={1} px={3}>
-        {/* Add the tables */}
-      </Grid>
     </>
   );
 }
