@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
 import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
@@ -8,6 +8,8 @@ import Analytics from "Components/Navigations/Dashboard/Graphs/index";
 import TopPerformers from "./Tables";
 
 function Dashboard() {
+  const matches = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+
   return (
     <>
       <ComponentHeader>
@@ -36,8 +38,8 @@ function Dashboard() {
 
       <ComponentBody>
         <WelcomeRefreshInterval />
-        <Analytics />
-        <TopPerformers />
+        <Analytics matches={matches} />
+        <TopPerformers matches={matches} />
       </ComponentBody>
     </>
   );

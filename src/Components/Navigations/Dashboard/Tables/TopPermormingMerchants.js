@@ -43,7 +43,8 @@ function TopPermormingMerchants() {
           </Typography>
           <TableContainer
             sx={{
-              maxHeight: 440,
+              minHeight: 410,
+              maxHeight: 500,
               overflowX: "auto",
             }}
           >
@@ -53,7 +54,7 @@ function TopPermormingMerchants() {
                 <TableRow>
                   {columns.map((column) => (
                     <TableCell
-                      sx={{ fontWeight: 500, textTransform: "uppercase" }}
+                      sx={{ fontWeight: 600, textTransform: "uppercase" }}
                       key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth }}
@@ -63,6 +64,7 @@ function TopPermormingMerchants() {
                   ))}
                 </TableRow>
               </TableHead>
+              {/* Table Body */}
               <TableBody>
                 {merchants.map((value) => (
                   <TableRow>

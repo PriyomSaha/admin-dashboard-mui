@@ -1,4 +1,3 @@
-import { Route, Routes } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-input-2/lib/bootstrap.css";
 import "Components/UI/app.css";
@@ -7,12 +6,11 @@ import { theme } from "Components/UI/themes";
 import { CssBaseline } from "@mui/material";
 import ScrollTop from "Components/ScrollTop";
 import ThemeRoutes from "Routes";
-import { useEffect } from "react";
 import { useAccountStore } from "Components/Assets/StateManagement";
 
 function App() {
-  // require("dotenv").config();
-
+  const setUserData = useAccountStore((state) => state.setUserData);
+  // setUserData("Priyom Saha", true);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

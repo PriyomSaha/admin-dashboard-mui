@@ -50,6 +50,9 @@ const Settings = Loadable(
 const UserPermission = Loadable(
   lazy(() => import("Components/Navigations/Settings/UserPermission/index"))
 );
+const General = Loadable(
+  lazy(() => import("Components/Navigations/Settings/General/index"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -108,6 +111,10 @@ const MainRoutes = {
         {
           path: "permission",
           element: <UserPermission />,
+        },
+        {
+          path: "general",
+          element: <General />,
         },
       ],
     },

@@ -75,15 +75,17 @@ function Settings() {
               {subPath}
             </Typography>
           </Box>
-          <Autocomplete
-            disablePortal
-            options={SettingsList}
-            onInputChange={handleInputChange}
-            sx={{ width: 250, mt: 2 }}
-            renderInput={(params) => (
-              <TextField {...params} size="small" label="Search Settings" />
-            )}
-          />
+          {subPathContainSetting ? (
+            <Autocomplete
+              disablePortal
+              options={SettingsList}
+              onInputChange={handleInputChange}
+              sx={{ width: 250, mt: 2 }}
+              renderInput={(params) => (
+                <TextField {...params} size="small" label="Search Settings" />
+              )}
+            />
+          ) : null}
         </Stack>
       </ComponentHeader>
       <ComponentBody>

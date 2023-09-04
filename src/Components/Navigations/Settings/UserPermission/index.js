@@ -42,6 +42,9 @@ function UserPermisson() {
         alignItems="center"
       >
         <Box>
+          <Typography variant="h5" sx={{ fontWeight: "600" }}>
+            Users
+          </Typography>
           <Typography>List of all users getting access to the panel</Typography>
         </Box>
 

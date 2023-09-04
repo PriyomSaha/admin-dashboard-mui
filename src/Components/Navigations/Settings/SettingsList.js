@@ -9,7 +9,7 @@ const SettingsList = [
     icon: <FaUserLock />,
     path: "/settings/permission",
   },
-  { label: "General", icon: <AiFillSetting /> },
+  { label: "General", icon: <AiFillSetting />, path: "/settings/general" },
   { label: "Theme", icon: <FaPalette /> },
   { label: "Language", icon: <FaLanguage /> },
   { label: "Serviceable Zones", icon: <FaLocationDot /> },

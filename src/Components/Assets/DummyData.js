@@ -447,3 +447,48 @@ export let topMerchants = [
     imgUri: "",
   },
 ];
+
+export let topProducts = [
+  {
+    id: 1,
+    product: "Chicken Dum Biriyani",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 1,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 2,
+    product: "Fried Rice",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 10,
+    imgUri:
+      "https://cdn-upload.hyperzod.app/public/1269/images/b4eea2d3-e3b5-4584-b3ff-1f7a74e1c06c.webp",
+  },
+  {
+    id: 3,
+    product: "Roll",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 5,
+    imgUri: "",
+  },
+  {
+    id: 4,
+    product: "Momo",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 5,
+    imgUri: "",
+  },
+  {
+    id: 5,
+    product: "Noodles",
+    merchant: "Sherwin's Minimart",
+    merchantId: "636ce01e8f6a9f9aa10b0824",
+    orders: 5,
+    imgUri: "",
+  },
+];
