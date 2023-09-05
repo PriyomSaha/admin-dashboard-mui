@@ -11,11 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 
-function SiteSettings({}, siteSettingsref) {
+function SiteSettings({}, ref) {
   const [language, setLanguage] = useState("english");
   return (
     <>
-      <Grid ref={siteSettingsref} item xs={12} sm={12} md={5}>
+      <Grid ref={ref} item xs={12} sm={12} md={5}>
         <Box mt={2} ml={2}>
           <Typography variant="h5" sx={{ fontWeight: "600" }}>
             Site Settings
@@ -51,6 +51,7 @@ function SiteSettings({}, siteSettingsref) {
               </FormControl>
 
               <TextField
+                autoFocus
                 fullWidth
                 label="Site Title"
                 variant="outlined"

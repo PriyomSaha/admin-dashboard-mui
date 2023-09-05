@@ -3,6 +3,16 @@ import { theme } from "Components/UI/themes";
 import React from "react";
 
 function SideNav({ handleClick }) {
+  const sideNavList = [
+    "Site Settings",
+    "Site SEO Settings",
+    "Site Contact Details",
+    "TimeZone Setting",
+    "Currency Setting",
+    "Distance Unit",
+    "Mobile App Links",
+    "Social Media Links",
+  ];
   return (
     <>
       <Box
@@ -17,103 +27,24 @@ function SideNav({ handleClick }) {
           position: "fixed",
         }}
       >
-        <Box
-          onClick={() => handleClick(0)}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            cursor: "pointer",
-          }}
-        >
-          Site Settings
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Site SEO Settings
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Site Contact Details
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          TimeZone Setting
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Currency Setting
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Distance Unit
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Mobile App Links
-        </Box>
-        <Box
-          onClick={() => {}}
-          sx={{
-            py: 1,
-            flexWrap: "no-wrap",
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-          }}
-        >
-          Social Media Links
-        </Box>
+
+        {sideNavList.map((item, index) => {
+          return (
+            <Box
+              onClick={() => handleClick(index)}
+              sx={{
+                py: 1,
+                flexWrap: "no-wrap",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                cursor: "pointer",
+              }}
+            >
+              {item}
+            </Box>
+          );
+        })}
       </Box>
     </>
   );

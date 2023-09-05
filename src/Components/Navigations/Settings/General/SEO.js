@@ -7,18 +7,18 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import CompactChipInputTextField from "Components/Assets/ReusableComp/CompactChipInputTextField";
 import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
 
-function SEO() {
+function SEO({}, ref) {
   const [pageTitle, setPageTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [metaKeyword, setMetakeyword] = useState([]);
 
   return (
     <>
-      <Grid item xs={12} sm={12} md={5}>
+      <Grid ref={ref} item xs={12} sm={12} md={5}>
         <Box mt={2} ml={2}>
           <Typography variant="h5" sx={{ fontWeight: "600" }}>
             Search Engine Optimization (SEO)
@@ -101,4 +101,4 @@ function SEO() {
   );
 }
 
-export default SEO;
+export default forwardRef(SEO);

@@ -27,7 +27,7 @@ function EmailInput({ email, setEmail }) {
       fullWidth
       label="Email"
       autoComplete="email"
-      autoFocus
+      // autoFocus
       size="small"
       value={email}
       onChange={handleEmailChange}
