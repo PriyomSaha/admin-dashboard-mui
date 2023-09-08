@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ParentChildCheckbox from "./ParentChildCheckbox ";
+import ParentChildCheckbox from "./ParentChildCheckbox";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { theme } from "Components/UI/themes";
 
