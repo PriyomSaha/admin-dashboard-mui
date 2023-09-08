@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
   // API endpoint for registration
-  const url = "/api/v1/register";
+  const registerUrl = process.env.REACT_APP_REGISTER_URL;
 
   // State to hold user input values
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -51,7 +51,7 @@ const Register = () => {
     } else {
       try {
         // Call registration API with user data
-        const resp = await axios.post(url, {
+        const resp = await axios.post(registerUrl, {
           firstName: firstName,
           lastName: lastName,
           country: country,

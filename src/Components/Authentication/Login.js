@@ -33,8 +33,8 @@ const Login = () => {
   const setUserData = useAccountStore((state) => state.setUserData);
 
   // API endpoints
-  const url = "/auth/token";
-  const urlUserDetails = "/api/v1/userDetails";
+  const tokenUrl = process.env.REACT_APP_TOKEN_URL;
+  const userDetailsUrl = process.env.REACT_APP_USER_DETAILS_URL;
 
   // Clear error status when password or email changes
   useEffect(() => {
@@ -53,7 +53,7 @@ const Login = () => {
         await setHavingError(false);
 
         // Call authentication API to get token
-        const resp = await axios.post(url, {
+        const resp = await axios.post(tokenUrl, {
           username: email,
           password: password,
         });
@@ -71,7 +71,7 @@ const Login = () => {
   const handleGetUserdata = async (bToken) => {
     try {
       const response = await axios.post(
-        urlUserDetails,
+        userDetailsUrl,
         {
           username: email,
         },
