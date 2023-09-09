@@ -16,6 +16,7 @@ import PhoneInput from "react-phone-input-2";
 import Countries from "Components/Assets/ReusableComp/Countries";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -33,8 +34,15 @@ const Register = () => {
   // State to track form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // State to indicate whether there's an error in the form
-  const [havingError, setHavingError] = useState(false);
+  // // State to indicate whether there's an error in the form
+  // const [havingError, setHavingError] = useState(false);
+
+  // State to control whether the Snackbar is shown or hidden
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  // State to store the message displayed in the Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  // State to store the type of Snackbar, which can be 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
 
   // Handle user registration
   const handleRegister = async () => {
@@ -47,11 +55,13 @@ const Register = () => {
       firstName < 2 ||
       lastName < 2
     ) {
-      await setHavingError(true);
+      setShowSnackbar(true);
+      setSnackbarType("error");
+      setSnackbarMessage("Please check all the inputs");
     } else {
       try {
         // Call registration API with user data
-        const resp = await axios.post(registerUrl, {
+        await axios.post(registerUrl, {
           firstName: firstName,
           lastName: lastName,
           country: country,
@@ -59,11 +69,17 @@ const Register = () => {
           password: password,
           username: email,
         });
-        await console.log(resp);
-        navigate("/login");
+        setShowSnackbar(true);
+        setSnackbarType("success");
+        setSnackbarMessage("User Created...Navigating to login page");
+        // Delay the navigation to the login page after the toast message is closed
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000); // Adjust the delay time as needed
       } catch (error) {
-        setHavingError(true);
-        await console.log(error);
+        setShowSnackbar(true);
+        setSnackbarType("error");
+        setSnackbarMessage("Some error occured!!");
       }
     }
     await setIsSubmitting(false);
@@ -71,7 +87,9 @@ const Register = () => {
 
   // Clear error status when input values change
   useEffect(() => {
-    setHavingError(false);
+    setShowSnackbar(false);
+    setSnackbarType("");
+    setSnackbarMessage("");
   }, [phoneNumber, password, firstName, lastName, email]);
 
   return (
@@ -190,16 +208,13 @@ const Register = () => {
           )}
         </Box>
       </Paper>
-
-      {/* Display error message in a Snackbar */}
-      <Snackbar
-        open={havingError}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert severity="error" variant="filled">
-          Please check your credentials !!
-        </Alert>
-      </Snackbar>
+      {/* Display error or success message in a Snackbar */}
+      <ToastAlert
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+        snackbarType={snackbarType}
+        snackbarMessage={snackbarMessage}
+      />
     </>
   );
 };

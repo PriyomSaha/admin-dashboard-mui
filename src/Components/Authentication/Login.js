@@ -7,7 +7,7 @@ import {
   CircularProgress,
   Alert,
   Snackbar,
-  Tooltip,
+  Stack,
 } from "@mui/material";
 import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 import { useAccountStore } from "Components/Assets/StateManagement";
 import axios from "axios";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,8 +24,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // State to indicate whether there's an error in the form
-  const [havingError, setHavingError] = useState(false);
+  // State to control whether the Snackbar is shown or hidden
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  // State to store the message displayed in the Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  // State to store the type of Snackbar, which can be 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
 
   // State to track form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +43,7 @@ const Login = () => {
 
   // Clear error status when password or email changes
   useEffect(() => {
-    setHavingError(false);
+    setShowSnackbar(false);
   }, [password, email]);
 
   // Handle user login
@@ -46,11 +51,18 @@ const Login = () => {
     await setIsSubmitting(true);
 
     // Validate email and password
-    if (password.length < 8 || !email.includes(".", "@")) {
-      await setHavingError(true);
+    if (password.length < 2 || !email.includes(".", "@")) {
+      // Display error in a Snackbar
+      setShowSnackbar(true);
+      setSnackbarType("error");
+      setSnackbarMessage(
+        password.length < 1 || email.length < 1
+          ? "Email/Password field cannot be blank"
+          : "Invalid email"
+      );
     } else {
       try {
-        await setHavingError(false);
+        await setShowSnackbar(false);
 
         // Call authentication API to get token
         const resp = await axios.post(tokenUrl, {
@@ -61,7 +73,10 @@ const Login = () => {
         // Get user data using token
         handleGetUserdata(resp.data);
       } catch (error) {
-        setHavingError(true);
+        // Show error notification in a Snackbar
+        setShowSnackbar(true);
+        setSnackbarType("error");
+        setSnackbarMessage("Please recheck your credentials!!");
       }
     }
     await setIsSubmitting(false);
@@ -83,8 +98,15 @@ const Login = () => {
       );
       // Update user data in global state
       setUserData(response.data, true);
+      // Show success notification in a Snackbar
+      setShowSnackbar(true);
+      setSnackbarType("success");
+      setSnackbarMessage("Login successful! You are now logged in.");
     } catch (error) {
-      setHavingError(true);
+      // Show error notification in a Snackbar
+      setShowSnackbar(true);
+      setSnackbarType("error");
+      setSnackbarMessage("Failed to retrieve user data");
     }
   };
 
@@ -110,11 +132,7 @@ const Login = () => {
         </Box>
         <Box component="form" noValidate sx={{ mt: 3 }}>
           {/* Email Input */}
-          <EmailInput
-            email={email}
-            setEmail={setEmail}
-            setHavingError={setHavingError}
-          />
+          <EmailInput email={email} setEmail={setEmail} />
 
           {/* Password Input */}
           <PasswordInput
@@ -182,15 +200,13 @@ const Login = () => {
         </span>
       </Typography>
 
-      {/* Display error message in a Snackbar */}
-      <Snackbar
-        open={havingError}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert severity="error" variant="filled">
-          Please check your credentials !!
-        </Alert>
-      </Snackbar>
+      {/* Display error or success message in a Snackbar */}
+      <ToastAlert
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+        snackbarType={snackbarType}
+        snackbarMessage={snackbarMessage}
+      />
     </>
   );
 };

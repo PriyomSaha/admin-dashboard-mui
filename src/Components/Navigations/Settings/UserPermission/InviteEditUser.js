@@ -21,6 +21,7 @@ import UserDetails from "./UserDetails";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import axios from "axios";
 import Overlay from "Components/Assets/ReusableComp/Overlay";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 function InviteEditUser({ type }) {
   // State to control the visibility of the modal, selected permissions, and email input
@@ -170,17 +171,13 @@ function InviteEditUser({ type }) {
         </Box>
       </Modal>
 
-      {/* Display error/success message in a Snackbar */}
-      <Snackbar
-        open={showSnackbar}
-        autoHideDuration={8000}
-        onClose={() => setShowSnackbar(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert severity={snackbarType} variant="filled">
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+      {/* Display error or success message in a Snackbar */}
+      <ToastAlert
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+        snackbarType={snackbarType}
+        snackbarMessage={snackbarMessage}
+      />
     </>
   );
 }
