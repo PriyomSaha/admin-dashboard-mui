@@ -72,6 +72,11 @@ const Login = () => {
 
         // Get user data using token
         handleGetUserdata(resp.data);
+
+        // Show success notification in a Snackbar
+        setShowSnackbar(true);
+        setSnackbarType("success");
+        setSnackbarMessage("Login successful! You are now logged in.");
       } catch (error) {
         // Show error notification in a Snackbar
         setShowSnackbar(true);
@@ -98,10 +103,6 @@ const Login = () => {
       );
       // Update user data in global state
       setUserData(response.data, true);
-      // Show success notification in a Snackbar
-      setShowSnackbar(true);
-      setSnackbarType("success");
-      setSnackbarMessage("Login successful! You are now logged in.");
     } catch (error) {
       // Show error notification in a Snackbar
       setShowSnackbar(true);
