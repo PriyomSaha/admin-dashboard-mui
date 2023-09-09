@@ -12,20 +12,26 @@ import CompactChipInputTextField from "Components/Assets/ReusableComp/CompactChi
 import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
 
 function SEO({}, ref) {
-  const [pageTitle, setPageTitle] = useState("");
-  const [metaDescription, setMetaDescription] = useState("");
-  const [metaKeyword, setMetakeyword] = useState([]);
+  // State variables to manage SEO information
+  const [pageTitle, setPageTitle] = useState(""); // Page title
+  const [metaDescription, setMetaDescription] = useState(""); // Meta description
+  const [metaKeyword, setMetaKeyword] = useState([]); // Meta keywords (as an array)
 
   return (
     <>
+      {/* Section 1: SEO Information */}
       <Grid ref={ref} item xs={12} sm={12} md={5}>
         <Box mt={2} ml={2}>
           <Typography variant="h5" sx={{ fontWeight: "600" }}>
             Search Engine Optimization (SEO)
           </Typography>
-          <Typography>Search Engine Optimization (SEO)</Typography>
+          <Typography>
+            Optimize your website for search engines with these settings.
+          </Typography>
         </Box>
       </Grid>
+
+      {/* Section 2: SEO Form */}
       <Grid
         item
         xs={12}
@@ -36,9 +42,12 @@ function SEO({}, ref) {
         <Box width={"100%"}>
           <Paper elevation={3}>
             <Box px={4} py={3}>
+              {/* Website Name */}
               <Typography variant="h5" color={"var(--links)"} fontWeight={600}>
                 ZAPERR
               </Typography>
+
+              {/* Page Title */}
               <TextField
                 fullWidth
                 label="Page Title"
@@ -47,13 +56,15 @@ function SEO({}, ref) {
                 value={pageTitle}
                 sx={{ mt: 2 }}
                 inputProps={{ maxLength: 60 }} // Set the maximum length
-                helperText={`${pageTitle.length} / 60`} // Display the current character count
+                helperText={`${pageTitle.length} / 60 characters`} // Display the current character count
                 onChange={(e) => {
                   if (e.target.value.length <= 60) {
                     setPageTitle(e.target.value);
                   }
                 }}
               />
+
+              {/* Meta Description */}
               <TextField
                 fullWidth
                 label="Meta Description"
@@ -62,7 +73,7 @@ function SEO({}, ref) {
                 value={metaDescription}
                 sx={{ mt: 2 }}
                 inputProps={{ maxLength: 160 }} // Set the maximum length
-                helperText={`${metaDescription.length} / 160`} // Display the current character count
+                helperText={`${metaDescription.length} / 160 characters`} // Display the current character count
                 onChange={(e) => {
                   if (e.target.value.length <= 160) {
                     setMetaDescription(e.target.value);
@@ -71,12 +82,16 @@ function SEO({}, ref) {
                 multiline
                 rows={2}
               />
+
+              {/* Meta Keywords */}
               <Box sx={{ mt: 2 }}>
                 <CompactChipInputTextField
                   chips={metaKeyword}
-                  setChips={setMetakeyword}
+                  setChips={setMetaKeyword}
                 />
               </Box>
+
+              {/* Image Upload */}
               <Grid
                 container
                 sx={{

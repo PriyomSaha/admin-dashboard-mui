@@ -12,17 +12,24 @@ import {
 } from "@mui/material";
 
 function SiteSettings({}, ref) {
+  // State variable to manage the selected language
   const [language, setLanguage] = useState("english");
+
   return (
     <>
+      {/* Grid for Site Settings Section */}
       <Grid ref={ref} item xs={12} sm={12} md={5}>
         <Box mt={2} ml={2}>
+          {/* Section Title */}
           <Typography variant="h5" sx={{ fontWeight: "600" }}>
             Site Settings
           </Typography>
+          {/* Section Description */}
           <Typography>This includes basic site settings</Typography>
         </Box>
       </Grid>
+
+      {/* Grid for the Site Settings Form */}
       <Grid
         item
         xs={12}
@@ -31,8 +38,10 @@ function SiteSettings({}, ref) {
         sx={{ display: "flex", justifyContent: "center" }}
       >
         <Box width={"100%"}>
+          {/* Paper for the Form */}
           <Paper elevation={3}>
             <Box px={4} py={3}>
+              {/* Language Selection Dropdown */}
               <FormControl
                 variant="outlined"
                 size="small"
@@ -50,6 +59,7 @@ function SiteSettings({}, ref) {
                 </Select>
               </FormControl>
 
+              {/* Site Title Input */}
               <TextField
                 autoFocus
                 fullWidth
@@ -58,6 +68,8 @@ function SiteSettings({}, ref) {
                 size="small"
                 sx={{ mt: 2 }}
               />
+
+              {/* Site Tagline Input */}
               <TextField
                 fullWidth
                 label="Site Tagline"
