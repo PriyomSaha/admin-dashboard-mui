@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   Box,
@@ -36,6 +36,11 @@ function InviteEditUser({ type }) {
   // State to store the type of Snackbar, which can be 'success' or 'error'
   const [snackbarType, setSnackbarType] = useState("success"); // 'success' or 'error'
 
+  //To set email to blank
+  useEffect(() => {
+    setEmail("");
+  }, [isModalOpen]);
+
   // Function to handle the save action
   const runOnSave = async (e) => {
     // Use a Set to ensure unique permissions
@@ -58,7 +63,6 @@ function InviteEditUser({ type }) {
     } else {
       // Update the user permissions via an API call
       const inviteUrl = `${process.env.REACT_APP_INVITE_USER_URL}${email}`; // Endpoint for user invitation
-
       try {
         const resp = await axios.post(inviteUrl, {
           email: email,

@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Chip,
   FormControl,
   IconButton,
@@ -17,13 +16,20 @@ import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 
 function Status({ oldStatus }) {
+  // State to control the visibility of the status update modal
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
+
+  // State to manage the current status
   const [status, setStatus] = useState(oldStatus);
+
+  // State to store the updated status
   const [updatedstatus, setUdateStatus] = useState(oldStatus);
 
   return (
     <>
+      {/* Render different UI elements based on the 'updatedstatus' state */}
       {updatedstatus === "Active" ? (
+        // Display a 'Chip' element for 'Active' status
         <Chip
           label="Active"
           sx={{
@@ -36,6 +42,7 @@ function Status({ oldStatus }) {
           onClick={() => setIsStatusModalOpen(!isStatusModalOpen)}
         />
       ) : updatedstatus === "Pending" ? (
+        // Display a 'Typography' element for 'Pending' status with a link to resend invite
         <Box>
           <Typography variant="body1" fontWeight={500}>
             Pending
@@ -50,6 +57,7 @@ function Status({ oldStatus }) {
           </span>
         </Box>
       ) : (
+        // Display a 'Chip' element for 'InActive' status
         <Chip
           label="InActive"
           sx={{
@@ -60,6 +68,7 @@ function Status({ oldStatus }) {
         />
       )}
 
+      {/* Modal for updating the status */}
       <Modal open={isStatusModalOpen}>
         <Box sx={ModalStyle}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -83,6 +92,8 @@ function Status({ oldStatus }) {
 
           {/* Horizontal line for visual separation */}
           <hr />
+
+          {/* Dropdown to select the new status */}
           <FormControl sx={{ my: 4 }} fullWidth variant="outlined" size="small">
             <InputLabel>Status</InputLabel>
             <Select
@@ -95,6 +106,7 @@ function Status({ oldStatus }) {
             </Select>
           </FormControl>
 
+          {/* Buttons for saving or canceling the status update */}
           <SaveCancelButtons
             isModalOpen={isStatusModalOpen}
             setIsModalOpen={setIsStatusModalOpen}
