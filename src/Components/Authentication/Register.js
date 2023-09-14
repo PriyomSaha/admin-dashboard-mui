@@ -60,7 +60,7 @@ const Register = () => {
       setSnackbarMessage("Please check all the inputs");
     } else {
       try {
-        // Call registration API with user data input
+        // Call registration API with user data
         await axios.post(registerUrl, {
           firstName: firstName,
           lastName: lastName,
