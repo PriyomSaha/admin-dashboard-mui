@@ -72,7 +72,7 @@ function TopPerformingProducts() {
               {/* Table Body */}
               <TableBody>
                 {products.map((value) => (
-                  <TableRow>
+                  <TableRow key={value.id}>
                     <TableCell>
                       {
                         <img

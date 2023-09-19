@@ -67,7 +67,7 @@ function TopPermormingMerchants() {
               {/* Table Body */}
               <TableBody>
                 {merchants.map((value) => (
-                  <TableRow>
+                  <TableRow key={value.id}>
                     <TableCell>
                       {
                         <img
