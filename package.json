@@ -5,7 +5,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+<<<<<<< Updated upstream
     "@mui/material": "^5.14.0",
+=======
+    "@mui/material": "^5.14.2",
+    "@nivo/bar": "^0.83.0",
+    "@nivo/core": "^0.83.0",
+    "@nivo/line": "^0.83.0",
+    "@nivo/stream": "^0.83.0",
+>>>>>>> Stashed changes
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -17,7 +25,12 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.1",
+<<<<<<< Updated upstream
     "react-scripts": "5.0.1",
+=======
+    "react-scripts": "^5.0.1",
+    "styled-components": "^6.0.5",
+>>>>>>> Stashed changes
     "web-vitals": "^2.1.4",
     "zustand": "^4.3.9"
   },

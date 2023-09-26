@@ -15,6 +15,8 @@
 --order-collected-text:whitesmoke;
 --order-cancelled-background:#b71c1c;
 --order-cancelled-text:whitesmoke;
+--order-Delivery-background:#7ec6ec;
+--order-sales-background:#008080;
 --order-accepted-background:#cddc39;
 --order-accepted-text:black;
 }
