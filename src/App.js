@@ -19,7 +19,7 @@ function App() {
 
   // Set user data with name "Priyom Saha" and a boolean value "true"
   // This is an example of using the state management hook to manage user data.
-  // setUserData("Priyom Saha", true);
+  setUserData("Priyom Saha", true);
 
   // The App component is the root component of the application.
   return (
