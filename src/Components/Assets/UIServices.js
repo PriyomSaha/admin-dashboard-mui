@@ -6,6 +6,7 @@ import {
   users,
   topMerchants,
   topProducts,
+  customers
 } from "Components/Assets/DummyData";
 
 // Function 'getOrders' to filter and retrieve orders based on the specified orderType
@@ -38,6 +39,26 @@ export const updateOrderCount = () => {
   // Return the updated 'orderCount' object
   return orderCount;
 };
+
+export const getCustomers = (custType) => {
+  if (custType === "All") return customers;
+  else return customers.filter((cust) => cust.status === custType);
+};
+
+export const updateCustomersCount = () => {
+  let customersCount = {
+    All: customers.length,
+    Active: 0,
+    Block: 0,
+  };
+
+  for (const customer of customers) {
+    const key = customer.status;
+    customersCount[key]++;
+  }
+  return customersCount;
+};
+
 export const getMerchants = () => {
   return merchants;
 };

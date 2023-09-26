@@ -492,3 +492,18 @@ export let topProducts = [
     imgUri: "",
   },
 ];
+
+export let customers = [
+  {
+    Name: "krishna",
+    Email: "krishna@gmail.com",
+    Phone: "827422346",
+    status: "Active",
+  },
+  {
+    Name: "Aditya",
+    Email: "adityak@gmail.com",
+    Phone: "764826384",
+    status: "Block",
+  },
+];

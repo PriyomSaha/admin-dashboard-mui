@@ -1,6 +1,5 @@
 // Importing required modules and components from React and MUI library
 import React from "react";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
