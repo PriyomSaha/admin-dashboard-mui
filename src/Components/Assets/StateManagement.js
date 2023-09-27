@@ -10,9 +10,19 @@ export const useOrdersLoadingStore = create((set) => ({
   setIsOrderLoading: () =>
     set((state) => ({ isOrderLoading: !state.isOrderLoading })),
 }));
-
+export const useCustomersLoadingStore = create((set) => ({
+  isCustomersLoading: false,
+  setIsCustomersLoading: () =>
+    set((state) => ({ isCustomersLoading: !state.isCustomersLoading })),
+}));
 export const useAccountStore = create((set) => ({
-  userData: { userId: "", userName: "" },
-  setUserData: (userId, userName) =>
-    set((state) => ({ userData: { userId, userName } })),
+  userData: { userName: "", authStatus: false },
+  setUserData: (userName, authStatus) =>
+    set((state) => ({ userData: { userName, authStatus } })),
+}));
+
+export const useEditProfileStore = create((set) => ({
+  isEditProfile: false,
+  setIsEditProfile: () =>
+    set((state) => ({ isEditProfile: !state.isEditProfile })),
 }));

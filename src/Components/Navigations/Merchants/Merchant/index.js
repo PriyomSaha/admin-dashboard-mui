@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import MerchantTable from "Components/Navigations/Merchants/Merchant/MerchantTable";
 
 function Merchant() {
   return (
-    <div>Merchant</div>
-  )
+    <>
+      <MerchantTable />
+    </>
+  );
 }
 
-export default Merchant
+export default Merchant;

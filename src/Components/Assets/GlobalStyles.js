@@ -1,4 +1,5 @@
 import { styled } from "@mui/material/styles";
+import { theme } from "Components/UI/themes";
 
 export const drawerWidth = 200;
 
@@ -17,8 +18,8 @@ export const ComponentHeader = styled("div")(({ theme }) => ({
   padding: theme.spacing(1, 4),
   boxShadow: theme.shadows[3],
   width: "100%",
-  color: "#444444",
-  background: "#ffffff",
+  background: "var(--component-header-background)",
+  color: "var(--component-header-text)",
   maxWidth: "100vw",
   position: "sticky",
   top: "64px",
@@ -36,9 +37,66 @@ export const ComponentBody = styled("div")(({ theme }) => ({
   marginTop: "1vh",
   padding: theme.spacing(1, 2),
   boxShadow: theme.shadows[10],
-  background: "#f8f8f8",
-  color: "#444444",
+  background: "var(--component-body-background)",
+  color: "var(--component-body-text)",
   minHeight: "100vh",
   maxWidth: "100vw",
   // [theme.breakpoints.down("md")]: { padding: theme.spacing(2, 1) },
 }));
+
+//This Style is for image in table cell
+export const TableImage = {
+  width: "5vh",
+  height: "5vh",
+  display: "flex",
+  alignSelf: "center",
+  borderRadius: "10px",
+};
+
+//Super Admin login for Merchant and Customer
+export const SuperAdminLoginButton = styled("button")(({ theme }) => ({
+  boxShadow: theme.shadows[10],
+  background: "var(--super-admin-login-button-background)",
+  color: "var(--super-admin-login-button-text)",
+  border: "1px solid var(--super-admin-login-button-text)",
+  borderRadius: "5px",
+  padding: theme.spacing(1, 2),
+  cursor: "pointer",
+  display: "flex",
+  alignItems: "center",
+}));
+
+// Styling for the Modal component
+export const ModalStyle = {
+  position: "absolute",
+  top: "30%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 50,
+  p: 2,
+  borderRadius: "10px",
+  [theme.breakpoints.between(0, 400)]: {
+    width: "100%",
+  },
+};
+
+export const FullScreenModalContainer = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+export const FullScreenModalContent = {
+  outline: "none",
+  backgroundColor: theme.palette.grey[200],
+  borderBottomLeftRadius: 5,
+  borderBottomRightRadius: 5,
+  padding: theme.spacing(2),
+  minWidth: "50vw",
+  maxWidth: "100vw",
+  minHeight: "20vh",
+  maxHeight: "80vh",
+  overflow: "auto",
+};

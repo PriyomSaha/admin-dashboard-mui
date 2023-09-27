@@ -44,6 +44,15 @@ const Category = Loadable(
 const Product = Loadable(
   lazy(() => import("Components/Navigations/Merchants/Product"))
 );
+const Settings = Loadable(
+  lazy(() => import("Components/Navigations/Settings"))
+);
+const UserPermission = Loadable(
+  lazy(() => import("Components/Navigations/Settings/UserPermission/index"))
+);
+const General = Loadable(
+  lazy(() => import("Components/Navigations/Settings/General/index"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -82,7 +91,7 @@ const MainRoutes = {
       element: <Merchants />,
       children: [
         {
-          path: "merchant",
+          path: "",
           element: <Merchant />,
         },
         {
@@ -92,6 +101,20 @@ const MainRoutes = {
         {
           path: "category",
           element: <Category />,
+        },
+      ],
+    },
+    {
+      path: "settings",
+      element: <Settings />,
+      children: [
+        {
+          path: "permission",
+          element: <UserPermission />,
+        },
+        {
+          path: "general",
+          element: <General />,
         },
       ],
     },

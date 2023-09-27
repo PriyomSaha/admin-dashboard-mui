@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import CategoryTable from "./CategoryTable";
 
 function Category() {
-  return (
-    <div>Category</div>
-  )
+  return <CategoryTable />;
 }
 
-export default Category
+export default Category;

@@ -7,17 +7,15 @@
 }
 
 .App{
-
     font-family: 'Poppins', sans-serif;
-    /* overflow-x: hidden; */
-       /* display: flex;
-      position: relative;  */
+    background-color: var(--component-body-background);
 }
-  
 .active{
   background-color: var(--sidenav-active-background);
 }
-
+.table-icon{
+font-size: "25px";
+}
   .react-datepicker__month-container {
     border: 1px solid #ccc;
     z-index: 999999;
@@ -86,6 +84,20 @@ select:hover{
       color: var(--order-cancelled-text);
     }
 
+    /* Phone input */
+    .react-tel-input .form-control{
+    /* font-size: 16px; */
+    height: 1.4375em;
+    background: transparent;
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+    }
+    .react-tel-input .form-control:focus {
+    background: transparent;
+    /* border: 1px solid var(--phone-input-border); */
+    }
+
   @media only screen and (max-width: 685px) {
     .react-datepicker__month-container {
       float: none;
@@ -102,4 +114,15 @@ select:hover{
     }
   }
   
+  a{
+    text-decoration: none;
+    color: var(--links);
+    font-weight: 500;
+  }
+  
+  .graphContainer {
+    padding: 0.4rem;
+    height: 45vh;
+    width: 100%;
+  }
   

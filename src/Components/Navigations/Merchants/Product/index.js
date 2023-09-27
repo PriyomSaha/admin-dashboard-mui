@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import ProductTable from "./ProductTable";
 
 function Product() {
-  return (
-    <div>Product</div>
-  )
+  return <ProductTable />;
 }
 
-export default Product
+export default Product;
