@@ -15,7 +15,7 @@ function AddCustomerButton() {
         }}
       >
         <AiOutlinePlus />
-        AddCustomer
+        &nbsp;AddCustomer
       </Button>
     </Box>
   );

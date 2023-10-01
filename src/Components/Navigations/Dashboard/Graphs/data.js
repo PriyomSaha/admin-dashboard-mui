@@ -95,55 +95,31 @@ export const data = [
 export const data2 = [
   {
     id: "Delivery",
-    color: "hsl(152, 70%, 50%)",
+    color: "var(--order-Delivery-background)",
     data: [
       {
-        x: "Jan",
-        y: 290,
+        x: 0,
+        y: 0,
       },
       {
-        x: "Feb",
-        y: 22,
+        x: 6,
+        y: 100,
       },
       {
-        x: "Mar",
-        y: 50,
+        x: 10,
+        y: 200,
       },
       {
-        x: "Apr",
-        y: 243,
+        x: 14,
+        y: 16,
       },
       {
-        x: "May",
-        y: 34,
+        x: 16,
+        y: 10,
       },
       {
-        x: "June",
-        y: 135,
-      },
-      {
-        x: "July",
-        y: 255,
-      },
-      {
-        x: "Aug",
-        y: 41,
-      },
-      {
-        x: "Sep",
-        y: 31,
-      },
-      {
-        x: "Oct",
-        y: 124,
-      },
-      {
-        x: "Nov",
-        y: 213,
-      },
-      {
-        x: "Dec",
-        y: 39,
+        x: 24,
+        y: 400,
       },
     ],
   },
@@ -152,55 +128,31 @@ export const data2 = [
 export const data3 = [
   {
     id: "Sales",
-    color: "hsl(152, 70%, 50%)",
+    color: "var(--order-sales-background)",
     data: [
       {
-        x: "Jan",
-        y: 499,
+        x: 0,
+        y: 0,
       },
       {
-        x: "Feb",
-        y: 220,
+        x: 6,
+        y: 25,
       },
       {
-        x: "Mar",
-        y: 50,
+        x: 10,
+        y: 4,
       },
       {
-        x: "Apr",
-        y: 240,
+        x: 14,
+        y: 16,
       },
       {
-        x: "May",
-        y: 340,
+        x: 16,
+        y: 1,
       },
       {
-        x: "June",
-        y: 130,
-      },
-      {
-        x: "July",
-        y: 250,
-      },
-      {
-        x: "Aug",
-        y: 410,
-      },
-      {
-        x: "Sep",
-        y: 310,
-      },
-      {
-        x: "Oct",
-        y: 120,
-      },
-      {
-        x: "Nov",
-        y: 230,
-      },
-      {
-        x: "Dec",
-        y: 390,
+        x: 24,
+        y: 166,
       },
     ],
   },

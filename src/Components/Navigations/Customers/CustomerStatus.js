@@ -24,7 +24,7 @@ function CustomerStatus(props) {
   useEffect(() => {
     setStatus(props.status);
     setUpdateStatus(props.status);
-  }, []);
+  });
 
   return (
     <>
