@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
 import React, { useRef } from "react";
 import SiteSettings from "./SiteSettings";
-import SideNav from "./SideNav";
+import SideNav from "Components/Assets/ReusableComp/SettingsSideNavWithRef";
 import SEO from "./SEO";
 import SiteContactDetails from "./SiteContactDetails";
 import TimeZone from "./TimeZone";
@@ -21,7 +21,17 @@ function General() {
       behavior: "smooth",
     });
   };
-
+  // List of items for the side navigation
+  const sideNavList = [
+    "Site Settings",
+    "Site SEO Settings",
+    "Site Contact Details",
+    "TimeZone Setting",
+    "Currency Setting",
+    "Distance Unit",
+    "Mobile App Links",
+    "Social Media Links",
+  ];
   return (
     <Box width={"100%"}>
       {/* Main Grid container */}
@@ -92,7 +102,7 @@ function General() {
         <Grid item md={2}>
           {/* SideNav component with navigation links */}
           {/* When a link is clicked, the handleClick function is called to scroll to the corresponding section */}
-          <SideNav handleClick={handleClick} />
+          <SideNav sideNavList={sideNavList} handleClick={handleClick} />
         </Grid>
       </Grid>
     </Box>

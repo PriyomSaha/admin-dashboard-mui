@@ -2,19 +2,7 @@ import { Box } from "@mui/material";
 import { theme } from "Components/UI/themes";
 import React from "react";
 
-function SideNav({ handleClick }) {
-  // List of items for the side navigation
-  const sideNavList = [
-    "Site Settings",
-    "Site SEO Settings",
-    "Site Contact Details",
-    "TimeZone Setting",
-    "Currency Setting",
-    "Distance Unit",
-    "Mobile App Links",
-    "Social Media Links",
-  ];
-
+function SettingsSideNavWithRef({ sideNavList, handleClick }) {
   return (
     <>
       {/* Side Navigation Container */}
@@ -53,4 +41,4 @@ function SideNav({ handleClick }) {
   );
 }
 
-export default SideNav;
+export default SettingsSideNavWithRef;
