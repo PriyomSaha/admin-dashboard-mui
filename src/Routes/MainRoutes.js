@@ -53,6 +53,9 @@ const UserPermission = Loadable(
 const General = Loadable(
   lazy(() => import("Components/Navigations/Settings/General/index"))
 );
+const OrderSetting = Loadable(
+  lazy(() => import("Components/Navigations/Settings/Order/index"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -116,6 +119,10 @@ const MainRoutes = {
           path: "general",
           element: <General />,
         },
+        {
+          path:"order",
+          element:<OrderSetting/>
+        }
       ],
     },
     {
