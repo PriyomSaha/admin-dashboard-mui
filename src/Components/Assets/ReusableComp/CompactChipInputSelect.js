@@ -16,7 +16,7 @@ function CompactChipInputSelect({
   setSelectedItems,
   inputLabelText,
 }) {
-  const ITEM_HEIGHT = 48;
+  const ITEM_HEIGHT = 40;
   const ITEM_PADDING_TOP = 8;
 
   const MenuProps = {
@@ -80,6 +80,7 @@ function CompactChipInputSelect({
             </Box>
           )}
           MenuProps={MenuProps}
+          size="small"
         >
           {totalList.map((item) => (
             <MenuItem key={item} value={item} style={getStyles(item, theme)}>
