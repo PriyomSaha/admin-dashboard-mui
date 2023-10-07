@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
+  FullScreenModalHeader,
 } from "Components/Assets/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import { FaRegEdit } from "react-icons/fa";
@@ -24,21 +25,7 @@ const AddEditMerchant = ({ merchantName }) => {
       <Modal open={isModalOpen} sx={FullScreenModalContainer}>
         <Box>
           <Box
-            sx={{
-              position: "sticky",
-              top: 0,
-              left: "auto",
-              right: "auto",
-              minWidth: "50vw",
-              maxWidth: "100vw",
-
-              backgroundColor: theme.palette.background.paper,
-              padding: theme.spacing(1, 2),
-              zIndex: 1,
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-              borderBottom: `1px solid ${theme.palette.grey[400]}`,
-            }}
+            sx={FullScreenModalHeader}
           >
             <Typography variant="h6">Edit Merchant</Typography>
 
