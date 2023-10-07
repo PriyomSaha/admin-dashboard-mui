@@ -54,7 +54,7 @@ const General = Loadable(
   lazy(() => import("Components/Navigations/Settings/General/index"))
 );
 const OrderSetting = Loadable(
-  lazy(() => import("Components/Navigations/Settings/Order/index"))
+  lazy(() => import("Components/Navigations/Settings/Order"))
 );
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -120,9 +120,9 @@ const MainRoutes = {
           element: <General />,
         },
         {
-          path:"order",
-          element:<OrderSetting/>
-        }
+          path: "order",
+          element: <OrderSetting />,
+        },
       ],
     },
     {
