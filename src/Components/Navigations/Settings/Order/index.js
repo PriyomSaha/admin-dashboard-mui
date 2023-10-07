@@ -4,6 +4,9 @@ import SideNav from "Components/Assets/ReusableComp/SettingsSideNavWithRef";
 import Scheduling from "./Scheduling";
 import OrderTip from "./OrderTip";
 import OrderAccept from "./OrderAccept";
+import CustomCharges from "./CustomCharges/index";
+import ChargesTable from "./CustomCharges/ChargesTable";
+import OrderTypes from "./OrderTypes/OrderTypes";
 
 function Order() {
   // Create a ref to store references to child components
@@ -22,7 +25,6 @@ function Order() {
     "Order Scheduling",
     "Order Tip",
     "Accept Orders",
-    "Order Status Name",
     "Custom Charges",
     "Order Types",
   ];
@@ -48,6 +50,16 @@ function Order() {
           <OrderAccept
             ref={(element) => {
               refs.current[2] = element; // Store a reference to this component
+            }}
+          />
+          <CustomCharges
+            ref={(element) => {
+              refs.current[3] = element; // Store a reference to this component
+            }}
+          />
+          <OrderTypes
+            ref={(element) => {
+              refs.current[4] = element; // Store a reference to this component
             }}
           />
         </Grid>

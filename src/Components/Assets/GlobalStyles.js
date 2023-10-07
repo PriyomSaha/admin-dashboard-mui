@@ -88,17 +88,43 @@ export const FullScreenModalContainer = {
   alignItems: "center",
   justifyContent: "center",
 };
+export const FullScreenModalHeader = {
+  position: "sticky",
+  top: 0,
+  left: "auto",
+  right: "auto",
+  minWidth: "40vw",
+  maxWidth: "50vw",
+  [theme.breakpoints.down("md")]: {
+    maxWidth: "90vw",
+  },
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "100vw",
+  },
 
+  backgroundColor: theme.palette.background.paper,
+  padding: theme.spacing(1, 2),
+  zIndex: 1,
+  borderTopLeftRadius: 5,
+  borderTopRightRadius: 5,
+  borderBottom: `1px solid ${theme.palette.grey[400]}`,
+};
 export const FullScreenModalContent = {
   outline: "none",
   backgroundColor: theme.palette.grey[200],
   borderBottomLeftRadius: 5,
   borderBottomRightRadius: 5,
   padding: theme.spacing(2),
-  minWidth: "50vw",
-  maxWidth: "100vw",
+  minWidth: "40vw",
+  maxWidth: "50vw",
+  [theme.breakpoints.down("md")]: {
+    maxWidth: "90vw",
+  },
+  [theme.breakpoints.down("sm")]: {
+    maxWidth: "100vw",
+  },
   minHeight: "20vh",
-  maxHeight: "80vh",
+  maxHeight: "90vh",
   overflow: "auto",
 };
 

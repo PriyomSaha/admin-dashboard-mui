@@ -6,7 +6,9 @@ import {
   users,
   topMerchants,
   topProducts,
-  customers
+  customers,
+  customCharges,
+  orderTypes,
 } from "Components/Assets/DummyData";
 
 // Function 'getOrders' to filter and retrieve orders based on the specified orderType
@@ -78,4 +80,11 @@ export const getTopMerchants = () => {
 };
 export const getTopProducts = () => {
   return topProducts;
+};
+export const getCustomCharges = () => {
+  return customCharges;
+};
+
+export const getOrderTypes = () => {
+  return orderTypes;
 };

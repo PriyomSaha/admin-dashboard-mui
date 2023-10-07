@@ -1,3 +1,4 @@
+//Orders
 export let orders = [
   {
     id: "1000",
@@ -158,6 +159,7 @@ export let orders = [
   },
 ];
 
+//Merchants
 export let merchants = [
   {
     id: "1",
@@ -294,6 +296,7 @@ export let merchants = [
   },
 ];
 
+//Merchants
 export let categories = [
   {
     id: 1,
@@ -320,6 +323,7 @@ export let categories = [
   },
 ];
 
+//Merchants
 export let products = [
   {
     id: 1,
@@ -371,6 +375,7 @@ export let products = [
   },
 ];
 
+//Settings User Invitation
 export let users = [
   {
     id: 1,
@@ -422,6 +427,7 @@ export let users = [
   },
 ];
 
+//Dashboard
 export let topMerchants = [
   {
     id: 1,
@@ -448,6 +454,7 @@ export let topMerchants = [
   },
 ];
 
+//Dashboard
 export let topProducts = [
   {
     id: 1,
@@ -493,6 +500,7 @@ export let topProducts = [
   },
 ];
 
+//Customers Page
 export let customers = [
   {
     Name: "krishna",
@@ -505,5 +513,51 @@ export let customers = [
     Email: "adityak@gmail.com",
     Phone: "764826384",
     status: "Block",
+  },
+];
+
+//Settings -> Orders
+export let customCharges = [
+  {
+    id: 1,
+    chargeName: "Packaging charges",
+    chargeDescription: "charges levied for packaging of food products",
+    applicableOn: "Merchant",
+    rule: {
+      value: "10",
+      orderType: ["Delivery", "Pickup", "Custom"],
+    },
+    status: true,
+  },
+  {
+    id: 2,
+    chargeName: "Delivery charges",
+    chargeDescription:
+      "charges levied for delivery (Within 5km free. 5km+ Rs.10 for each 5 km ",
+    applicableOn: "Global",
+    rule: {
+      value: "",
+      orderType: [],
+    },
+    status: true,
+  },
+];
+
+//Settings -> Orders
+export let orderTypes = [
+  {
+    id: 1,
+    name: "Delivery",
+    status: true,
+  },
+  {
+    id: 2,
+    name: "Pickup",
+    status: true,
+  },
+  {
+    id: 3,
+    name: "Custom",
+    status: false,
   },
 ];
