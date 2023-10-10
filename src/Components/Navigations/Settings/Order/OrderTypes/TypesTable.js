@@ -14,7 +14,7 @@ import { getCustomCharges, getOrderTypes } from "Components/Assets/UIServices";
 import { CustomSwitch } from "Components/Assets/GlobalStyles";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 
-function TypesTable() {
+function TypesTable({ setIsModalOpen }) {
   const columns = [
     {
       id: "name",
@@ -87,7 +87,11 @@ function TypesTable() {
                     <CustomSwitch checked={item.status} />
                   </TableCell>
                   <TableCell align="center">
-                    <IoEllipsisHorizontal size={25} />
+                    <IoEllipsisHorizontal
+                      size={25}
+                      onClick={() => setIsModalOpen(true)}
+                      cursor={"pointer"}
+                    />
                   </TableCell>
                 </TableRow>
               ))}

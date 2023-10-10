@@ -524,8 +524,8 @@ export let customCharges = [
     chargeDescription: "charges levied for packaging of food products",
     applicableOn: "Merchant",
     rule: {
-      value: "10",
-      orderType: ["Delivery", "Pickup", "Custom"],
+      value: "",
+      orderType: [],
     },
     status: true,
   },
@@ -536,8 +536,8 @@ export let customCharges = [
       "charges levied for delivery (Within 5km free. 5km+ Rs.10 for each 5 km ",
     applicableOn: "Global",
     rule: {
-      value: "",
-      orderType: [],
+      value: "10",
+      orderType: ["Delivery", "Pickup", "Custom"],
     },
     status: true,
   },

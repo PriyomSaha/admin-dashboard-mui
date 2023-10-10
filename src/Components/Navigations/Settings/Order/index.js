@@ -5,8 +5,7 @@ import Scheduling from "./Scheduling";
 import OrderTip from "./OrderTip";
 import OrderAccept from "./OrderAccept";
 import CustomCharges from "./CustomCharges/index";
-import ChargesTable from "./CustomCharges/ChargesTable";
-import OrderTypes from "./OrderTypes/OrderTypes";
+import OrderTypes from "./OrderTypes";
 
 function Order() {
   // Create a ref to store references to child components
@@ -62,6 +61,8 @@ function Order() {
               refs.current[4] = element; // Store a reference to this component
             }}
           />
+
+          
         </Grid>
 
         {/* Right side of the page with navigation */}

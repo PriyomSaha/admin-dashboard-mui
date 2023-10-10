@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import TypesTable from "./TypesTable";
+import CustomOrderTypeModal from "./Custom";
 
 function OrderTypes({}, ref) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       {/* Grid for Site Settings Section */}
@@ -26,7 +29,13 @@ function OrderTypes({}, ref) {
           alignItems: "center",
         }}
       >
-        <TypesTable />
+        <TypesTable setIsModalOpen={setIsModalOpen} />
+      </Grid>
+      <Grid item xs={12}>
+        <CustomOrderTypeModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
       </Grid>
     </>
   );

@@ -100,25 +100,30 @@ function ChargesTable() {
                   </TableCell>
                   <TableCell>{item.applicableOn}</TableCell>
                   <TableCell>
-                    <Typography
-                      fontWeight={300}
-                      fontSize={13}
-                      sx={{ color: theme.palette.grey[600] }}
-                      noWrap
-                    >
-                      Value : <b>{item.rule.value}</b>
-                    </Typography>
-                    <Typography
-                      fontWeight={300}
-                      fontSize={13}
-                      sx={{ color: theme.palette.grey[600] }}
-                      noWrap
-                    >
-                      Order Type :
-                      {item.rule.orderType.map((types, index) => (
-                        <b key={index}> {types} &nbsp;</b>
-                      ))}
-                    </Typography>
+                    {item.applicableOn === "Global" ? (
+                      <>
+                        {" "}
+                        <Typography
+                          fontWeight={300}
+                          fontSize={13}
+                          sx={{ color: theme.palette.grey[600] }}
+                          noWrap
+                        >
+                          Value : <b>{item.rule.value}</b>
+                        </Typography>
+                        <Typography
+                          fontWeight={300}
+                          fontSize={13}
+                          sx={{ color: theme.palette.grey[600] }}
+                          noWrap
+                        >
+                          Order Type :
+                          {item.rule.orderType.map((types, index) => (
+                            <b key={index}> {types} &nbsp;</b>
+                          ))}
+                        </Typography>
+                      </>
+                    ) : null}
                   </TableCell>
                   <TableCell>
                     <Stack direction={"row"} justifyContent={"space-around"}>
@@ -127,7 +132,7 @@ function ChargesTable() {
                         // onChange={() => setEnabled(!enabled)}
                         inputProps={{ "aria-label": "ant design" }}
                       />
-                      <FaEdit size={30} />
+                      <FaEdit size={30} color="var(--links)" />
                     </Stack>
                   </TableCell>
                 </TableRow>
