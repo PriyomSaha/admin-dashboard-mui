@@ -6,7 +6,7 @@ import { useOrdersStore } from "Components/Assets/StateManagement";
 import axios from "axios";
 
 // API endpoints
-const allOrdersUrl = process.env.REACT_APP_GET_ORDERS_LIST_URL;
+const allOrdersUrl = process.env.REACT_APP_GET_ORDERS_LIST_URL_SUPERADMIN;
 
 // Functional component 'OrderStatusFilter' to filter orders by their status
 export default function OrderStatusFilter({ counts, setOrders }) {
@@ -30,6 +30,7 @@ export default function OrderStatusFilter({ counts, setOrders }) {
 
   const getAllOrders = async () => {
     await setIsOrderLoading();
+    console.log(allOrdersUrl);
     const response = await axios.get(allOrdersUrl);
     setInitialOrdersList(response.data);
     await setIsOrderLoading();
