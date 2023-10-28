@@ -1,16 +1,18 @@
-import * as React from "react";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { Skeleton } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Skeleton,
+} from "@mui/material";
 import OrderStatus from "./OrderStatus";
-import { useOrdersLoadingStore } from "Components/Assets/StateManagement";
 import Notes from "./Notes";
+import { useOrdersStore } from "Components/Assets/StateManagement";
 
 // Columns configuration for the table
 const columns = [
@@ -59,13 +61,15 @@ const columns = [
 ];
 
 // Functional component 'OrderTable' to display orders in a table format
-export default function OrderTable({ orders }) {
+export default function OrderTable() {
   // State variables for pagination
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // Custom hook 'useOrdersLoadingStore' to access 'isOrderLoading' state
-  const isOrderLoading = useOrdersLoadingStore((state) => state.isOrderLoading);
+  // Custom hook 'useOrdersStore' to access 'isOrderLoading' state
+  const isOrderLoading = useOrdersStore((state) => state.isOrderLoading);
+  // Custom hook 'useOrdersStore' to access 'orders' state
+  const orders = useOrdersStore((state) => state.ordersList);
 
   // Function to handle page change event
   const handleChangePage = (event, newPage) => {
@@ -108,7 +112,7 @@ export default function OrderTable({ orders }) {
           <TableBody>
             {/* Display skeleton loading when 'isOrderLoading' is true */}
             {isOrderLoading
-              ? // Number of rows perpage should be the total skeleton count
+              ? // Number of rows per page should be the total skeleton count
                 Array.from({ length: rowsPerPage }, (_, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => (
@@ -168,36 +172,3 @@ export default function OrderTable({ orders }) {
     </Paper>
   );
 }
-
-/**Comments Explanation:
-
-The code imports required modules and components from React and MUI (Material-UI) libraries.
-
-The OrderTable functional component is responsible for displaying orders in a table format.
-
-The columns constant represents the configuration for the columns of the table, specifying their ids, labels, and minimum widths.
-
-The component uses the useState hook to manage the page and rowsPerPage state variables for pagination.
-
-The component uses the custom hook useOrdersLoadingStore to access the isOrderLoading state, which is used for skeleton loading when orders are being fetched.
-
-The functions handleChangePage and handleChangeRowsPerPage handle the page change and rows per page change events, respectively.
-
-The component returns a Paper container with some styling properties.
-
-Inside the Paper, there's a TableContainer that wraps the Table element to allow for horizontal scrolling when the content exceeds the container width.
-
-The Table component includes TableHead and TableBody elements for organizing the header and body of the table.
-
-The TableHead displays the column headers using the columns configuration.
-
-The TableBody conditionally renders either skeleton loading rows or actual order data rows based on the isOrderLoading state.
-
-When isOrderLoading is true, skeleton loading rows with placeholders are displayed.
-
-When isOrderLoading is false, actual order data is displayed, and the data is paginated based on the page and rowsPerPage state variables.
-
-Each order row displays cells with corresponding order data, including the order status and notes, using the OrderStatus and Notes components, respectively.
-
-The TablePagination component provides pagination controls to navigate through the orders when there are more than the specified number of rows per page.
- */

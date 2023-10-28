@@ -8,6 +8,7 @@ import OrderFilterSearchBar from "Components/Navigations/Orders/OrderFilterSearc
 import OrderTable from "Components/Navigations/Orders/OrderTable";
 import OrderStatusFilter from "Components/Navigations/Orders/OrderStatusFilter";
 import { updateOrderCount } from "Components/Assets/UIServices";
+import { useOrdersStore } from "Components/Assets/StateManagement";
 
 // Functional component 'Orders' to manage the Orders page
 function Orders() {
@@ -15,11 +16,13 @@ function Orders() {
   const [orders, setOrders] = React.useState([]); // Represents the list of orders to be displayed
   const [counts, setCounts] = React.useState({}); // Represents the counts of orders based on their status
 
+  const ordersList = useOrdersStore((state) => state.allOrdersList);
+
   // useEffect hook to update 'counts' state with order counts on component mount
   React.useEffect(() => {
     // Fetch and update the counts of orders for each status
-    setCounts(updateOrderCount());
-  }, []);
+    setCounts(updateOrderCount(ordersList));
+  }, [ordersList]);
 
   return (
     <>
