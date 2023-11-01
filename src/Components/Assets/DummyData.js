@@ -561,3 +561,13 @@ export let orderTypes = [
     status: false,
   },
 ];
+
+export let notificationEvents = [
+  {
+    id: 1,
+    name: "Order Placed",
+    description: "When an Order gets placed",
+    sms: true,
+    email: false,
+  },
+];

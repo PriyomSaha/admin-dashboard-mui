@@ -51,15 +51,6 @@ function OrderFilterSearchBar() {
           <Button
             onClick={() => setSelected("All")}
             variant={selected === "All" ? "contained-dark" : "outlined-dark"}
-            sx={
-              selected === "All"
-                ? {
-                    ":hover": {
-                      background: theme.palette.grey[800],
-                    },
-                  }
-                : null
-            }
           >
             All Orders
           </Button>
@@ -69,15 +60,6 @@ function OrderFilterSearchBar() {
             onClick={() => setSelected("Scheduled")}
             variant={
               selected === "Scheduled" ? "contained-dark" : "outlined-dark"
-            }
-            sx={
-              selected === "Scheduled"
-                ? {
-                    ":hover": {
-                      background: theme.palette.grey[800],
-                    },
-                  }
-                : null
             }
           >
             Scheduled

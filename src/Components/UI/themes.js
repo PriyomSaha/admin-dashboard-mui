@@ -55,6 +55,9 @@ export const theme = createTheme({
               color: `${defaultTheme.palette.grey[100]}`,
               pointerEvents: "none",
             },
+            "&:hover": {
+              background: `${defaultTheme.palette.grey[800]}`,
+            },
           },
         },
         {

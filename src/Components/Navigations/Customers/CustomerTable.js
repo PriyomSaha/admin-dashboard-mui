@@ -53,9 +53,7 @@ export default function CustomerTable({ customers }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const isCustomerLoading = useCustomersLoadingStore(
-    (state) => state.isCustomerLoading
-  );
+  const isCustomersLoading = useCustomersLoadingStore((state) => state.isCustomersLoading);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -91,7 +89,7 @@ export default function CustomerTable({ customers }) {
           </TableHead>
 
           <TableBody>
-            {isCustomerLoading
+            {isCustomersLoading
               ? Array.from({ length: rowsPerPage }, (_, index) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => (

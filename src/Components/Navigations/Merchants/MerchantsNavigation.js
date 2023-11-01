@@ -58,15 +58,6 @@ function MerchantsNavigation() {
               variant={
                 selected === "Merchants" ? "contained-dark" : "outlined-dark"
               }
-              sx={
-                selected === "Merchants"
-                  ? {
-                      ":hover": {
-                        background: theme.palette.grey[800],
-                      },
-                    }
-                  : null
-              }
             >
               Merchant
             </Button>
@@ -79,15 +70,6 @@ function MerchantsNavigation() {
               variant={
                 selected === "Category" ? "contained-dark" : "outlined-dark"
               }
-              sx={
-                selected === "Category"
-                  ? {
-                      ":hover": {
-                        background: theme.palette.grey[800],
-                      },
-                    }
-                  : null
-              }
             >
               Category
             </Button>
@@ -99,15 +81,6 @@ function MerchantsNavigation() {
               }}
               variant={
                 selected === "Product" ? "contained-dark" : "outlined-dark"
-              }
-              sx={
-                selected === "Product"
-                  ? {
-                      ":hover": {
-                        background: theme.palette.grey[800],
-                      },
-                    }
-                  : null
               }
             >
               Product

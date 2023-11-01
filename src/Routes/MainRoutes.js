@@ -47,14 +47,17 @@ const Product = Loadable(
 const Settings = Loadable(
   lazy(() => import("Components/Navigations/Settings"))
 );
-const UserPermission = Loadable(
-  lazy(() => import("Components/Navigations/Settings/UserPermission/index"))
+const UserPermissionSetting = Loadable(
+  lazy(() => import("Components/Navigations/Settings/UserPermission"))
 );
-const General = Loadable(
-  lazy(() => import("Components/Navigations/Settings/General/index"))
+const GeneralSetting = Loadable(
+  lazy(() => import("Components/Navigations/Settings/General"))
 );
 const OrderSetting = Loadable(
   lazy(() => import("Components/Navigations/Settings/Order"))
+);
+const NotificationSetting = Loadable(
+  lazy(() => import("Components/Navigations/Settings/Notification"))
 );
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -113,15 +116,19 @@ const MainRoutes = {
       children: [
         {
           path: "permission",
-          element: <UserPermission />,
+          element: <UserPermissionSetting />,
         },
         {
           path: "general",
-          element: <General />,
+          element: <GeneralSetting />,
         },
         {
           path: "order",
           element: <OrderSetting />,
+        },
+        {
+          path: "notification",
+          element: <NotificationSetting />,
         },
       ],
     },

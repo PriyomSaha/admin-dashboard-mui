@@ -14,9 +14,16 @@ import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TbArrowBackUpDouble } from "react-icons/tb";
 import { theme } from "Components/UI/themes";
+import { useEffect } from "react";
 
 function Settings() {
   const [list, setList] = useState(SettingsList);
+
+  // Get the screen width
+  const screenWidth = window.innerWidth;
+  // Calculate the maximum width with based on the maximum length of list item
+  const maxWidth = Math.max(...list.map((item) => item.label.length * 18));
+  const width = Math.min(screenWidth, maxWidth);
 
   const handleInputChange = (event, value) => {
     if (value === "") {
@@ -42,7 +49,7 @@ function Settings() {
           spacing={2}
           direction="row"
           justifyContent="space-between"
-          sx={{ flexWrap: "wrap" }}
+          sx={{ flexWrap: "wrap", display: "flex", alignItems: "center" }}
         >
           <Box>
             <Typography
@@ -101,22 +108,43 @@ function Settings() {
                 <Grid item key={index} onClick={() => navigate(`${item.path}`)}>
                   <Paper
                     sx={{
-                      px: 5,
+                      px: 2,
                       py: 2,
-                      width: "100%", // Set the desired fixed width
+                      maxWidth: "100%", // Set the desired fixed width
+                      width: `${width}px`, // Use the calculated maximum width
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center", // Center horizontally
-
                       "&:hover": {
                         cursor: "pointer", // Change to the desired cursor style
                         border: "1px solid blue",
                       },
                     }}
                   >
-                    {item.icon}
+                    <span
+                      style={{
+                        // display: width < screenWidth ? "block" : "none",
+                        width: "auto",
+                        display: "flex",
+                        alignItems: "center",
+                        background: theme.palette.grey[200],
+                        padding: "0 3px", // Padding-x, 1px on the left and right
+                        borderRadius: "10%",
+                      }}
+                    >
+                      {item.icon}
+                    </span>
 
-                    <Typography variant="h8" fontWeight={600} sx={{ mx: 2 }}>
+                    <Typography
+                      variant="h8"
+                      fontWeight={600}
+                      sx={{
+                        ml: width < screenWidth ? 2 : 1,
+                        textOverflow: width < 300 ? "ellipsis" : "clip",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {item.label}
                     </Typography>
                   </Paper>

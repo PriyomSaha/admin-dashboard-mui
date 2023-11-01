@@ -12,36 +12,40 @@ import {
   Box,
 } from "@mui/material";
 import { CustomSwitch } from "Components/Assets/GlobalStyles";
-import { getCustomCharges } from "Components/Assets/UIServices";
+import { getNotificationEvents } from "Components/Assets/UIServices";
 import { theme } from "Components/UI/themes";
 import { FaEdit } from "react-icons/fa";
 import React, { useState } from "react";
 
-function ChargesTable() {
+function NotificationTable() {
   const columns = [
     {
-      id: "chargeName",
-      label: "Charge Name",
-      minwidth: "350",
+      id: "events",
+      label: "Events",
+      minwidth: "2000",
     },
     {
-      id: "applicableOn",
-      label: "Applicable On",
+      id: "sms",
+      label: "SMS",
       minwidth: "100",
     },
     {
-      id: "rule",
-      label: "Rule",
-      minwidth: "300",
-      align: "center",
+      id: "email",
+      label: "EMail",
+      minwidth: "100",
     },
     {
-      id: "Status",
-      label: "Status",
+      id: "notifications",
+      label: "Notifications",
       minwidth: "100",
+    },
+    {
+      id: "action",
+      label: "",
+      minwidth: "50",
     },
   ];
-  const [charges, setCharges] = useState(getCustomCharges());
+  const [charges, setCharges] = useState(getNotificationEvents());
   // const [enabled, setEnabled] = useState(true);
 
   return (
@@ -87,7 +91,7 @@ function ChargesTable() {
                   {/* Add table cells for each property in your data object */}
                   <TableCell>
                     <Typography variant="body1" fontWeight={600} noWrap>
-                      {item.chargeName}
+                      {item.name}
                     </Typography>
                     <Typography
                       fontWeight={300}
@@ -95,44 +99,11 @@ function ChargesTable() {
                       sx={{ color: theme.palette.grey[600] }}
                       noWrap
                     >
-                      {item.chargeDescription}
+                      {item.description}
                     </Typography>
                   </TableCell>
-                  <TableCell>{item.applicableOn}</TableCell>
                   <TableCell>
-                    {item.applicableOn === "Global" ? (
-                      <>
-                        <Typography
-                          fontWeight={300}
-                          fontSize={13}
-                          sx={{ color: theme.palette.grey[600] }}
-                          noWrap
-                        >
-                          Value : <b>{item.rule.value}</b>
-                        </Typography>
-                        <Typography
-                          fontWeight={300}
-                          fontSize={13}
-                          sx={{ color: theme.palette.grey[600] }}
-                          noWrap
-                        >
-                          Order Type :
-                          {item.rule.orderType.map((types, index) => (
-                            <b key={index}> {types} &nbsp;</b>
-                          ))}
-                        </Typography>
-                      </>
-                    ) : null}
-                  </TableCell>
-                  <TableCell>
-                    <Stack direction={"row"} justifyContent={"space-around"}>
-                      <CustomSwitch
-                        checked={item.status}
-                        // onChange={() => setEnabled(!enabled)}
-                        inputProps={{ "aria-label": "ant design" }}
-                      />
-                      <FaEdit size={30} color="var(--links)" />
-                    </Stack>
+                    <CustomSwitch />
                   </TableCell>
                 </TableRow>
               ))}
@@ -144,4 +115,4 @@ function ChargesTable() {
   );
 }
 
-export default ChargesTable;
+export default NotificationTable;

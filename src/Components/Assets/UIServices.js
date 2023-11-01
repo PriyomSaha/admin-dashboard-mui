@@ -9,6 +9,7 @@ import {
   customers,
   customCharges,
   orderTypes,
+  notificationEvents,
 } from "Components/Assets/DummyData";
 
 // Function 'updateOrderCount' to update the counts of orders for each status in 'orderCount'
@@ -79,4 +80,8 @@ export const getCustomCharges = () => {
 
 export const getOrderTypes = () => {
   return orderTypes;
+};
+
+export const getNotificationEvents = () => {
+  return notificationEvents;
 };
