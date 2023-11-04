@@ -9,12 +9,9 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 
-function LanguageTemplateChannelSoundSettings() {
+function LanguageTemplateChannelSoundSettings({ selected, setSelected }) {
   // State variable to manage the selected language
   const [language, setLanguage] = useState("english");
-
-  const [selected, setSelected] = useState("Template");
-
   return (
     <>
       <Box mt={2}>

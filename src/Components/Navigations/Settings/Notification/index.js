@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import SideNav from "Components/Assets/ReusableComp/SettingsSideNavWithRef";
 import LanguageTemplateChannelSoundSettings from "./LanguageTemplateChannelSoundSettings";
-import Admin from "./Admin/Admin";
+import Admin from "./Template/Admin/Admin";
+import Sound from "./Sound/Sound";
 
 function Notification() {
   // Create a ref to store references to child components
@@ -22,7 +23,7 @@ function Notification() {
     "Customer Notifications",
     "Merchant Notifications",
   ];
-
+  const [settingsType, setSettingsType] = useState("Template");
   return (
     <Box width={"100%"}>
       {/* Main Grid container */}
@@ -32,12 +33,23 @@ function Notification() {
           {/* Each setting section is a separate component */}
           {/* Attach a ref to each component to allow scrolling to them */}
           <Grid item xs={12}>
-            <LanguageTemplateChannelSoundSettings />
-            <Admin
-              ref={(element) => {
-                refs.current[0] = element; // Store a reference to this component
-              }}
+            <LanguageTemplateChannelSoundSettings
+              selected={settingsType}
+              setSelected={setSettingsType}
             />
+            {settingsType === "Template" ? (
+              <>
+                <Admin
+                  ref={(element) => {
+                    refs.current[0] = element; // Store a reference to this component
+                  }}
+                />
+              </>
+            ) : settingsType === "Sound" ? (
+              <>
+                <Sound />
+              </>
+            ) : null}
           </Grid>
         </Grid>
 
@@ -45,7 +57,9 @@ function Notification() {
         <Grid item md={2}>
           {/* SideNav component with navigation links */}
           {/* When a link is clicked, the handleClick function is called to scroll to the corresponding section */}
-          <SideNav sideNavList={sideNavList} handleClick={handleClick} />
+          {settingsType === "Template" ? (
+            <SideNav sideNavList={sideNavList} handleClick={handleClick} />
+          ) : null}
         </Grid>
       </Grid>
     </Box>

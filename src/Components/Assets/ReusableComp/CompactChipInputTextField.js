@@ -4,7 +4,7 @@ import Chip from "@mui/material/Chip";
 import { Box } from "@mui/material";
 import { theme } from "Components/UI/themes";
 
-const CompactChipInputTextField = ({ chips, setChips }) => {
+const CompactChipInputTextField = ({ label, chips, setChips }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
@@ -32,7 +32,8 @@ const CompactChipInputTextField = ({ chips, setChips }) => {
   return (
     <Box>
       <TextField
-        label="Meta Keyword"
+        label={label}
+        placeholder="Press enter to add"
         size="small"
         variant="outlined"
         fullWidth

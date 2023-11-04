@@ -86,6 +86,7 @@ function SEO({}, ref) {
               {/* Meta Keywords */}
               <Box sx={{ mt: 2 }}>
                 <CompactChipInputTextField
+                  label="Meta Keyword"
                   chips={metaKeyword}
                   setChips={setMetaKeyword}
                 />
