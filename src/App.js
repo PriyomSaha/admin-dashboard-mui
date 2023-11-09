@@ -1,6 +1,7 @@
 // Import CSS styles for datepicker, phone input, and custom app styles
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-input-2/lib/bootstrap.css";
+import "react-quill/dist/quill.snow.css";
 import "Components/UI/app.css";
 
 // Import necessary components and styles from Material-UI

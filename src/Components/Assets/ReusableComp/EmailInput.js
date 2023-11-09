@@ -22,7 +22,7 @@ function EmailInput({ email, setEmail }) {
 
   return (
     <TextField
-      margin="normal"
+      // margin="normal"
       required
       fullWidth
       label="Email"

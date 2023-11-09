@@ -29,4 +29,11 @@
     --component-body-background:#f2f2f2;
     --component-body-text:#444444;
     --circular-progress:#add8e9;
+    --color-background: #4f4fcc;
+    --color-text-secondary: #7b7e89;
+    --color-border: #010102;
     }
+
+    :root .tc-wrap {
+    --color-border: #010102;
+}
