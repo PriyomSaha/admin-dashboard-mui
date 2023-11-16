@@ -2,8 +2,6 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { eventTypes } from "./toolbarIconsList";
 import { useEffect, useState } from "react";
 import {
-  CAN_REDO_COMMAND,
-  CAN_UNDO_COMMAND,
   REDO_COMMAND,
   UNDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
@@ -12,7 +10,6 @@ import {
   $getSelection,
   $isRangeSelection,
   $createParagraphNode,
-  $getNodeByKey,
 } from "lexical";
 import { INSERT_TABLE_COMMAND } from "@lexical/table";
 import { $getNearestNodeOfType, mergeRegister } from "@lexical/utils";
@@ -36,11 +33,7 @@ import {
   getDefaultCodeLanguage,
   getCodeLanguages,
 } from "@lexical/code";
-import {
-  $isParentElementRTL,
-  $wrapNodes,
-  $isAtNodeEnd,
-} from "@lexical/selection";
+import { $wrapNodes, $isAtNodeEnd } from "@lexical/selection";
 
 const LowPriority = 1;
 
