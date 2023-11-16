@@ -16,7 +16,7 @@ import {
   MdAccountCircle,
   MdLogout,
 } from "react-icons/md";
-import { DrawerHeader } from "Components/Assets/GlobalStyles";
+import { DrawerHeader } from "Components/UI/GlobalStyles";
 import {
   useAccountStore,
   useDrawerStore,

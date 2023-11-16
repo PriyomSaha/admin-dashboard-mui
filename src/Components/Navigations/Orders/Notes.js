@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material"; // Importing required Material-UI components and styles
-import { ModalStyle } from "Components/Assets/GlobalStyles";
+import { ModalStyle } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes"; // Importing the theme for styling
 import React, { useState, useEffect } from "react"; // Importing React and its hooks
 import { BsFillClipboard2MinusFill } from "react-icons/bs"; // Importing an icon from react-icons library

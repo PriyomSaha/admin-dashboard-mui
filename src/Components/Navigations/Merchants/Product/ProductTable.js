@@ -12,7 +12,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { TableImage } from "Components/Assets/GlobalStyles";
+import { TableImage } from "Components/UI/GlobalStyles";
 import { getProducts } from "Components/Assets/UIServices";
 import React from "react";
 import ProductFallBack from "Components/UI/Images/ProductFallBack.svg";

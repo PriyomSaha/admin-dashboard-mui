@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { Stack, useMediaQuery } from "@mui/material";
-import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
+import { ComponentHeader, ComponentBody } from "Components/UI/GlobalStyles";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
 import Analytics from "Components/Navigations/Dashboard/Graphs/index";

@@ -14,7 +14,7 @@ import {
   FullScreenModalContainer,
   FullScreenModalContent,
   FullScreenModalHeader,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import { MdClose } from "react-icons/md";
 import { theme } from "Components/UI/themes";
 import { useMediaQuery } from "@mui/material";

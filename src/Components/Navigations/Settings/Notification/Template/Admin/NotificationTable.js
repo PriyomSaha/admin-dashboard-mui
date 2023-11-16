@@ -12,7 +12,7 @@ import {
   Box,
   Tab,
 } from "@mui/material";
-import { CustomSwitch } from "Components/Assets/GlobalStyles";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 import { getNotificationEvents } from "Components/Assets/UIServices";
 import { theme } from "Components/UI/themes";
 import { BsThreeDotsVertical } from "react-icons/bs";

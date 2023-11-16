@@ -24,7 +24,17 @@ export const theme = createTheme({
     mode: "light",
   },
   typography: {
-    fontFamily: `"Poppins","Roboto", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Poppins","Roboto","Lexend", "Helvetica", "Arial", sans-serif`,
+    h3: {
+      [defaultTheme.breakpoints.down("sm")]: {
+        fontSize: "2rem",
+      },
+    },
+    h4: {
+      [defaultTheme.breakpoints.down("sm")]: {
+        fontSize: "1.75rem",
+      },
+    },
   },
   components: {
     MuiDrawer: {
@@ -81,3 +91,4 @@ export const theme = createTheme({
     },
   },
 });
+

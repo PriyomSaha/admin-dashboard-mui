@@ -8,7 +8,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { DrawerHeader, drawerWidth } from "Components/Assets/GlobalStyles";
+import { DrawerHeader, drawerWidth } from "Components/UI/GlobalStyles";
 import { MdExpandLess, MdExpandMore, MdSpaceDashboard } from "react-icons/md";
 import {
   BiSolidPackage,

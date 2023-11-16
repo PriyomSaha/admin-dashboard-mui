@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Stack, Typography } from "@mui/material";
-import { ComponentBody, ComponentHeader } from "Components/Assets/GlobalStyles";
+import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import { Outlet, useLocation } from "react-router-dom";
 import AddNewImportExportButton from "Components/Navigations/Merchants/Merchant/AddNewImportExportButton";
 import MerchantsNavigation from "./MerchantsNavigation";

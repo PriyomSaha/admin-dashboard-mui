@@ -1,5 +1,5 @@
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
-import Editor from "Components/Assets/ReusableComp/EditorOld/Editor";
+import EditorWrapper from "Components/Assets/ReusableComp/Editor/EditorWrapper";
 import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
@@ -30,13 +30,12 @@ function Email({ eventDescription, setEventDescription }) {
           </Box>
         </Paper>
       </Box>
-      <Typography variant="h6" color={theme.palette.grey[800]}>
-        Description(Optional)
-      </Typography>
-      <Editor
-        eventDescription={eventDescription}
-        setEventDescription={setEventDescription}
-      />
+      <Box>
+        <Typography variant="h6" color={theme.palette.grey[800]}>
+          Description(Optional)
+        </Typography>
+      </Box>
+      <EditorWrapper />
     </>
   );
 }

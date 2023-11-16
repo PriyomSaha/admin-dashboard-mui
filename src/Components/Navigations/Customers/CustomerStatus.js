@@ -10,7 +10,7 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { ModalStyle } from "Components/Assets/GlobalStyles";
+import { ModalStyle } from "Components/UI/GlobalStyles";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import { theme } from "Components/UI/themes";
 

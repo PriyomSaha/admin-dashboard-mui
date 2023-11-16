@@ -1,6 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
-import { ComponentHeader } from "Components/Assets/GlobalStyles";
+import { ComponentHeader } from "Components/UI/GlobalStyles";
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
 

@@ -9,7 +9,7 @@ import {
   TablePagination,
   TableRow,
 } from "@mui/material";
-import { SuperAdminLoginButton } from "Components/Assets/GlobalStyles";
+import { SuperAdminLoginButton } from "Components/UI/GlobalStyles";
 import { useCustomersLoadingStore } from "Components/Assets/StateManagement";
 import { Skeleton } from "@mui/material";
 import { FaAngleRight } from "react-icons/fa";
@@ -53,7 +53,9 @@ export default function CustomerTable({ customers }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const isCustomersLoading = useCustomersLoadingStore((state) => state.isCustomersLoading);
+  const isCustomersLoading = useCustomersLoadingStore(
+    (state) => state.isCustomersLoading
+  );
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

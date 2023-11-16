@@ -14,10 +14,7 @@ import {
   Box,
   TablePagination,
 } from "@mui/material";
-import {
-  SuperAdminLoginButton,
-  TableImage,
-} from "Components/Assets/GlobalStyles";
+import { SuperAdminLoginButton, TableImage } from "Components/UI/GlobalStyles";
 import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
 import { FaAngleRight } from "react-icons/fa";
 import "Components/UI/app.css";

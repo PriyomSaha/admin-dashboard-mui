@@ -3,7 +3,7 @@ import {
   FullScreenModalContainer,
   FullScreenModalContent,
   FullScreenModalHeader,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";

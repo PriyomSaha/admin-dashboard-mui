@@ -5,7 +5,7 @@ import {
   FullScreenModalContainer,
   FullScreenModalContent,
   FullScreenModalHeader,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import { FaRegEdit } from "react-icons/fa";
 import MerchantDetails from "./MerchantDetails";
@@ -24,9 +24,7 @@ const AddEditMerchant = ({ merchantName }) => {
       />
       <Modal open={isModalOpen} sx={FullScreenModalContainer}>
         <Box>
-          <Box
-            sx={FullScreenModalHeader}
-          >
+          <Box sx={FullScreenModalHeader}>
             <Typography variant="h6">Edit Merchant</Typography>
 
             <IconButton

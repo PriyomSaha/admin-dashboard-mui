@@ -9,7 +9,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { TableImage } from "Components/Assets/GlobalStyles";
+import { TableImage } from "Components/UI/GlobalStyles";
 import { getTopProducts } from "Components/Assets/UIServices";
 import ProductFallBack from "Components/UI/Images/ProductFallBack.svg";
 import React from "react";

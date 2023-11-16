@@ -1,6 +1,7 @@
 import { Switch } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { theme } from "Components/UI/themes";
+import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 
 export const drawerWidth = 200;
 
@@ -109,6 +110,7 @@ export const FullScreenModalHeader = {
   borderTopRightRadius: 5,
   borderBottom: `1px solid ${theme.palette.grey[400]}`,
 };
+
 export const FullScreenModalContent = {
   outline: "none",
   backgroundColor: theme.palette.grey[200],
@@ -160,3 +162,26 @@ export const CustomSwitch = styled(Switch)(({ theme }) => ({
     margin: 0,
   },
 }));
+
+/**
+ * Lexical Editor
+ */
+export const MuiContentEditable = styled(ContentEditable)({
+  minHeight: 200,
+  padding: "0 8px",
+  borderRadius: 5,
+  paddingTop: 2,
+  paddingLeft: 10,
+  position: "relative",
+  outline: "none",
+});
+
+export const placeHolderSx = {
+  position: "absolute",
+  top: 18,
+  left: 10,
+  userSelect: "none",
+  display: "inline-block",
+  pointerEvents: "none",
+  color: theme.palette.grey[400],
+};

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { MdClose, MdDelete } from "react-icons/md";
 import { TiWarning } from "react-icons/ti";
-import { ModalStyle } from "Components/Assets/GlobalStyles";
+import { ModalStyle } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 
 const Delete = ({ name, type }) => {

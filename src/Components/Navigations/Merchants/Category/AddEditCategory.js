@@ -13,7 +13,7 @@ import {
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";

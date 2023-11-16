@@ -11,7 +11,7 @@ import {
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 import { getCustomCharges, getOrderTypes } from "Components/Assets/UIServices";
-import { CustomSwitch } from "Components/Assets/GlobalStyles";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 
 function TypesTable({ setIsModalOpen }) {

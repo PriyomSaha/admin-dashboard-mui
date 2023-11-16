@@ -11,7 +11,7 @@ import {
   Divider,
   Box,
 } from "@mui/material";
-import { CustomSwitch } from "Components/Assets/GlobalStyles";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 import { getCustomCharges } from "Components/Assets/UIServices";
 import { theme } from "Components/UI/themes";
 import { FaEdit } from "react-icons/fa";

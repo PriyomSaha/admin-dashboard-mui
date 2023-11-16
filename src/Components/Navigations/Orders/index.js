@@ -2,7 +2,7 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
-import { ComponentHeader, ComponentBody } from "Components/Assets/GlobalStyles";
+import { ComponentHeader, ComponentBody } from "Components/UI/GlobalStyles";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import OrderFilterSearchBar from "Components/Navigations/Orders/OrderFilterSearchBar";
 import OrderTable from "Components/Navigations/Orders/OrderTable";

@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { ComponentBody, ComponentHeader } from "Components/Assets/GlobalStyles";
+import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import React from "react";
 import SettingsList from "./SettingsList";
 import { useState } from "react";

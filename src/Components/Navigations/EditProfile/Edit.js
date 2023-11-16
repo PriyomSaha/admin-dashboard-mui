@@ -13,7 +13,7 @@ import {
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import { MdClose } from "react-icons/md";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";

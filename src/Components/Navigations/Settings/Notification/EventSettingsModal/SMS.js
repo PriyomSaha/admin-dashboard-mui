@@ -4,7 +4,7 @@ import Countries from "Components/Assets/ReusableComp/Countries";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { theme } from "Components/UI/themes";
 import PhoneInput from "react-phone-input-2";
-import { FullScreenModalContent } from "Components/Assets/GlobalStyles";
+import { FullScreenModalContent } from "Components/UI/GlobalStyles";
 
 function SMS({
   eventDescription,

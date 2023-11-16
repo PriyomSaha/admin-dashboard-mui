@@ -14,7 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { CustomSwitch } from "Components/Assets/GlobalStyles";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 
 function OrderTip({}, ref) {
   const [enabled, setEnabled] = useState(true);

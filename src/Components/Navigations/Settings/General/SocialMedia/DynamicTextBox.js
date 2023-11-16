@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
-import { ModalStyle } from "Components/Assets/GlobalStyles";
+import { ModalStyle } from "Components/UI/GlobalStyles";
 import { Divider, IconButton } from "@mui/material";
 import { MdClose } from "react-icons/md";
 

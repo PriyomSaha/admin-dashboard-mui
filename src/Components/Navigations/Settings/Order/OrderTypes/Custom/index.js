@@ -19,7 +19,7 @@ import {
   FullScreenModalContainer,
   FullScreenModalContent,
   FullScreenModalHeader,
-} from "Components/Assets/GlobalStyles";
+} from "Components/UI/GlobalStyles";
 import { MdClose, MdExpandMore } from "react-icons/md";
 import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
 

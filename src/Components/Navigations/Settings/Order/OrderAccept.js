@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import { Box, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
-import { CustomSwitch } from "Components/Assets/GlobalStyles";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 import { sound } from "Components/Assets/ReusableComp/SoundNotification";
 
 function OrderAccept({}, ref) {
