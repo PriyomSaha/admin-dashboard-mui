@@ -5,6 +5,7 @@ import { HeadingNode, QuoteNode } from "@lexical/rich-text";
 import { CodeHighlightNode, CodeNode } from "@lexical/code";
 import { TableNode, TableCellNode, TableRowNode } from "@lexical/table";
 import { ListNode, ListItemNode } from "@lexical/list";
+import { ImageNode } from "./Nodes/ImageNode";
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -14,7 +15,7 @@ function onError(error) {
 }
 
 const lexicalEditorConfig = {
-  namespace: "MyEditor",
+  namespace: "description",
   theme: lexicalEditorTheme,
   onError,
   nodes: [
@@ -32,7 +33,9 @@ const lexicalEditorConfig = {
     TableCellNode,
     TableNode,
     TableRowNode,
+    ImageNode,
   ],
+  editorState: "",
 };
 
 export default lexicalEditorConfig;

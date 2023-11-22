@@ -7,8 +7,8 @@ import PhoneInput from "react-phone-input-2";
 import { FullScreenModalContent } from "Components/UI/GlobalStyles";
 
 function SMS({
-  eventDescription,
-  setEventDescription,
+  smsDescription,
+  setSmsDescription,
   phoneNumber,
   setPhoneNumber,
   country,
@@ -172,7 +172,7 @@ function SMS({
                   Preview
                 </Typography>
                 <Typography>Description</Typography>
-                <Box m={1}>{eventDescription}</Box>
+                <Box m={1}>{smsDescription}</Box>
                 <Typography>Tags</Typography>
                 <Box m={1}>
                   {tags.map((item) => (
@@ -200,8 +200,8 @@ function SMS({
                   multiline
                   rows={5}
                   size="small"
-                  value={eventDescription}
-                  onChange={(e) => setEventDescription(e.target.value)}
+                  value={smsDescription}
+                  onChange={(e) => setSmsDescription(e.target.value)}
                 />
               </Box>
             </Grid>

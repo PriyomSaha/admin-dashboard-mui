@@ -143,7 +143,7 @@ function NotificationTable() {
                     sx={{ cursor: "pointer" }}
                     onClick={() => {
                       setEventName(item.name);
-                      setEventDescription(item.description);
+                      setEventDescription(item.optionalDescription);
                       setIsModalOpen(true);
                     }}
                   >

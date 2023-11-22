@@ -1,4 +1,4 @@
-import { Switch } from "@mui/material";
+import { Box, Switch, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { theme } from "Components/UI/themes";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -185,3 +185,48 @@ export const placeHolderSx = {
   pointerEvents: "none",
   color: theme.palette.grey[400],
 };
+export const FloatingDivContainer = styled(Box)({
+  position: "fixed", // Use fixed instead of absolute
+  zIndex: 10000000000000000000,
+  top: "100%",
+  marginTop: -6,
+  maxWidth: 300,
+  width: "100%",
+  opacity: 0,
+  display: "flex",
+  backgroundColor: "#fff",
+  boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.3)",
+  borderRadius: 8,
+  transition: "opacity 0.5s",
+});
+
+export const FloatingDivLinkInput = styled(TextField)({
+  display: "block",
+  paddingRight: 20,
+  boxSizing: "border-box",
+  width: "100%",
+  borderRadius: 15,
+  margin: "8px 12px",
+  fontSize: 15,
+  color: "rgb(5, 5, 5)",
+  border: 0,
+  outline: 0,
+  position: "relative",
+  fontFamily: "inherit",
+});
+
+export const FloatingDivLink = styled("a")({
+  display: "block",
+  width: "calc(100% - 24px)",
+  boxSizing: "border-box",
+  margin: "8px 12px",
+  padding: "8px 12px",
+  borderRadius: 15,
+  backgroundColor: "#eee",
+  fontSize: 15,
+  color: "rgb(5, 5, 5)",
+  border: 0,
+  outline: 0,
+  position: "relative",
+  fontFamily: "inherit",
+});

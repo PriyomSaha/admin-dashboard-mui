@@ -5,11 +5,12 @@ import {
   FullScreenModalHeader,
 } from "Components/UI/GlobalStyles";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import SMS from "./SMS";
 import "Components/UI/app.css";
 import Email from "./Email/Email";
+import { modifyEvent } from "Components/Assets/ReusableComp/Editor/utils/modifyEmptyContent";
 
 function EventSettings({
   eventName,
@@ -22,7 +23,14 @@ function EventSettings({
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("IN");
   const [tags, setTags] = useState([]);
-  const [emailDescription, setEmailDescription] = useState("");
+  const [emailDescription, setEmailDescription] = useState();
+  const [smsDescription, setSmsDescription] = useState();
+
+  useEffect(() => {
+    setSmsDescription(eventDescription);
+    setSelected("SMS");
+    setEmailDescription(modifyEvent(eventDescription));
+  }, [eventDescription]);
 
   return (
     <Modal open={isModalOpen} sx={FullScreenModalContainer}>
@@ -64,8 +72,8 @@ function EventSettings({
           </Box>
           {selected === "SMS" ? (
             <SMS
-              eventDescription={eventDescription}
-              setEventDescription={setEventDescription}
+              smsDescription={smsDescription}
+              setSmsDescription={setSmsDescription}
               phoneNumber={phoneNumber}
               setPhoneNumber={setPhoneNumber}
               country={country}
@@ -75,8 +83,8 @@ function EventSettings({
             />
           ) : (
             <Email
-              eventDescription={eventDescription}
-              setEventDescription={setEventDescription}
+              emailDescription={emailDescription}
+              setEmailDescription={setEmailDescription}
             />
           )}
           <Box mt={4}>

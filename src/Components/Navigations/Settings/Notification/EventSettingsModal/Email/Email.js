@@ -3,10 +3,10 @@ import EditorWrapper from "Components/Assets/ReusableComp/Editor/EditorWrapper";
 import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
-function Email({ eventDescription, setEventDescription }) {
+function Email({ emailDescription, setEmailDescription }) {
   const [email, setEmail] = useState("");
-
   return (
     <>
       <Box mb={2}>
@@ -35,7 +35,7 @@ function Email({ eventDescription, setEventDescription }) {
           Description(Optional)
         </Typography>
       </Box>
-      <EditorWrapper />
+      <EditorWrapper EMPTY_CONTENT={emailDescription} />
     </>
   );
 }

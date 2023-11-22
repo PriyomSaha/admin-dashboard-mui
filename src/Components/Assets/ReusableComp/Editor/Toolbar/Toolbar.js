@@ -2,9 +2,11 @@ import { Box, Grid } from "@mui/material";
 import pluginsList from "./toolbarIconsList";
 import table from "./toolbarIconsList";
 import useOnClickListener from "./useOnClickListener";
+import FloatingLinkEditor from "../FloatingLinkEditor.js";
+import { createPortal } from "react-dom";
 
 const Toolbar = () => {
-  const { onClick } = useOnClickListener();
+  const { onClick, isLink, editor, modal, showModal } = useOnClickListener();
   return (
     <Grid
       container
@@ -32,6 +34,9 @@ const Toolbar = () => {
           <plugin.Icon onClick={() => onClick(plugin.event)} />
         </Grid>
       ))}
+      {modal}
+      {isLink &&
+        createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
     </Grid>
   );
 };

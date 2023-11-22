@@ -34,14 +34,20 @@ import {
   getCodeLanguages,
 } from "@lexical/code";
 import { $wrapNodes, $isAtNodeEnd } from "@lexical/selection";
+import useModal from "../hooks/useModal";
+import { InsertImageDialog } from "../Plugin/ImagePlugin";
 
 const LowPriority = 1;
 
 const useOnClickListener = () => {
   const [editor] = useLexicalComposerContext();
+  const [modal, showModal] = useModal();
   const [blockType, setBlockType] = useState("paragraph");
-  const [selectedEventTypes, setSelectedEventTypes] = useState([]);
+  const [selectedElementKey, setSelectedElementKey] = useState(null);
+  const [isRTL, setIsRTL] = useState(false);
   const [isLink, setIsLink] = useState(false);
+
+  const [selectedEventTypes, setSelectedEventTypes] = useState([]);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -171,8 +177,22 @@ const useOnClickListener = () => {
       editor.dispatchCommand(UNDO_COMMAND);
     } else if (event === eventTypes.insertTable) {
       handleTable();
+    } else if (event === eventTypes.insertImage) {
+      showModal("Insert Image", (onClose) => (
+        <InsertImageDialog activeEditor={editor} onClose={onClose} />
+      ));
+    } else if (event === eventTypes.formatInsertLink) {
+      insertLink();
     }
   };
+
+  const insertLink = useCallback(() => {
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, "https://");
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
 
   const handleTable = () => {
     const rows = prompt("Enter the number of rows:", "");
@@ -258,7 +278,7 @@ const useOnClickListener = () => {
     }
   };
 
-  return { onClick };
+  return { onClick, isLink, editor, modal, showModal };
 };
 
 function getSelectedNode(selection) {
