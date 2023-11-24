@@ -1,7 +1,6 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import { Box, Grid, Paper, Stack, TextField, Typography } from "@mui/material";
 import { CustomSwitch } from "Components/UI/GlobalStyles";
-import { sound } from "Components/Assets/ReusableComp/SoundNotification";
 
 function OrderAccept({}, ref) {
   const [enabled, setEnabled] = useState(true);
@@ -14,7 +13,7 @@ function OrderAccept({}, ref) {
       setMessage("Accepting Orders.");
     } else {
       setMessage("Currently we are not accepting orders.");
-      sound.play();
+      
     }
   }, [enabled]);
 

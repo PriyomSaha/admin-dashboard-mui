@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import SideNav from "Components/Assets/ReusableComp/SettingsSideNavWithRef";
 import LanguageTemplateChannelSoundSettings from "./LanguageTemplateChannelSoundSettings";
-import Admin from "./Template/Admin/Admin";
+import Admin from "./Template/Admin";
 import Sound from "./Sound/Sound";
 
 function Notification() {
