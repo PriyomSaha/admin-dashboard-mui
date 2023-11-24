@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import SMS from "./SMS";
 import "Components/UI/app.css";
-import Email from "./Email/Email";
+import Email from "./Email";
 import { modifyEvent } from "Components/Assets/ReusableComp/Editor/utils/modifyEmptyContent";
 
 function EventSettings({

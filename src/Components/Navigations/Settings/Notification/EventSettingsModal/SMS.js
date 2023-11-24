@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import CompactChipInputSelect from "Components/Assets/ReusableComp/CompactChipInputSelect";
 import Countries from "Components/Assets/ReusableComp/Countries";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { theme } from "Components/UI/themes";
 import PhoneInput from "react-phone-input-2";
 import { FullScreenModalContent } from "Components/UI/GlobalStyles";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
+import ActionItemList from "./ActionItemList";
 
 function SMS({
   smsDescription,
@@ -130,6 +132,50 @@ function SMS({
     "YummyDelights",
   ];
 
+  // State to control whether the Snackbar is shown or hidden
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  // State to store the message displayed in the Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  // State to store the type of Snackbar, which can be 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
+
+  const [mobileList, setMobileList] = useState([]);
+
+  const addNewPhoneNumberToList = () => {
+    if (phoneNumber.length > 0) {
+      if (!mobileList.includes(phoneNumber)) {
+        setMobileList((prevList) => [...prevList, phoneNumber]);
+        setShowSnackbar(true);
+        setSnackbarMessage("Phone Number added");
+        setSnackbarType("success");
+      } else {
+        setShowSnackbar(true);
+        setSnackbarMessage("Phone Number already added  ");
+        setSnackbarType("error");
+      }
+    } else {
+      setShowSnackbar(true);
+      setSnackbarMessage("Phone Number field cannot be blank");
+      setSnackbarType("error");
+    }
+  };
+
+  const deletePhoneNumberFromList = (index) => {
+    try {
+      const updatedList = [...mobileList];
+      updatedList.splice(index, 1);
+      setMobileList(updatedList);
+
+      setShowSnackbar(true);
+      setSnackbarMessage("Phone Number deleted");
+      setSnackbarType("success");
+    } catch {
+      setShowSnackbar(true);
+      setSnackbarMessage("Some error occured in deleting.");
+      setSnackbarType("error");
+    }
+  };
+
   return (
     <>
       <Box mb={2}>
@@ -156,10 +202,17 @@ function SMS({
                 />
               </Grid>
               <Grid item xs={12} sm={2}>
-                <Button variant="contained">Add</Button>
+                <Button variant="contained" onClick={addNewPhoneNumberToList}>
+                  Add
+                </Button>
               </Grid>
             </Grid>
           </Box>
+          <ActionItemList
+            actionItemsList={mobileList}
+            deleteItemFromList={deletePhoneNumberFromList}
+            recordType="Phone"
+          />
         </Paper>
       </Box>
 
@@ -208,6 +261,12 @@ function SMS({
           </Grid>
         </Box>
       </Paper>
+      <ToastAlert
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+        snackbarType={snackbarType}
+        snackbarMessage={snackbarMessage}
+      />
     </>
   );
 }
