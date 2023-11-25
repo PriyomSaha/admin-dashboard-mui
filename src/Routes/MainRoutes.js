@@ -18,10 +18,6 @@ const Customers = Loadable(
   lazy(() => import("Components/Navigations/Customers"))
 );
 
-const Promotions = Loadable(
-  lazy(() => import("Components/Navigations/Promotions"))
-);
-
 const Analytics = Loadable(
   lazy(() => import("Components/Navigations/Analytics"))
 );
@@ -58,6 +54,19 @@ const OrderSetting = Loadable(
 );
 const NotificationSetting = Loadable(
   lazy(() => import("Components/Navigations/Settings/Notification"))
+);
+
+const Promotions = Loadable(
+  lazy(() => import("Components/Navigations/Promotions"))
+);
+const Banners = Loadable(
+  lazy(() => import("Components/Navigations/Promotions/Banners"))
+);
+const Coupons = Loadable(
+  lazy(() => import("Components/Navigations/Promotions/Coupons"))
+);
+const Popups = Loadable(
+  lazy(() => import("Components/Navigations/Promotions/Popups"))
 );
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -111,6 +120,24 @@ const MainRoutes = {
       ],
     },
     {
+      path: "promotions",
+      element: <Promotions />,
+      children: [
+        {
+          path: "banners",
+          element: <Banners />,
+        },
+        {
+          path: "coupons",
+          element: <Coupons />,
+        },
+        {
+          path: "popups",
+          element: <Popups />,
+        },
+      ],
+    },
+    {
       path: "settings",
       element: <Settings />,
       children: [
@@ -135,10 +162,6 @@ const MainRoutes = {
     {
       path: "customers",
       element: <Customers />,
-    },
-    {
-      path: "promotions",
-      element: <Promotions />,
     },
   ],
 };
