@@ -49,7 +49,9 @@ function Notification() {
               <>
                 <Sound />
               </>
-            ) : null}
+            ) : (
+              <>Not available yet</>
+            )}
           </Grid>
         </Grid>
 

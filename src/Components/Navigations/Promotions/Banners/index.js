@@ -1,7 +1,12 @@
 import React from "react";
+import BannerTable from "./BannerTable";
 
 function Banners() {
-  return <div>Banners</div>;
+  return (
+    <>
+      <BannerTable />
+    </>
+  );
 }
 
 export default Banners;

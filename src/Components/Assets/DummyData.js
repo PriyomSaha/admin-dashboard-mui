@@ -627,3 +627,16 @@ export let notificationEvents = [
     notification: null,
   },
 ];
+
+//promotions
+export let banners = [
+  {
+    id: 1,
+    imgUri: "",
+    name: "Fresh Meat",
+    actionType: "merchant_category",
+    actionValue: "Sea Food & Meat",
+    status: true,
+    sort: 2,
+  },
+];

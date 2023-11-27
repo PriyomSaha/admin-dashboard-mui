@@ -1,15 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Badge, Box, Button, Grid, Typography } from "@mui/material";
 import AddImage from "Components/UI/Images/AddImage.svg";
+
 import { MdClose } from "react-icons/md";
 
 // Functional component 'ImageUpload' to handle image upload and display
-const ImageUpload = () => {
+const ImageUpload = ({ imageUrl }) => {
   // State variable to store the image data in canvas format
   const [canvasImage, setCanvasImage] = useState(null);
 
   // Reference to the file input element to trigger file selection
   const inputRef = useRef(null);
+
+  // useEffect to update canvasImage when imageUrl changes
+  useEffect(() => {
+    if (imageUrl) {
+      setCanvasImage(imageUrl);
+    }
+  }, [imageUrl]);
 
   // Function to handle the image change when a file is selected or dropped
   const handleImageChange = (file) => {
@@ -93,8 +101,8 @@ const ImageUpload = () => {
             src={canvasImage}
             alt=""
             style={{
-              maxWidth: "100%",
-              maxHeight: "100%",
+              maxWidth: "200px",
+              maxHeight: "200px",
               borderRadius: "5px",
             }}
           />

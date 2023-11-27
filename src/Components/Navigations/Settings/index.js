@@ -22,7 +22,7 @@ function Settings() {
   // Get the screen width
   const screenWidth = window.innerWidth;
   // Calculate the maximum width with based on the maximum length of list item
-  const maxWidth = Math.max(...list.map((item) => item.label.length * 18));
+  const maxWidth = Math.max(...list.map((item) => item.label.length * 20));
   const width = Math.min(screenWidth, maxWidth);
 
   const handleInputChange = (event, value) => {
@@ -76,7 +76,12 @@ function Settings() {
                     marginRight: 1,
                   }}
                 >
-                  <TbArrowBackUpDouble onClick={() => navigate("/settings")} />
+                  <TbArrowBackUpDouble
+                    onClick={() => {
+                      setList(SettingsList);
+                      navigate("/settings");
+                    }}
+                  />
                 </Box>
               ) : null}
               {subPath}
@@ -96,14 +101,14 @@ function Settings() {
         </Stack>
       </ComponentHeader>
       <ComponentBody>
-        <Box width="100%" display={"flex"} justifyContent={"center"} px={1}>
+        <Box
+          width="100%"
+          display={"flex"}
+          // justifyContent={"center"}
+          px={1}
+        >
           {subPathContainSetting ? (
-            <Grid
-              container
-              spacing={2}
-              justifyContent="space-around"
-              sx={{ flexWrap: "wrap" }}
-            >
+            <Grid container spacing={2} justifyContent="space-around">
               {list.map((item, index) => (
                 <Grid item key={index} onClick={() => navigate(`${item.path}`)}>
                   <Paper
@@ -127,8 +132,8 @@ function Settings() {
                         width: "auto",
                         display: "flex",
                         alignItems: "center",
-                        background: theme.palette.grey[200],
-                        padding: "0 3px", // Padding-x, 1px on the left and right
+                        background: theme.palette.grey[100],
+                        padding: theme.spacing(1),
                         borderRadius: "10%",
                       }}
                     >

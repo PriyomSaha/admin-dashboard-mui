@@ -12,45 +12,30 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { TableImage } from "Components/UI/GlobalStyles";
-import { getCategories } from "Components/Assets/UIServices";
-import React from "react";
-import CategoryFallBack from "Components/UI/Images/CategoriesFallBack.jpg";
-import { theme } from "Components/UI/themes";
-import AddEditCategory from "Components/Navigations/Merchants/Category/AddEditCategory";
 import Delete from "Components/Assets/ReusableComp/Delete";
+import { getBanners } from "Components/Assets/UIServices";
+import { TableImage } from "Components/UI/GlobalStyles";
+import { theme } from "Components/UI/themes";
+import React from "react";
+import AddEditBanner from "./AddEditBanner";
+import BannerFallback from "Components/UI/Images/BannerFallback.svg";
+import { FaRegEdit } from "react-icons/fa";
+import { useBannerStore } from "Components/Assets/StateManagement";
 
-function CategoryTable() {
+function BannerTable() {
+  // Define columns for the table
   const columns = [
     { id: "img", label: "Photo", minWidth: 20 },
-    {
-      id: "category",
-      label: "Category",
-      minWidth: 250,
-    },
-    {
-      id: "sort",
-      label: "Sort Order",
-      minWidth: 20,
-      align: "center",
-    },
-    {
-      id: "status",
-      label: "Status",
-      minWidth: 20,
-      align: "center",
-    },
-    {
-      id: "actions",
-      label: "Actions",
-      minWidth: 100,
-      align: "center",
-    },
+    { id: "name", label: "Name", minWidth: 250 },
+    { id: "actionType", label: "Action Type", minWidth: 250 },
+    { id: "actionValue", label: "Action Value", minWidth: 250 },
+    { id: "status", label: "Status", minWidth: 20, align: "center" },
+    { id: "sort", label: "Sort", minWidth: 20, align: "center" },
+    { id: "actions", label: "Actions", minWidth: 150, align: "center" },
   ];
 
-  const [categories, setCategories] = React.useState([]);
-
-  // State variables for pagination
+  // State for storing banners and handling pagination
+  const [banners, setBanners] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -65,20 +50,28 @@ function CategoryTable() {
     setPage(0);
   };
 
+  // Fetch banners on component mount
   React.useEffect(() => {
-    setCategories(getCategories());
+    setBanners(getBanners());
   }, []);
+
+  // Access state and functions from the banner store using custom hooks
+  const setBannerType = useBannerStore((state) => state.setBannerType);
+  const setIsBannerModalOpen = useBannerStore(
+    (state) => state.setIsBannerModalOpen
+  );
 
   return (
     <>
+      {/* Table container */}
       <Paper sx={{ overflowX: "auto", mt: 2, width: "100%" }}>
-        {/* Table container */}
         <TableContainer
           sx={{
             maxHeight: 440,
             overflowX: "auto",
           }}
         >
+          {/* Table component with sticky header */}
           <Table stickyHeader>
             {/* Table Head */}
             <TableHead>
@@ -96,34 +89,43 @@ function CategoryTable() {
               </TableRow>
             </TableHead>
 
+            {/* Table Body */}
             <TableBody>
-              {categories
+              {banners
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((value) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={value.id}>
+                    {/* Banner Image */}
                     <TableCell>
-                      {
-                        <img
-                          src={
-                            value.imgUri.length == 0
-                              ? CategoryFallBack
-                              : value.imgUri
-                          }
-                          alt="Category View"
-                          style={TableImage}
-                        />
-                      }
+                      <img
+                        src={
+                          value.imgUri.length === 0
+                            ? BannerFallback
+                            : value.imgUri
+                        }
+                        alt="Banner View"
+                        style={TableImage}
+                      />
                     </TableCell>
+                    {/* Banner Name */}
                     <TableCell>
                       <Typography variant="body1" fontWeight={500}>
                         {value.name}
                       </Typography>
                     </TableCell>
-                    <TableCell align="center">
+                    {/* Action Type */}
+                    <TableCell>
                       <Typography variant="body1" fontWeight={500}>
-                        {value.sortOrder}
+                        {value.actionType}
                       </Typography>
                     </TableCell>
+                    {/* Action Value */}
+                    <TableCell>
+                      <Typography variant="body1" fontWeight={500}>
+                        {value.actionValue}
+                      </Typography>
+                    </TableCell>
+                    {/* Status Switch */}
                     <TableCell align="center">
                       <Switch
                         defaultChecked={value.status}
@@ -138,6 +140,13 @@ function CategoryTable() {
                         }
                       />
                     </TableCell>
+                    {/* Sort Order */}
+                    <TableCell align="center">
+                      <Typography variant="body1" fontWeight={500}>
+                        {value.sort}
+                      </Typography>
+                    </TableCell>
+                    {/* Edit and Delete Actions */}
                     <TableCell align="center">
                       <Box
                         sx={{
@@ -151,15 +160,22 @@ function CategoryTable() {
                           },
                         }}
                       >
-                        <AddEditCategory />
-
+                        {/* Edit Icon */}
+                        <FaRegEdit
+                          onClick={() => {
+                            setBannerType("Edit");
+                            setIsBannerModalOpen();
+                          }}
+                          style={{ fontSize: "25px", cursor: "pointer" }}
+                        />
+                        {/* Divider */}
                         <Divider
                           orientation="vertical"
                           variant="middle"
                           flexItem
                         />
-
-                        <Delete name={value.name} type="Category" />
+                        {/* Delete Component */}
+                        <Delete name={value.name} type="Banner" />
                       </Box>
                     </TableCell>
                   </TableRow>
@@ -171,14 +187,17 @@ function CategoryTable() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={categories.length}
+          count={banners.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      {/* Add/Edit Banner Modal */}
+      <AddEditBanner />
     </>
   );
 }
-export default CategoryTable;
+
+export default BannerTable;

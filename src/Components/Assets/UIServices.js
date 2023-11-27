@@ -1,5 +1,4 @@
 import {
-  orders,
   merchants,
   categories,
   products,
@@ -10,6 +9,7 @@ import {
   customCharges,
   orderTypes,
   notificationEvents,
+  banners,
 } from "Components/Assets/DummyData";
 
 // Function 'updateOrderCount' to update the counts of orders for each status in 'orderCount'
@@ -84,4 +84,8 @@ export const getOrderTypes = () => {
 
 export const getNotificationEvents = () => {
   return notificationEvents;
+};
+
+export const getBanners = () => {
+  return banners;
 };

@@ -47,3 +47,17 @@ export const useOrdersStore = create((set) => ({
     }
   },
 }));
+
+export const useBannerStore = create((set) => ({
+  isBannerModalOpen: false,
+  bannerType: "",
+  setBannerType: (value) =>
+    set(() => ({
+      bannerType: value,
+    })),
+  setIsBannerModalOpen: () =>
+    set((state) => ({
+      isBannerModalOpen: !state.isBannerModalOpen,
+      bannerType: state.isBannerModalOpen ? "" : state.bannerType,
+    })),
+}));

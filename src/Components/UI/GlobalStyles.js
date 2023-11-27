@@ -17,7 +17,7 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 
 // This is Component name or the navigation names container
 export const ComponentHeader = styled("div")(({ theme }) => ({
-  padding: theme.spacing(1, 4),
+  padding: theme.spacing(1.5, 4),
   boxShadow: theme.shadows[3],
   width: "100%",
   background: "var(--component-header-background)",
@@ -28,7 +28,7 @@ export const ComponentHeader = styled("div")(({ theme }) => ({
   zIndex: theme.zIndex.drawer - 1,
   // maxWidth: `calc(100vw - ${drawerWidth}px)`,
   [theme.breakpoints.down("md")]: {
-    padding: theme.spacing(1, 1),
+    padding: theme.spacing(2, 1),
     top: "56px",
   },
 }));
