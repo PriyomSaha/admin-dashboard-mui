@@ -640,3 +640,16 @@ export let banners = [
     sort: 2,
   },
 ];
+export let coupons = [
+  {
+    id: 1,
+    code: "KKRD",
+    type: "percentage",
+    value: 10,
+    usageLimit: 2,
+    usageCount: 5,
+    status: true,
+    startDate: "Tue 13 Jun 12:00 AM",
+    endDate: "Tue 15 Jun 11:59 PM",
+  },
+];

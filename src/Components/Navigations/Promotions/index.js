@@ -31,9 +31,12 @@ function Promotions() {
   // Handle the "Add New" button click based on the current subPath
   const addNewHandler = () => {
     if (subPath.includes("banners")) {
-      // Open the banner modal and set the banner type to "Add"
+      // Open the banner modal and set the banner modal type to "Add"
       setIsBannerModalOpen();
       setBannerType("Add");
+    }
+    if (subPath.includes("Coupons")) {
+      // Open the Coupons modal and set the Coupon modal type to "Add"
     }
   };
 

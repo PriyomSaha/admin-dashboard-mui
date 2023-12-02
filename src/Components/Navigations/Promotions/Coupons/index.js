@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import CouponsTable from "./CouponsTable";
+import AddEditCoupon from "./AddEditCoupon";
 
 function Cupons() {
   return (
-    <div>Cupons</div>
-  )
+    <>
+      <CouponsTable />
+      <AddEditCoupon />
+    </>
+  );
 }
 
-export default Cupons
+export default Cupons;
