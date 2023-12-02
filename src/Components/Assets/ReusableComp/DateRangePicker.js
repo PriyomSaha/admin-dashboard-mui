@@ -6,7 +6,7 @@ import { BsFillCalendarFill, BsFillCaretDownFill } from "react-icons/bs";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 // Defining the DateRangePicker component
-function DateRangePicker() {
+function DateRangePicker({ enableFutureDateSelection }) {
   // Importing the dayjs library
   const dayjs = require("dayjs");
   const date = new Date();
@@ -27,20 +27,40 @@ function DateRangePicker() {
 
   // Function to set predefined date range selections
   const setSelectionRange = (value) => {
+    // Set date range for the previous month
     if (value === "prev-month") {
-      // Set date range for the previous month
       setStartDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
       setEndDate(new Date(date.getFullYear(), date.getMonth(), 0));
-    } else if (value === "curr-month") {
-      // Set date range for the current month
-      setStartDate(new Date(date.getFullYear(), date.getMonth(), 1));
-      setEndDate(new Date());
-    } else if (value === "yesterday") {
-      // Set date range for yesterday
+    }
+    // Set date range for yesterday
+    else if (value === "yesterday") {
       setStartDate(new Date(dayjs().subtract(1, "day")));
       setEndDate(new Date(dayjs().subtract(1, "day")));
-    } else {
-      // Set default date range (today)
+    }
+    // Set date range for the current month when future dates are disabled
+    else if (value === "curr-month" && !enableFutureDateSelection) {
+      setStartDate(new Date(date.getFullYear(), date.getMonth(), 1));
+      setEndDate(new Date());
+    }
+    // Set date range for the current month when future dates are enabled
+    else if (value === "curr-month" && enableFutureDateSelection) {
+      setStartDate(
+        new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1)
+      );
+      setEndDate(new Date(date.getFullYear(), date.getMonth() + 1, 0));
+    }
+    // Set date range for tomorrow
+    else if (value === "tomorrow") {
+      setStartDate(new Date(dayjs().add(1, "day")));
+      setEndDate(new Date(dayjs().add(1, "day")));
+    }
+    // Set date range for the next month
+    else if (value === "next-month") {
+      setStartDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
+      setEndDate(new Date(date.getFullYear(), date.getMonth() + 2, 0));
+    }
+    // Set default date range (today)
+    else {
       setStartDate(new Date());
       setEndDate(new Date());
     }
@@ -67,37 +87,70 @@ function DateRangePicker() {
   // Calendar container component for DatePicker
   const Container = ({ className, children }) => {
     return (
-      <Box className="calender-container">
-        <CalendarContainer className={className}>
-          <Box sx={{ position: "relative" }}>{children}</Box>
-        </CalendarContainer>
-        <Box sx={{ position: "relative" }}>
-          <Button
-            sx={{ color: "white" }}
-            onClick={() => setSelectionRange("today")}
-          >
-            Today
-          </Button>
-          <Button
-            sx={{ color: "white" }}
-            onClick={() => setSelectionRange("yesterday")}
-          >
-            Yesterday
-          </Button>
-          <Button
-            sx={{ color: "white" }}
-            onClick={() => setSelectionRange("curr-month")}
-          >
-            This month
-          </Button>
-          <Button
-            sx={{ color: "white" }}
-            onClick={() => setSelectionRange("prev-month")}
-          >
-            Last Month
-          </Button>
-        </Box>
-      </Box>
+      <>
+        <>
+          <Box className="calender-container">
+            <CalendarContainer className={className}>
+              <Box sx={{ position: "relative" }}>{children}</Box>
+            </CalendarContainer>
+            {!enableFutureDateSelection ? (
+              <Box sx={{ position: "relative" }}>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("today")}
+                >
+                  Today
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("yesterday")}
+                >
+                  Yesterday
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("curr-month")}
+                >
+                  This month
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("prev-month")}
+                >
+                  Last Month
+                </Button>
+              </Box>
+            ) : (
+              <Box sx={{ position: "relative" }}>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("today")}
+                >
+                  Today
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("tomorrow")}
+                >
+                  Tomorrow
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("curr-month")}
+                >
+                  This month
+                </Button>
+                <Button
+                  sx={{ color: "white" }}
+                  onClick={() => setSelectionRange("next-month")}
+                >
+                  Next Month
+                </Button>
+              </Box>
+            )}
+          </Box>
+        </>
+      </>
     );
   };
 
@@ -112,7 +165,7 @@ function DateRangePicker() {
         startDate={startDate}
         endDate={endDate}
         selectsRange
-        maxDate={new Date()}
+        maxDate={!enableFutureDateSelection ? new Date() : null}
         calendarContainer={Container}
         shouldCloseOnSelect={true}
         disabledKeyboardNavigation
@@ -120,6 +173,11 @@ function DateRangePicker() {
           if (endDate === null) setEndDate(startDate);
           console.log("Call filtered data from API");
         }}
+        //Time
+        // showTimeSelect
+        // timeIntervals={10}
+        // allowSameDay
+        // timeCaption="Time"
       />
     </div>
   );
