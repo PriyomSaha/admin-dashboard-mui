@@ -17,7 +17,6 @@ import { getBanners } from "Components/Assets/UIServices";
 import { TableImage } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import React from "react";
-import AddEditBanner from "./AddEditBanner";
 import BannerFallback from "Components/UI/Images/BannerFallback.svg";
 import { FaRegEdit } from "react-icons/fa";
 import { useBannerStore } from "Components/Assets/StateManagement";
@@ -194,8 +193,6 @@ function BannerTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      {/* Add/Edit Banner Modal */}
-      <AddEditBanner />
     </>
   );
 }
