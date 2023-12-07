@@ -13,6 +13,7 @@ import {
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
+  FullScreenModalHeader,
 } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
@@ -37,22 +38,7 @@ function AddEditProduct() {
       <Modal open={isModalOpen} sx={FullScreenModalContainer}>
         <Box>
           {/* Modal header */}
-          <Box
-            sx={{
-              position: "sticky",
-              top: 0,
-              left: "auto",
-              right: "auto",
-              minWidth: "10vw",
-              maxWidth: "100vw",
-              backgroundColor: theme.palette.background.paper,
-              padding: theme.spacing(1, 2),
-              zIndex: 1,
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-              borderBottom: `1px solid ${theme.palette.grey[400]}`,
-            }}
-          >
+          <Box sx={FullScreenModalHeader}>
             {/* Title of the modal */}
             <Typography variant="h6">Edit Category</Typography>
 

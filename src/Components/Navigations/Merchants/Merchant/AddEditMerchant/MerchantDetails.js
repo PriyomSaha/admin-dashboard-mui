@@ -107,8 +107,8 @@ function MerchantDetails() {
             <FormControl fullWidth variant="outlined" size="small">
               <InputLabel>Status</InputLabel>
               <Select label="Status">
-                <MenuItem value="merchant">Active</MenuItem>
-                <MenuItem value="admin">Inactive</MenuItem>
+                <MenuItem value="active">Active</MenuItem>
+                <MenuItem value="inactive">Inactive</MenuItem>
               </Select>
             </FormControl>
           </Grid>

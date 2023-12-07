@@ -61,3 +61,16 @@ export const useBannerStore = create((set) => ({
       bannerType: state.isBannerModalOpen ? "" : state.bannerType,
     })),
 }));
+export const useCouponStore = create((set) => ({
+  isCouponModalOpen: false,
+  couponType: "",
+  setCouponType: (value) =>
+    set(() => ({
+      couponType: value,
+    })),
+  setIsCouponModalOpen: () =>
+    set((state) => ({
+      isCouponModalOpen: !state.isCouponModalOpen,
+      couponType: state.isCouponModalOpen ? "" : state.couponType,
+    })),
+}));

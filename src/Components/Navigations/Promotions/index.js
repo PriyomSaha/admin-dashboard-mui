@@ -3,7 +3,10 @@ import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import PromotionNavigation from "Components/Navigations/Promotions/PromotionNavigation";
-import { useBannerStore } from "Components/Assets/StateManagement";
+import {
+  useBannerStore,
+  useCouponStore,
+} from "Components/Assets/StateManagement";
 
 function Promotions() {
   // Get the current location object from the React Router
@@ -28,6 +31,12 @@ function Promotions() {
     (state) => state.setIsBannerModalOpen
   );
 
+  // Access state and functions from the coupon store using custom hooks
+  const setCouponType = useCouponStore((state) => state.setCouponType);
+  const setIsCouponModalOpen = useCouponStore(
+    (state) => state.setIsCouponModalOpen
+  );
+
   // Handle the "Add New" button click based on the current subPath
   const addNewHandler = () => {
     if (subPath.includes("banners")) {
@@ -35,8 +44,10 @@ function Promotions() {
       setIsBannerModalOpen();
       setBannerType("Add");
     }
-    if (subPath.includes("Coupons")) {
+    if (subPath.includes("coupons")) {
       // Open the Coupons modal and set the Coupon modal type to "Add"
+      setIsCouponModalOpen();
+      setCouponType("Add");
     }
   };
 
