@@ -40,6 +40,7 @@ function CompactChipInputSelect({
   };
 
   const theme = useTheme();
+  //Number of Items visible before showing {value} more
   const count = 2;
 
   const handleChange = (event) => {
@@ -68,7 +69,9 @@ function CompactChipInputSelect({
           onChange={handleChange}
           input={<OutlinedInput label={`"${inputLabelText}"`} />}
           renderValue={(selected) => (
-            <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, py: 0.5 }}>
+            <Box
+              sx={{ display: "flex", flexWrap: "wrap", gap: 0.5, paddingY: -1 }}
+            >
               {selected.map((value, index) =>
                 index < count ? (
                   <Chip size="small" key={value} label={value} />
