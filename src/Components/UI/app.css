@@ -15,12 +15,19 @@
 .table-icon{
 font-size: "25px";
 }
-  .react-datepicker__month-container {
-    border: 1px solid #ccc;
-    z-index: 999999;
+
+.react-datepicker-popper{
+  z-index: 99999999999 !important;
+}
+    .react-datepicker__month-container {
+    border-left: 1px solid #c0bcbc;
+    z-index: 999999 !important;
   }
+
+
   .calender-container{ 
     overflow: auto;
+    z-index: 999999 !important;
     background:var(--calender-button-container-background);
     color:var(--calender-button-contrast-text);
     position: relative;

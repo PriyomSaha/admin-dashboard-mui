@@ -4,6 +4,7 @@ import React, { useState, forwardRef } from "react";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import { BsFillCalendarFill, BsFillCaretDownFill } from "react-icons/bs";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { theme } from "Components/UI/themes";
 
 // Defining the DateRangePicker component
 function DateRangePicker({ enableFutureDateSelection }) {
@@ -77,7 +78,10 @@ function DateRangePicker({ enableFutureDateSelection }) {
       type="text"
       onClick={onClick}
       ref={ref}
-      sx={{ color: `var(--header-nav-background)}` }}
+      sx={{
+        color: `var(--header-nav-background)}`,
+      }}
+      variant="outlined-dark"
     >
       <BsFillCalendarFill /> &nbsp;&nbsp;
       {value}&nbsp;&nbsp; <BsFillCaretDownFill />
