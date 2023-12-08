@@ -74,3 +74,17 @@ export const useCouponStore = create((set) => ({
       couponType: state.isCouponModalOpen ? "" : state.couponType,
     })),
 }));
+
+export const usePopupStore = create((set) => ({
+  isPopupModalOpen: false,
+  popupType: "",
+  setPopupType: (value) =>
+    set(() => ({
+      popupType: value,
+    })),
+  setIsPopupModalOpen: () =>
+    set((state) => ({
+      isPopupModalOpen: !state.isPopupModalOpen,
+      popupType: state.isPopupModalOpen ? "" : state.popupType,
+    })),
+}));

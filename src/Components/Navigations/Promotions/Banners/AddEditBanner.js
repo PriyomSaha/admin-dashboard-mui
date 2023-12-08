@@ -149,7 +149,7 @@ function AddEditBanner() {
                   sx={{ display: "flex", justifyContent: "center" }}
                 >
                   {/* Component for image upload */}
-                  <ImageUpload imageUrl="https://th.bing.com/th?id=ORMS.78faa78b77b5990e06f3be6dc478ea5d&pid=Wdp&w=612&h=304&qlt=90&c=1&rs=1&dpr=1.375&p=0" />
+                  <ImageUpload imageUrl="" />
                 </Grid>
               </Grid>
 

@@ -6,6 +6,7 @@ import PromotionNavigation from "Components/Navigations/Promotions/PromotionNavi
 import {
   useBannerStore,
   useCouponStore,
+  usePopupStore,
 } from "Components/Assets/StateManagement";
 
 function Promotions() {
@@ -37,6 +38,11 @@ function Promotions() {
     (state) => state.setIsCouponModalOpen
   );
 
+  // Access state and functions from the Popup store using custom hooks
+  const setPopupType = usePopupStore((state) => state.setPopupType);
+  const setIsPopupModalOpen = usePopupStore(
+    (state) => state.setIsPopupModalOpen
+  );
   // Handle the "Add New" button click based on the current subPath
   const addNewHandler = () => {
     if (subPath.includes("banners")) {
@@ -48,6 +54,11 @@ function Promotions() {
       // Open the Coupons modal and set the Coupon modal type to "Add"
       setIsCouponModalOpen();
       setCouponType("Add");
+    }
+    if (subPath.includes("popups")) {
+      // Open the Popup modal and set the Popup modal type to "Add"
+      setIsPopupModalOpen();
+      setPopupType("Add");
     }
   };
 

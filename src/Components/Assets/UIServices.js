@@ -11,6 +11,7 @@ import {
   notificationEvents,
   banners,
   coupons,
+  popups,
 } from "Components/Assets/DummyData";
 
 // Function 'updateOrderCount' to update the counts of orders for each status in 'orderCount'
@@ -93,4 +94,7 @@ export const getBanners = () => {
 
 export const getCoupons = () => {
   return coupons;
+};
+export const getPopups = () => {
+  return popups;
 };

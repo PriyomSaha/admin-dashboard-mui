@@ -653,3 +653,13 @@ export let coupons = [
     endDate: "Tue 15 Jun 11:59 PM",
   },
 ];
+export let popups = [
+  {
+    id: 1,
+    title: "UP TO 25% OFF",
+    type: "image",
+    location: "global",
+    frequency: "always",
+    status: true,
+  },
+];

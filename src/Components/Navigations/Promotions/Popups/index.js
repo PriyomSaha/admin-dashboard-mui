@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import PopupTable from "./PopupTable";
+import AddEditPopup from "./AddEditPopup";
 
 function Popups() {
   return (
-    <div>Popups</div>
-  )
+    <>
+      <PopupTable />
+      <AddEditPopup />
+    </>
+  );
 }
 
-export default Popups
+export default Popups;
