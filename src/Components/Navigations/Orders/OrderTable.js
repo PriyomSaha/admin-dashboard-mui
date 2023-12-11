@@ -17,16 +17,16 @@ import { useOrdersStore } from "Components/Assets/StateManagement";
 // Columns configuration for the table
 const columns = [
   { id: "id", label: "Order Id", minWidth: 100 },
-  { id: "d&t", label: "Date & Time", minWidth: 180 },
+  { id: "d&t", label: "Date & Time", minWidth: 200 },
   {
     id: "merch",
     label: "Merchant",
-    minWidth: 200,
+    minWidth: 150,
   },
   {
     id: "cust",
     label: "Customer",
-    minWidth: 200,
+    minWidth: 150,
   },
   {
     id: "items",
@@ -41,12 +41,12 @@ const columns = [
   {
     id: "type",
     label: "Type",
-    minWidth: 130,
+    minWidth: 100,
   },
   {
     id: "payment",
     label: "Payment",
-    minWidth: 120,
+    minWidth: 100,
   },
   {
     id: "status",
