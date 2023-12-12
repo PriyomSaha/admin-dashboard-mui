@@ -16,6 +16,7 @@ import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 import { useAccountStore } from "Components/Assets/StateManagement";
 import axios from "axios";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
+import { getCookie, setCookie } from "Components/Assets/UIServices";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,8 +39,10 @@ const Login = () => {
   const setUserData = useAccountStore((state) => state.setUserData);
 
   // API endpoints
-  const tokenUrl = process.env.REACT_APP_TOKEN_URL;
-  const userDetailsUrl = process.env.REACT_APP_USER_DETAILS_URL;
+  const tokenUrl =
+    process.env.REACT_APP_BASE_URL + process.env.REACT_APP_TOKEN_URL;
+  const userDetailsUrl =
+    process.env.REACT_APP_BASE_URL + process.env.REACT_APP_USER_DETAILS_URL;
 
   // Clear error status when password or email changes
   useEffect(() => {
@@ -102,7 +105,15 @@ const Login = () => {
         }
       );
       // Update user data in global state
-      setUserData(response.data, true);
+      await setUserData(
+        response.data.userName,
+        // email
+        response.data.authStatus
+      );
+      await setCookie("ud", bToken, 7);
+      await setCookie("email", email, 7);
+
+      // await getCookie("ud");
     } catch (error) {
       // Show error notification in a Snackbar
       setShowSnackbar(true);

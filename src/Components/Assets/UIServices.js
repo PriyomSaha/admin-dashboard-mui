@@ -98,3 +98,27 @@ export const getCoupons = () => {
 export const getPopups = () => {
   return popups;
 };
+
+//global set cookies
+//@param {cookieName , cookieValue , expairydays}
+export const setCookie = async (name, value, days) => {
+  const expires = new Date();
+  //expire after number of days--prod
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  //expire after number of min--test
+  // expires.setTime(expires.getTime() + 60 * 1000);
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+};
+//global get cookies
+export const getCookie = (cookieName) => {
+  const cookies = document.cookie.split(";");
+  for (const cookie of cookies) {
+    const [name, value] = cookie.trim().split("=");
+    if (name === cookieName) {
+      // console.log(value);
+      return value;
+    }
+  }
+  // console.log(null);
+  return null;
+};
