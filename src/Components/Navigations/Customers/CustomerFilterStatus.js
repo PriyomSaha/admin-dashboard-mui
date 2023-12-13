@@ -45,10 +45,6 @@ export default function CustomerFilterStatus({ counts, setCustomers }) {
           },
         }
       );
-      console.log(response.data);
-      // const resp = JSON.parse(response.data);
-      // console.log(resp);
-      // console.log(typeof resp);
 
       await setInitialCustomersList(response.data);
     } catch (error) {

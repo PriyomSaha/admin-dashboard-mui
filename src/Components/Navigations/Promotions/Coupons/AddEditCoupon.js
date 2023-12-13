@@ -77,6 +77,7 @@ export default function AddEditCoupon() {
 
   return (
     <>
+      {console.log(usageLimit)}
       {/* The modal dialog for adding or editing a coupon */}
       <Modal open={isCouponModalOpen} sx={FullScreenModalContainer}>
         <Box>
@@ -116,7 +117,9 @@ export default function AddEditCoupon() {
                     size="small"
                     placeholder="Upper case only"
                     value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
+                    onChange={(e) =>
+                      setCouponCode(e.target.value.toUpperCase())
+                    }
                   />
 
                   <Box mt={1} width={"100%"}>
