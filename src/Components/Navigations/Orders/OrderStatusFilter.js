@@ -4,10 +4,10 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useOrdersStore } from "Components/Assets/StateManagement";
 import axios from "axios";
+import { getCookie } from "Components/Assets/UIServices";
+import { Button } from "@mui/material";
 
 // API endpoints
-const tokenUrl =
-  process.env.REACT_APP_BASE_URL + process.env.REACT_APP_TOKEN_URL;
 const allOrdersUrl =
   process.env.REACT_APP_BASE_URL +
   process.env.REACT_APP_GET_ORDERS_LIST_URL_SUPERADMIN;
@@ -34,11 +34,24 @@ export default function OrderStatusFilter({ counts, setOrders }) {
 
   const getAllOrders = async () => {
     await setIsOrderLoading();
-    // Call authentication API to get token
 
-    const response = await axios.get(allOrdersUrl);
-    console.log(response.data);
-    setInitialOrdersList(response.data);
+    try {
+      const response = await axios.post(
+        allOrdersUrl,
+        {
+          username: getCookie("email"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("ud")}`,
+          },
+        }
+      );
+      await setInitialOrdersList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+
     await setIsOrderLoading();
   };
 
@@ -61,8 +74,24 @@ export default function OrderStatusFilter({ counts, setOrders }) {
           variant="scrollable"
           value={value}
           onChange={handleChange}
-          aria-label="Filter Order Status"
+          aria-label="Filter Customer Status"
+          indicatorColor="primary"
           sx={{ overflow: "auto" }}
+          ScrollButtonComponent={({ direction, onClick }) => (
+            <Box
+              onClick={onClick}
+              variant="outlined"
+              color="primary"
+              sx={{
+                width: "auto",
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              {direction === "left" ? "<" : ">"}
+            </Box>
+          )}
         >
           {/* Each Tab represents a different order status and displays its count */}
           {/* onClick event for each Tab calls the 'setOrders' function with the corresponding status */}

@@ -7,14 +7,17 @@ import AddCustomerButton from "./AddCustomerButton";
 import CustomerFilterStatus from "./CustomerFilterStatus";
 import CustomerTable from "./CustomerTable";
 import { updateCustomersCount } from "Components/Assets/UIServices";
+import { useCustomersStore } from "Components/Assets/StateManagement";
 
 function Customers() {
   const [customers, setCustomers] = React.useState([]);
   const [counts, setCounts] = React.useState({});
 
+  const customerList = useCustomersStore((state) => state.customersList);
+
   React.useEffect(() => {
-    setCounts(updateCustomersCount());
-  }, []);
+    setCounts(updateCustomersCount(customerList));
+  }, [customerList]);
 
   return (
     <>

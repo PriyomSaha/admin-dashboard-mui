@@ -26,6 +26,7 @@ import { Avatar, Badge, Fade } from "@mui/material";
 import { useEffect } from "react";
 import Edit from "Components/Navigations/EditProfile/Edit";
 import { theme } from "Components/UI/themes";
+import { deleteCookie } from "Components/Assets/UIServices";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -251,6 +252,8 @@ export default function TopNav() {
                   onClick={() => {
                     setAnchorEl(null);
                     setUserData("", false);
+                    deleteCookie("ud");
+                    deleteCookie("email");
                   }}
                 >
                   <Box

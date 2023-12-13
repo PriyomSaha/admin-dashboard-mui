@@ -55,6 +55,9 @@ export default function AddEditCoupon() {
     usageCount: false,
     sigleUsagePerCustomer: false,
   });
+  const [couponCode, setCouponCode] = React.useState("");
+  const [status, setStatus] = React.useState("active");
+
   // Handle usageLimit checkbox state changes
   const handleCheckboxChange = (checkboxName) => {
     setUsageLimit((prevCheckedItems) => ({
@@ -112,6 +115,8 @@ export default function AddEditCoupon() {
                     variant="outlined"
                     size="small"
                     placeholder="Upper case only"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value)}
                   />
 
                   <Box mt={1} width={"100%"}>
@@ -132,7 +137,11 @@ export default function AddEditCoupon() {
                     sx={{ mt: 2 }}
                   >
                     <InputLabel>Status</InputLabel>
-                    <Select label="Status">
+                    <Select
+                      label="Status"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
                       <MenuItem value="active">Active</MenuItem>
                       <MenuItem value="inactive">Inactive</MenuItem>
                     </Select>

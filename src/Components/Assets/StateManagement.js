@@ -22,6 +22,32 @@ export const useEditProfileStore = create((set) => ({
     set((state) => ({ isEditProfile: !state.isEditProfile })),
 }));
 
+export const useCustomersStore = create((set) => ({
+  isCustomersLoading: false,
+  setIsCustomersLoading: () =>
+    set((state) => ({ isCustomersLoading: !state.isCustomersLoading })),
+  allCustomersList: [],
+  customersList: [],
+  setInitialCustomersList: (customers) =>
+    set({
+      customersList: customers,
+      allCustomersList: customers,
+    }),
+  setFilteredCustomersList: (condition) => {
+    if (condition === "All") {
+      set((state) => ({
+        customersList: state.allCustomersList,
+      }));
+    } else {
+      set((state) => ({
+        customersList: state.allCustomersList.filter(
+          (customer) => customer.status === condition
+        ),
+      }));
+    }
+  },
+}));
+
 export const useOrdersStore = create((set) => ({
   isOrderLoading: false,
   setIsOrderLoading: () =>

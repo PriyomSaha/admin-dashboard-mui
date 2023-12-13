@@ -42,7 +42,7 @@ export const getCustomers = (custType) => {
   else return customers.filter((cust) => cust.status === custType);
 };
 
-export const updateCustomersCount = () => {
+export const updateCustomersCount = (customers) => {
   let customersCount = {
     All: customers.length,
     Active: 0,
@@ -121,4 +121,8 @@ export const getCookie = (cookieName) => {
   }
   // console.log(null);
   return null;
+};
+
+export const deleteCookie = (cookieName) => {
+  document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };

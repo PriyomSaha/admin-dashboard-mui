@@ -1,33 +1,67 @@
 import * as React from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { useCustomersLoadingStore } from "Components/Assets/StateManagement";
-import { getCustomers } from "Components/Assets/UIServices";
+import {
+  useCustomersLoadingStore,
+  useCustomersStore,
+} from "Components/Assets/StateManagement";
+import axios from "axios";
+import { getCookie } from "Components/Assets/UIServices";
 
+// API endpoints
+const allCustomersUrl =
+  process.env.REACT_APP_BASE_URL +
+  process.env.REACT_APP_GET_CUSTOMERS_LIST_URL_SUPERADMIN;
 export default function CustomerFilterStatus({ counts, setCustomers }) {
   const [value, setValue] = React.useState(0);
 
-  const setIsCustomersLoading = useCustomersLoadingStore(
-    (state) => state.setIsCustomersLoading,
+  // Custom hook 'useCustomersStore' to access and update 'isOrderLoading' state
+  const setIsCustomersLoading = useCustomersStore(
+    (state) => state.setIsCustomersLoading
   );
 
-  const isCustomerLoading = useCustomersLoadingStore(
-    (state) => state.isCustomerLoading,
+  const setInitialCustomersList = useCustomersStore(
+    (state) => state.setInitialCustomersList
+  );
+  const setFilteredCustomersList = useCustomersStore(
+    (state) => state.setFilteredCustomersList
   );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  const load = async () => {
+  const getAllCustomers = async () => {
     await setIsCustomersLoading();
-    await setTimeout(function () {
-      setCustomers(getCustomers("All"));
-      setIsCustomersLoading();
-    }, 1000);
+
+    try {
+      const response = await axios.post(
+        allCustomersUrl,
+        {
+          username: getCookie("email"),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${getCookie("ud")}`,
+          },
+        }
+      );
+      console.log(response.data);
+      // const resp = JSON.parse(response.data);
+      // console.log(resp);
+      // console.log(typeof resp);
+
+      await setInitialCustomersList(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    await setIsCustomersLoading();
   };
 
+  // useEffect hook to set initial orders when the component is mounted
   React.useEffect(() => {
-    load();
+    //To retrieve data through API
+    getAllCustomers();
   }, []);
 
   return (
@@ -47,15 +81,15 @@ export default function CustomerFilterStatus({ counts, setCustomers }) {
         >
           <Tab
             label={`All (${counts.All})`}
-            onClick={() => setCustomers(getCustomers("All"))}
+            onClick={() => setFilteredCustomersList("All")}
           />
           <Tab
             label={`Active (${counts.Active})`}
-            onClick={() => setCustomers(getCustomers("Active"))}
+            onClick={() => setFilteredCustomersList("Active")}
           />
           <Tab
             label={`Block (${counts.Block})`}
-            onClick={() => setCustomers(getCustomers("Block"))}
+            onClick={() => setFilteredCustomersList("Block")}
           />
         </Tabs>
       </Box>
