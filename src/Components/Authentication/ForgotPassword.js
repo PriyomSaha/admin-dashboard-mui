@@ -61,7 +61,8 @@ export default function ForgotPassword() {
                   background: theme.palette.grey[800],
                 },
               }}
-              onClick={handleSubmit}
+              // onClick={handleSubmit}
+              onClick={() => navigate("/reset")}
             >
               Send
             </Button>

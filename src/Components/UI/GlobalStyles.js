@@ -36,14 +36,19 @@ export const ComponentHeader = styled("div")(({ theme }) => ({
 // This is Component Body or the navigation Body container
 export const ComponentBody = styled("div")(({ theme }) => ({
   // overflowX: "hidden",
+  boxShadow: theme.shadows[10],
   marginTop: "1vh",
   padding: theme.spacing(1, 2),
-  boxShadow: theme.shadows[10],
   background: "var(--component-body-background)",
   color: "var(--component-body-text)",
   minHeight: "100vh",
   maxWidth: "100vw",
   // [theme.breakpoints.down("md")]: { padding: theme.spacing(2, 1) },
+}));
+
+export const BufferHeightofBody = styled("div")(({ theme }) => ({
+  height: theme.spacing(10),
+  background: "var(--component-body-background)",
 }));
 
 //This Style is for image in table cell
@@ -230,4 +235,3 @@ export const FloatingDivLink = styled("a")({
   position: "relative",
   fontFamily: "inherit",
 });
-

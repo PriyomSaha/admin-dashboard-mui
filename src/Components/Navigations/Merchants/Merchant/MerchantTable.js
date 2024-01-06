@@ -9,12 +9,15 @@ import {
   Paper,
   Typography,
   Checkbox,
-  Switch,
   Divider,
   Box,
   TablePagination,
 } from "@mui/material";
-import { SuperAdminLoginButton, TableImage } from "Components/UI/GlobalStyles";
+import {
+  CustomSwitch,
+  SuperAdminLoginButton,
+  TableImage,
+} from "Components/UI/GlobalStyles";
 import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
 import { FaAngleRight } from "react-icons/fa";
 import "Components/UI/app.css";
@@ -143,17 +146,10 @@ function MerchantTable() {
                       <Checkbox defaultChecked={value.sponsored} />
                     </TableCell>
                     <TableCell>
-                      <Switch
-                        defaultChecked={value.status}
-                        sx={
-                          !value.status
-                            ? {
-                                "& .MuiSwitch-thumb": {
-                                  background: `${theme.palette.grey[300]}`,
-                                },
-                              }
-                            : null
-                        }
+                      <CustomSwitch
+                        checked={value.status}
+                        // onChange={() => setEnabled(!enabled)}
+                        inputProps={{ "aria-label": "ant design" }}
                       />
                     </TableCell>
                     <TableCell>

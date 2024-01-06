@@ -2,7 +2,6 @@ import {
   Box,
   Divider,
   Paper,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -15,6 +14,7 @@ import {
 import Delete from "Components/Assets/ReusableComp/Delete";
 import { useCouponStore } from "Components/Assets/StateManagement";
 import { getCoupons } from "Components/Assets/UIServices";
+import { CustomSwitch } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import React from "react";
 import { FaRegEdit } from "react-icons/fa";
@@ -120,17 +120,10 @@ function CouponsTable() {
                     </TableCell>
                     {/* Status Switch */}
                     <TableCell align="center">
-                      <Switch
-                        defaultChecked={value.status}
-                        sx={
-                          !value.status
-                            ? {
-                                "& .MuiSwitch-thumb": {
-                                  background: `${theme.palette.grey[300]}`,
-                                },
-                              }
-                            : null
-                        }
+                      <CustomSwitch
+                        checked={value.status}
+                        // onChange={() => setEnabled(!enabled)}
+                        inputProps={{ "aria-label": "ant design" }}
                       />
                     </TableCell>
                     <TableCell align="center">

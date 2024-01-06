@@ -157,3 +157,24 @@ export const data3 = [
     ],
   },
 ];
+
+export const data4 = [
+  {
+    id: "Web",
+    label: "Web",
+    value: 600,
+    color: "hsl(63, 70%, 50%)",
+  },
+  {
+    id: "Android",
+    label: "Android",
+    value: 282,
+    color: "hsl(320, 70%, 50%)",
+  },
+  {
+    id: "IOS",
+    label: "IOS",
+    value: 126,
+    color: "hsl(109, 70%, 50%)",
+  },
+];

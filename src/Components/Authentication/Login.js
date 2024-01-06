@@ -72,9 +72,8 @@ const Login = () => {
           username: email,
           password: password,
         });
-
         // Get user data using token
-        handleGetUserdata(resp.data);
+        handleGetUserdata(resp.data.token);
 
         // Show success notification in a Snackbar
         setShowSnackbar(true);
@@ -111,7 +110,7 @@ const Login = () => {
         response.data.authStatus
       );
       await setCookie("ud", bToken, 7);
-      await setCookie("email", email, 7);
+      await setCookie("email", email, 0.1);
 
       // await getCookie("ud");
     } catch (error) {

@@ -2,7 +2,6 @@ import {
   Box,
   Divider,
   Paper,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -14,7 +13,7 @@ import {
 } from "@mui/material";
 import Delete from "Components/Assets/ReusableComp/Delete";
 import { getBanners } from "Components/Assets/UIServices";
-import { TableImage } from "Components/UI/GlobalStyles";
+import { CustomSwitch, TableImage } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import React from "react";
 import BannerFallback from "Components/UI/Images/BannerFallback.svg";
@@ -126,17 +125,10 @@ function BannerTable() {
                     </TableCell>
                     {/* Status Switch */}
                     <TableCell align="center">
-                      <Switch
-                        defaultChecked={value.status}
-                        sx={
-                          !value.status
-                            ? {
-                                "& .MuiSwitch-thumb": {
-                                  background: `${theme.palette.grey[300]}`,
-                                },
-                              }
-                            : null
-                        }
+                      <CustomSwitch
+                        checked={value.status}
+                        // onChange={() => setEnabled(!enabled)}
+                        inputProps={{ "aria-label": "ant design" }}
                       />
                     </TableCell>
                     {/* Sort Order */}

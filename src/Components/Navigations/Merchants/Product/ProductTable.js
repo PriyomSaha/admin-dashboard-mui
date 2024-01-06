@@ -2,7 +2,6 @@ import {
   Box,
   Divider,
   Paper,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +11,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { TableImage } from "Components/UI/GlobalStyles";
+import { CustomSwitch, TableImage } from "Components/UI/GlobalStyles";
 import { getProducts } from "Components/Assets/UIServices";
 import React from "react";
 import ProductFallBack from "Components/UI/Images/ProductFallBack.svg";
@@ -131,17 +130,10 @@ function ProductTable() {
                     </TableCell>
                     <TableCell>{value.price}</TableCell>
                     <TableCell align="center">
-                      <Switch
-                        defaultChecked={value.published}
-                        sx={
-                          !value.published
-                            ? {
-                                "& .MuiSwitch-thumb": {
-                                  background: `${theme.palette.grey[300]}`,
-                                },
-                              }
-                            : null
-                        }
+                      <CustomSwitch
+                        checked={value.status}
+                        // onChange={() => setEnabled(!enabled)}
+                        inputProps={{ "aria-label": "ant design" }}
                       />
                     </TableCell>
                     <TableCell align="center">

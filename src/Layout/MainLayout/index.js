@@ -5,6 +5,7 @@ import { theme } from "Components/UI/themes";
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useAccountStore } from "Components/Assets/StateManagement";
+import { BufferHeightofBody } from "Components/UI/GlobalStyles";
 
 // Functional component 'MainLayout' representing the main layout of the application
 function MainLayout() {
@@ -33,6 +34,7 @@ function MainLayout() {
               {!userData.authStatus ? <Navigate to="/login" /> : <Outlet />}
             </Box>
           </Box>
+          <BufferHeightofBody />
         </>
       )}
     </>

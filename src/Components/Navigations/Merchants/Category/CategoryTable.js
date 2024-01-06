@@ -2,7 +2,6 @@ import {
   Box,
   Divider,
   Paper,
-  Switch,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +11,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { TableImage } from "Components/UI/GlobalStyles";
+import { CustomSwitch, TableImage } from "Components/UI/GlobalStyles";
 import { getCategories } from "Components/Assets/UIServices";
 import React from "react";
 import CategoryFallBack from "Components/UI/Images/CategoriesFallBack.jpg";
@@ -125,17 +124,10 @@ function CategoryTable() {
                       </Typography>
                     </TableCell>
                     <TableCell align="center">
-                      <Switch
-                        defaultChecked={value.status}
-                        sx={
-                          !value.status
-                            ? {
-                                "& .MuiSwitch-thumb": {
-                                  background: `${theme.palette.grey[300]}`,
-                                },
-                              }
-                            : null
-                        }
+                      <CustomSwitch
+                        checked={value.status}
+                        // onChange={() => setEnabled(!enabled)}
+                        inputProps={{ "aria-label": "ant design" }}
                       />
                     </TableCell>
                     <TableCell align="center">
