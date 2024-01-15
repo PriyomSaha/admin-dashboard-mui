@@ -18,23 +18,29 @@ function PermissionList({ perms, setPerms }) {
   // Function to handle the "Select All" checkbox
   const handleSelectAll = async () => {
     await setIsSelectAll(!isSelectAll); // Toggle the "Select All" state
-    await setPerms([]); // Clear the selected permissions
 
     if (isSelectAll) {
       // If "Select All" was checked
-      await setPerms([...perms]); // Restore the previous permissions
+      const updatedPerms = [];
 
       // Loop through each parent permission category
       for (const parent in list) {
         const children = list[parent];
+        const parentPermissions = [];
+
         children.forEach((child) => {
           const childPermission = `${parent}-${child}`;
           if (!perms.includes(childPermission)) {
             // If the child permission is not in the selected permissions, add it
             setPerms((prevPerms) => [...prevPerms, childPermission]);
           }
+          parentPermissions.push(child);
         });
+
+        updatedPerms.push({ [parent]: parentPermissions }); // Add an object with parent and child permissions to the array
       }
+
+      setPerms(updatedPerms); // Set the modified permissions structure as an array of objects
     } else {
       // If "Select All" was unchecked, clear all permissions
       setPerms([]);
@@ -59,7 +65,7 @@ function PermissionList({ perms, setPerms }) {
         control={
           <Checkbox checked={!isSelectAll} onChange={() => handleSelectAll()} />
         }
-        label={<b>Select All</b>}
+        label={isSelectAll ? <b>Select All</b> : <b>DeSelect All</b>}
       />
 
       {/* Map through each permission category and render ParentChildCheckbox */}

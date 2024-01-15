@@ -27,7 +27,6 @@ const ParentChildCheckbox = ({
     }
   }, [childChecked]);
 
-  // Handle change for the parent checkbox
   const handleParentChange = () => {
     if (!defaultChecked) {
       setParentChecked(!defaultChecked);
@@ -38,21 +37,41 @@ const ParentChildCheckbox = ({
         setParentChecked(true);
         setChildChecked(Array(children.length).fill(true)); // Set all child checkboxes to checked
 
-        // Remove unchecked children from perms array
-        const newPerms = perms.filter((perm) => !children.includes(perm));
+        setPerms((prevPerms) => {
+          const existingParentIndex = prevPerms.findIndex(
+            (item) => Object.keys(item)[0] === parent
+          );
 
-        // Update permissions array to include parent and children
-        setPerms([
-          ...newPerms,
-          ...children.map((child) => `${parent}-${child}`),
-        ]);
+          const uniqueChildren = Array.from(
+            new Set([
+              ...(existingParentIndex !== -1
+                ? prevPerms[existingParentIndex][parent]
+                : []),
+              ...children,
+            ])
+          );
+
+          const updatedParent = {
+            [parent]: uniqueChildren.map((child) => `${child}`),
+          };
+
+          if (existingParentIndex !== -1) {
+            // If the parent object already exists, update its children array
+            prevPerms.splice(existingParentIndex, 1, updatedParent);
+            return [...prevPerms];
+          } else {
+            // If the parent object doesn't exist, create a new one
+            return [...prevPerms, updatedParent];
+          }
+        });
       } else {
         // When parent checkbox is unchecked
         setParentChecked(false);
         setChildChecked(Array(children.length).fill(false)); // Set all child checkboxes to unchecked
-        const newPerms = perms.filter((perm) => !perm.includes(parent));
 
-        setPerms([...newPerms]);
+        setPerms((prevPerms) =>
+          prevPerms.filter((perm) => Object.keys(perm)[0] !== parent)
+        );
       }
     }
   };
@@ -66,19 +85,22 @@ const ParentChildCheckbox = ({
       newChildChecked[index] = !newChildChecked[index]; // Toggle the checked status of the clicked child checkbox
       setChildChecked(newChildChecked);
 
-      if (newChildChecked[index]) {
-        // If child checkbox is checked, update permissions array
-        setPerms([...perms, `${parent}-${children[index]}`]);
-      } else {
-        // If child checkbox is unchecked, remove corresponding permissions from array
-        setPerms(
-          perms.filter(
-            (item) =>
-              item !== children[index] &&
-              item !== `${parent}-${children[index]}`
-          )
+      const selectedChildren = children.filter(
+        (child, i) => newChildChecked[i]
+      );
+
+      setPerms((prevPerms) => {
+        const updatedPerms = prevPerms.filter(
+          (item) => Object.keys(item)[0] !== parent
         );
-      }
+
+        if (selectedChildren.length > 0) {
+          // If at least one child checkbox is checked
+          updatedPerms.push({ [parent]: selectedChildren });
+        }
+
+        return updatedPerms;
+      });
     }
   };
 

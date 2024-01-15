@@ -28,6 +28,8 @@ function InviteEditUser({ type }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [perms, setPerms] = useState([]); // Array to hold selected permissions
   const [email, setEmail] = useState(""); // State to store the email input value
+  const [userName, setUserName] = useState(""); // State State to store the user name for email
+
   const [showOverlay, setShowOverlay] = useState(false); // While sending invite
 
   // State to control whether the Snackbar is shown or hidden
@@ -45,17 +47,29 @@ function InviteEditUser({ type }) {
   // Function to handle the save action
   const runOnSave = async (e) => {
     // Use a Set to ensure unique permissions
-    const uniqueElements = new Set(perms);
-    const uniqueArray = [...uniqueElements];
+    // const uniqueElements = new Set(perms);
+    // const uniqueArray = [...uniqueElements];
 
+    const uniqueArray = perms.map((permission) => {
+      const category = Object.keys(permission)[0];
+      const actions = permission[category];
+
+      return { category, actions };
+    });
     // Show overlay while processing
     setShowOverlay(true);
 
-    if (uniqueArray.length < 1 || !email.includes(".", "@")) {
+    if (
+      uniqueArray.length < 1 ||
+      !email.includes(".", "@") ||
+      userName.length < 2
+    ) {
       // Validation errors
       setSnackbarMessage(
         uniqueArray.length < 1
           ? "Please select at least 1 permission"
+          : userName.length < 2
+          ? "User name must be at least 2 characters"
           : "Invalid email"
       );
       setSnackbarType("error");
@@ -153,11 +167,15 @@ function InviteEditUser({ type }) {
 
           <Box sx={FullScreenModalContent}>
             {/* Component for entering user details, specifically the email */}
-            <UserDetails email={email} setEmail={setEmail} />
+            <UserDetails
+              email={email}
+              setEmail={setEmail}
+              userName={userName}
+              setUserName={setUserName}
+            />
 
             {/* Component for selecting user permissions */}
             <PermissionList perms={perms} setPerms={setPerms} />
-
             <Box mt={4}>
               {/* Component with save and cancel buttons */}
               <SaveCancelButtons

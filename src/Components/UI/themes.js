@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import {} from "@mui/material/colors";
 
 const defaultTheme = createTheme();
@@ -19,9 +19,12 @@ export const calculateFontSize = () => {
   }
 };
 
-export const theme = createTheme({
+const baseTheme = createTheme({
   palette: {
     mode: "light",
+    secondary: {
+      main: defaultTheme.palette.grey[400],
+    },
   },
   typography: {
     fontFamily: `"Poppins","Roboto","Lexend", "Helvetica", "Arial", sans-serif`,
@@ -92,3 +95,5 @@ export const theme = createTheme({
   },
 });
 
+// Make the theme responsive by wrapping it with responsiveFontSizes
+export const theme = responsiveFontSizes(baseTheme);

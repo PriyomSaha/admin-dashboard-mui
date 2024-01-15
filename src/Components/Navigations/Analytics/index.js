@@ -32,7 +32,6 @@ function Analytics() {
           <DateRangePicker />
         </Stack>
       </ComponentHeader>
-      <Typography></Typography>
       <Outlet />
     </>
   );

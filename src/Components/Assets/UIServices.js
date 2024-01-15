@@ -12,6 +12,8 @@ import {
   banners,
   coupons,
   popups,
+  reviews,
+  commissionReport,
 } from "Components/Assets/DummyData";
 
 // Function 'updateOrderCount' to update the counts of orders for each status in 'orderCount'
@@ -97,6 +99,12 @@ export const getCoupons = () => {
 };
 export const getPopups = () => {
   return popups;
+};
+export const getReviews = () => {
+  return reviews;
+};
+export const getCommissionReport = () => {
+  return commissionReport;
 };
 
 //global set cookies

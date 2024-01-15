@@ -6,8 +6,6 @@ import {
   Paper,
   TextField,
   CircularProgress,
-  Alert,
-  Snackbar,
 } from "@mui/material";
 
 import { theme } from "Components/UI/themes";
@@ -15,21 +13,35 @@ import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import PhoneInput from "react-phone-input-2";
 import Countries from "Components/Assets/ReusableComp/Countries";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 const Register = () => {
   const navigate = useNavigate();
+
   // API endpoint for registration
   const registerUrl = process.env.REACT_APP_REGISTER_URL;
+
+  const location = useLocation();
 
   // State to hold user input values
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("IN");
   const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [uniquecode, setUniqueCode] = useState("");
+
+  // For registering user through email link
+  // Link format 'hasedString = Email+Space+Username+Space+InviteCode'
+  const token = location.pathname.split("/").slice(-1);
+  useEffect(() => {
+    const decode = atob(token);
+    const decodeArray = decode.split(" ");
+    setEmail(decodeArray[0]);
+    setUserName(decodeArray[1]);
+    setUniqueCode(decodeArray[2]);
+  }, [token]);
 
   // State to track form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -52,8 +64,7 @@ const Register = () => {
       password.length < 8 ||
       !email.includes(".", "@") ||
       phoneNumber.length < 8 ||
-      firstName < 2 ||
-      lastName < 2
+      userName < 2
     ) {
       setShowSnackbar(true);
       setSnackbarType("error");
@@ -62,8 +73,7 @@ const Register = () => {
       try {
         // Call registration API with user data
         await axios.post(registerUrl, {
-          firstName: firstName,
-          lastName: lastName,
+          userName: userName,
           country: country,
           phoneNumber: phoneNumber,
           password: password,
@@ -90,7 +100,7 @@ const Register = () => {
     setShowSnackbar(false);
     setSnackbarType("");
     setSnackbarMessage("");
-  }, [phoneNumber, password, firstName, lastName, email]);
+  }, [phoneNumber, password, userName, email]);
 
   return (
     <>
@@ -112,7 +122,7 @@ const Register = () => {
             Enter your details to accept the invitation
           </Typography>
         </Box>
-        <Box noValidate sx={{ mt: 3 }}>
+        <Box noValidate sx={{ mt: 2 }}>
           {/* Input fields */}
           <TextField
             size="small"
@@ -121,7 +131,11 @@ const Register = () => {
             fullWidth
             label="Your Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            // onChange={(e) => setEmail(e.target.value)}
+            InputProps={{
+              readOnly: true,
+              disabled: true,
+            }}
           />
 
           <TextField
@@ -129,18 +143,9 @@ const Register = () => {
             margin="normal"
             required
             fullWidth
-            label="Enter your First Name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <TextField
-            size="small"
-            margin="normal"
-            required
-            fullWidth
-            label="Enter your Last Name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            label="Enter your User Name"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
           />
           <PasswordInput
             password={password}

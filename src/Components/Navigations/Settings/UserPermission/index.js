@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import UserTable from "./UserTable";
 import {
   Box,
-  Button,
   IconButton,
   InputAdornment,
   Stack,
@@ -11,7 +10,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { MdClear, MdSearch } from "react-icons/md";
-import { theme } from "Components/UI/themes";
 import InviteEditUser from "./InviteEditUser";
 
 function UserPermisson() {

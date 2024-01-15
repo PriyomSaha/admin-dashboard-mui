@@ -7,7 +7,7 @@ function Countries({ country, setCountry }) {
     <FormControl fullWidth variant="outlined" size="small">
       <InputLabel>Country</InputLabel>
       <Select
-        label="Select Country"
+        label="Country"
         value={country}
         onChange={(e) => {
           setCountry(e.target.value);

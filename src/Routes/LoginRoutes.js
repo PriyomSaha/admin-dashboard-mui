@@ -37,7 +37,7 @@ const LoginRoutes = {
       element: <ForgotPassword />,
     },
     {
-      path: "register",
+      path: "register/:token",
       element: <Register />,
     },
   ],

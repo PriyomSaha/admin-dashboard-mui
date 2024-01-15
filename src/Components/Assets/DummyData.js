@@ -663,3 +663,69 @@ export let popups = [
     status: true,
   },
 ];
+
+export let reviews = [
+  {
+    orderId: 10987,
+    rating: 1.5,
+    review: "Bad Food",
+    customerName: "Priyom Saha",
+    merchantName: "ABC Resturant",
+    dateTime: "Tue 15 Jun 11:59 PM",
+  },
+  {
+    orderId: 187630,
+    rating: 4.5,
+    review: "Good Food",
+    customerName: "Priyom Saha",
+    merchantName: "FDE Resturant",
+    dateTime: "Tue 15 Jun 11:59 PM",
+  },
+  {
+    orderId: 187630,
+    rating: 5,
+    review: "V. Good Food",
+    customerName: "Priyom Saha",
+    merchantName: "EFG Resturant",
+    dateTime: "Tue 15 Jun 11:59 PM",
+  },
+];
+
+export let commissionReport = [
+  {
+    id: 1,
+    imgUri:
+      "https://images.jdmagicbox.com/comp/hyderabad/i4/040pxx40.xx40.171013211011.y2i4/catalogue/capital-multicuisine-restaurant-malakpet-hyderabad-home-delivery-restaurants-9e7wi.jpg?clr=#661400",
+    merchantName: "ABC Resturant",
+    orderCount: 1200,
+    total: 1220009,
+    commission: 3860,
+  },
+  {
+    id: 2,
+    imgUri:
+      "https://images.jdmagicbox.com/comp/hyderabad/i4/040pxx40.xx40.171013211011.y2i4/catalogue/capital-multicuisine-restaurant-malakpet-hyderabad-home-delivery-restaurants-9e7wi.jpg?clr=#661400",
+    merchantName: "ABC Resturant",
+    orderCount: 1200,
+    total: 1220009,
+    commission: 3860,
+  },
+  {
+    id: 3,
+    imgUri: "",
+    merchantName: "ABC Resturant",
+    orderCount: 1200,
+    total: 1220009,
+    commission: 3860,
+  },
+  {
+    id: 4,
+    imgUri:
+      "https://images.jdmagicbox.com/comp/hyderabad/i4/040pxx40.xx40.171013211011.y2i4/catalogue/capital-multicuisine-restaurant-malakpet-hyderabad-home-delivery-restaurants-9e7wi.jpg?clr=#661400",
+
+    merchantName: "ABC Resturant",
+    orderCount: 1200,
+    total: 1220009,
+    commission: 3860,
+  },
+];

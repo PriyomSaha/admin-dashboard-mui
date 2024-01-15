@@ -8,55 +8,34 @@ import {
   TableRow,
   Paper,
   Typography,
-  Checkbox,
-  Divider,
-  Box,
   TablePagination,
 } from "@mui/material";
-import {
-  CustomSwitch,
-  SuperAdminLoginButton,
-  TableImage,
-} from "Components/UI/GlobalStyles";
+import { getCommissionReport } from "Components/Assets/UIServices";
 import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
-import { FaAngleRight } from "react-icons/fa";
-import "Components/UI/app.css";
-import { getMerchants } from "Components/Assets/UIServices";
-import Delete from "Components/Assets/ReusableComp/Delete";
-import EditMerchant from "Components/Navigations/Merchants/Merchant/AddEditMerchant/index";
+import { TableImage } from "Components/UI/GlobalStyles";
 
-function MerchantTable() {
+function ReviewTable() {
   const columns = [
     { id: "img", label: "Photo", minWidth: 20 },
     {
-      id: "merch",
-      label: "Merchant",
+      id: "merchantName",
+      label: "Merchant Name",
       minWidth: 200,
     },
     {
-      id: "feature",
-      label: "Featured",
-      minWidth: 20,
+      id: "orderCount",
+      label: "Order Count",
+      minWidth: 50,
     },
     {
-      id: "sponsored",
-      label: "Sponsored",
-      minWidth: 20,
-    },
-    {
-      id: "status",
-      label: "Status",
-      minWidth: 20,
-    },
-    {
-      id: "actions",
-      label: "Actions",
+      id: "grandTotal",
+      label: "Grand Total",
       minWidth: 100,
     },
     {
-      id: "login",
-      label: "Auto Login",
-      minWidth: 120,
+      id: "commission",
+      label: "Commission",
+      minWidth: 100,
     },
   ];
 
@@ -78,7 +57,7 @@ function MerchantTable() {
   };
 
   React.useEffect(() => {
-    setMerchants(getMerchants());
+    setMerchants(getCommissionReport());
   }, []);
 
   return (
@@ -112,7 +91,7 @@ function MerchantTable() {
               {merchants
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((value) => (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={value.id}>
+                  <TableRow hover tabIndex={-1} key={value.id}>
                     <TableCell>
                       {
                         <img
@@ -128,57 +107,24 @@ function MerchantTable() {
                     </TableCell>
                     <TableCell>
                       <Typography variant="body1" fontWeight={500}>
-                        {value.name}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        fontWeight={400}
-                        fontSize={12}
-                      >
-                        {value.address}
+                        {value.merchantName}
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Checkbox defaultChecked={value.featured} />
+                      <Typography variant="body1" fontWeight={500}>
+                        {value.orderCount}
+                      </Typography>
                     </TableCell>
                     <TableCell>
-                      <Checkbox defaultChecked={value.sponsored} />
+                      <Typography variant="body1" fontWeight={500}>
+                        ₹ {value.total}
+                      </Typography>
                     </TableCell>
-                    <TableCell>
-                      <CustomSwitch
-                        checked={value.status}
-                        // onChange={() => setEnabled(!enabled)}
-                        inputProps={{ "aria-label": "ant design" }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          width: "fit-content",
 
-                          "& svg": {
-                            m: 1,
-                          },
-                        }}
-                      >
-                        <EditMerchant merchantName={value.name} />
-
-                        <Divider
-                          orientation="vertical"
-                          variant="middle"
-                          flexItem
-                        />
-
-                        <Delete name={value.name} type="Merchant" />
-                      </Box>
-                    </TableCell>
                     <TableCell>
-                      <SuperAdminLoginButton>
-                        Login &nbsp;
-                        <FaAngleRight />
-                      </SuperAdminLoginButton>
+                      <Typography variant="body1" fontWeight={500}>
+                        ₹ {value.commission}
+                      </Typography>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -200,4 +146,4 @@ function MerchantTable() {
   );
 }
 
-export default MerchantTable;
+export default ReviewTable;
