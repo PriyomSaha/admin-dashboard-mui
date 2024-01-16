@@ -20,7 +20,9 @@ const Register = () => {
   const navigate = useNavigate();
 
   // API endpoint for registration
-  const registerUrl = process.env.REACT_APP_REGISTER_URL;
+  const registerUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_REGISTER_URL;
 
   const location = useLocation();
 
@@ -72,12 +74,22 @@ const Register = () => {
     } else {
       try {
         // Call registration API with user data
-        await axios.post(registerUrl, {
-          userName: userName,
-          country: country,
-          phoneNumber: phoneNumber,
+        const requestBody = {
+          // country: country,
+          username: userName,
           password: password,
-          username: email,
+          email: email,
+          phone: phoneNumber,
+          inviteCode: {
+            code: uniquecode,
+          },
+          // inviteCode: uniquecode,
+        };
+        const requestHeader = {
+          "X-API-Key": "b41447e6319d1cd467306735632ba733",
+        };
+        await axios.post(registerUrl, requestBody, {
+          headers: requestHeader,
         });
         setShowSnackbar(true);
         setSnackbarType("success");

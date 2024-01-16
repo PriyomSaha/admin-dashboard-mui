@@ -76,12 +76,27 @@ function InviteEditUser({ type }) {
       setShowSnackbar(true);
       setShowOverlay(false);
     } else {
-      // Update the user permissions via an API call
-      const inviteUrl = `${process.env.REACT_APP_INVITE_USER_URL}${email}`; // Endpoint for user invitation
-      try {
-        const resp = await axios.post(inviteUrl, {
-          email: email,
+      /* Update the user permissions via an API call */
+
+      // Endpoint for user invitation
+      const inviteUrl =
+        process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+        process.env.REACT_APP_INVITE_USER_URL;
+
+      const requestBody = {
+        email: email,
+        username: userName,
+        roles: {
+          name: "Admin",
           permissions: uniqueArray,
+        },
+      };
+      const requestHeader = {
+        "X-API-Key": "b41447e6319d1cd467306735632ba733",
+      };
+      try {
+        const resp = await axios.post(inviteUrl, requestBody, {
+          headers: requestHeader,
         });
 
         if (resp.status === 200) {

@@ -27,7 +27,7 @@ function UserDetails({ email, setEmail, userName, setUserName }) {
             margin="normal"
             required
             fullWidth
-            label="Enter your User Name"
+            label="Enter receipient's name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
