@@ -6,13 +6,15 @@ import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
 import WelcomeRefreshInterval from "./WelcomeRefreshInterval";
 import Analytics from "Components/Navigations/Dashboard/Graphs/index";
 import TopPerformers from "./Tables";
+import { useDrawerStore } from "Components/Assets/StateManagement";
 
 function Dashboard() {
   const matches = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
 
   return (
     <>
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           spacing={2}
           direction="row"
@@ -36,7 +38,7 @@ function Dashboard() {
         </Stack>
       </ComponentHeader>
 
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         <WelcomeRefreshInterval />
         <Analytics matches={matches} />
         <TopPerformers matches={matches} />

@@ -1,15 +1,18 @@
 import { Stack, Typography } from "@mui/material";
 import DateRangePicker from "Components/Assets/ReusableComp/DateRangePicker";
-import { ComponentHeader } from "Components/UI/GlobalStyles";
+import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import { useDrawerStore } from "Components/Assets/StateManagement";
 
 function Analytics() {
   const location = useLocation();
   let subPath = location.pathname.split("/").slice(-1);
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
   return (
     <>
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           spacing={2}
           direction="row"
@@ -32,7 +35,9 @@ function Analytics() {
           <DateRangePicker />
         </Stack>
       </ComponentHeader>
-      <Outlet />
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
+        <Outlet />
+      </ComponentBody>
     </>
   );
 }

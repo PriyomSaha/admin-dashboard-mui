@@ -9,13 +9,38 @@ import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import { theme } from "Components/UI/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function ResetPassword() {
+function NewPasswordInput({
+  setShowSnackbar,
+  setSnackbarType,
+  setSnackbarMessage,
+}) {
+  const navigate = useNavigate();
+
+  const passwordChangeUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_PASSWORD_CHANGE_URL;
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPassMatch, setIsPassMatch] = useState(true);
+
+  const location = useLocation();
+  const token = location.pathname.split("/").slice(-1);
+
+  useEffect(() => {
+    const decode = atob(token);
+    // const decode = "atob(token)";
+
+    const decodeArray = decode.split(" ");
+    setEmail(decodeArray[0]);
+  }, [token]);
 
   useEffect(() => {
     setIsPassMatch(true);
@@ -28,14 +53,35 @@ function ResetPassword() {
       setIsPassMatch(false);
       setIsSubmitting(false); // Set it to false here
     } else {
-      setIsSubmitting(true);
-      // Simulate an asynchronous operation with a delay
-      setTimeout(async () => {
-        // Perform your actual asynchronous operations here
-        // For example, API calls or other async tasks
+      try {
+        setIsSubmitting(true);
 
+        const requestBody = {
+          email: email,
+          password: password,
+        };
+        const requestHeader = {
+          "X-API-Key": API_KEY,
+        };
+        const resp = await axios.post(passwordChangeUrl, requestBody, {
+          headers: requestHeader,
+        });
+        if (!resp.data.error) {
+          setShowSnackbar(true);
+          setSnackbarType("success");
+          setSnackbarMessage(resp.data.message);
+
+          setTimeout(() => {
+            navigate("/login");
+          }, 5000);
+        }
+      } catch (error) {
+        setShowSnackbar(true);
+        setSnackbarType("error");
+        setSnackbarMessage(error.response.data.message);
+      } finally {
         setIsSubmitting(false); // Stop the circular progress
-      }, 2000); // Delay for 2 seconds (adjust as needed)
+      }
     }
   };
 
@@ -55,7 +101,7 @@ function ResetPassword() {
             Reset Password
           </Typography>
           <Typography sx={{ color: theme.palette.grey[700], pt: 1 }}>
-            Both the passwords should match
+            Both passwords should match
           </Typography>
         </Box>
         <Box noValidate sx={{ mt: 3 }}>
@@ -125,4 +171,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default NewPasswordInput;

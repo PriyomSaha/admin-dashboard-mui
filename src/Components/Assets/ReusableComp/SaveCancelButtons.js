@@ -21,7 +21,7 @@ function SaveCancelButtons({ isModalOpen, setIsModalOpen, runOnSave }) {
           onClick={() => {
             // Perform the action to save the changes here...
             runOnSave();
-            setIsModalOpen(!isModalOpen);
+            // setIsModalOpen(!isModalOpen);
           }}
         >
           Save

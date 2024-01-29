@@ -16,25 +16,32 @@ export const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 // This is Component name or the navigation names container
-export const ComponentHeader = styled("div")(({ theme }) => ({
+export const ComponentHeader = styled("div")(({ theme, isDrawerOpen }) => ({
   padding: theme.spacing(1.5, 4),
   boxShadow: theme.shadows[3],
-  width: "100%",
+  // width: "100%",
   background: "var(--component-header-background)",
   color: "var(--component-header-text)",
   maxWidth: "100vw",
   position: "sticky",
   top: "64px",
+  marginLeft: isDrawerOpen ? `calc(200px - ${theme.spacing(8)} + 1px)` : "0",
+  transition: theme.transitions.create(["margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
   zIndex: theme.zIndex.drawer - 1,
-  // maxWidth: `calc(100vw - ${drawerWidth}px)`,
   [theme.breakpoints.down("md")]: {
     padding: theme.spacing(2, 1),
     top: "56px",
   },
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: 0,
+  },
 }));
 
 // This is Component Body or the navigation Body container
-export const ComponentBody = styled("div")(({ theme }) => ({
+export const ComponentBody = styled("div")(({ theme, isDrawerOpen }) => ({
   // overflowX: "hidden",
   boxShadow: theme.shadows[10],
   marginTop: "1vh",
@@ -42,7 +49,16 @@ export const ComponentBody = styled("div")(({ theme }) => ({
   background: "var(--component-body-background)",
   color: "var(--component-body-text)",
   minHeight: "100vh",
+  // width: "100%",
   maxWidth: "100vw",
+  marginLeft: isDrawerOpen ? `calc(200px - ${theme.spacing(8)} + 1px)` : "0",
+  transition: theme.transitions.create(["margin"], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  [theme.breakpoints.down("sm")]: {
+    marginLeft: 0,
+  },
   // [theme.breakpoints.down("md")]: { padding: theme.spacing(2, 1) },
 }));
 
@@ -190,6 +206,7 @@ export const placeHolderSx = {
   pointerEvents: "none",
   color: theme.palette.grey[400],
 };
+
 export const FloatingDivContainer = styled(Box)({
   position: "fixed", // Use fixed instead of absolute
   zIndex: 10000000000000000000,

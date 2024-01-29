@@ -5,10 +5,8 @@ import {
   Typography,
   Paper,
   CircularProgress,
-  Alert,
-  Snackbar,
-  Stack,
 } from "@mui/material";
+
 import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
@@ -39,10 +37,16 @@ const Login = () => {
   const setUserData = useAccountStore((state) => state.setUserData);
 
   // API endpoints
-  const tokenUrl =
-    process.env.REACT_APP_BASE_URL + process.env.REACT_APP_TOKEN_URL;
-  const userDetailsUrl =
-    process.env.REACT_APP_BASE_URL + process.env.REACT_APP_USER_DETAILS_URL;
+
+  const loginUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_LOGIN_URL;
+
+  const refreshTokenUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_REFRESH_TOKEN_URL;
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   // Clear error status when password or email changes
   useEffect(() => {
@@ -67,18 +71,77 @@ const Login = () => {
       try {
         await setShowSnackbar(false);
 
-        // Call authentication API to get token
-        const resp = await axios.post(tokenUrl, {
-          username: email,
+        const requestBody = {
+          email: email,
           password: password,
-        });
-        // Get user data using token
-        handleGetUserdata(resp.data.token);
+        };
+        const requestHeader = {
+          "X-API-Key": API_KEY,
+        };
 
+        // Call authentication API to get token
+        const resp = await axios.post(loginUrl, requestBody, {
+          headers: requestHeader,
+          withCredentials: true,
+        });
+
+        // const setCookieHeader = resp.headers.get("Set-Cookie");
+        // console.log(setCookieHeader);
+        // if (setCookieHeader) {
+        //   // Set the cookie in the document's cookie storage
+        //   document.cookie = setCookieHeader;
+
+        //   // Now you can access the cookie value
+        //   const yourCookieValue = getCookie("__Host-refresh_token");
+
+        //   // Do something with the cookie value
+        //   console.log("Your cookie value:", yourCookieValue);
+        // }
+
+        if (!resp.data.error) {
+          const respData = resp.data.data;
+          sessionStorage.setItem("accessToken", respData.access_token);
+
+          setUserData(
+            respData.user.username,
+            respData.user.profile.firstName,
+            respData.user.profile.lastName,
+            respData.user.email,
+            true
+          );
+        }
+        const refreshTokenResp = await axios.get(refreshTokenUrl, {
+          withCredentials: true,
+          headers: requestHeader,
+        });
+
+        // let i = async () => {
+        //   const requestOptions = {
+        //     method: "GET",
+        //     credentials: "include",
+        //     headers: requestHeader,
+        //   };
+
+        //   fetch(refreshTokenUrl, requestOptions)
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //       console.log(data);
+        //       if (data.access_token) {
+        //         // setJWTToken(data.access_token);
+        //         // toggleRefresh(true);
+        //       }
+        //     })
+        //     .catch((error) => {
+        //       console.log("user is not logged in", error);
+        //     });
+        // };
+        // await i();
+
+        // console.log(refreshTokenResp);
         // Show success notification in a Snackbar
         setShowSnackbar(true);
         setSnackbarType("success");
-        setSnackbarMessage("Login successful! You are now logged in.");
+        setSnackbarMessage(resp.data.message);
       } catch (error) {
         // Show error notification in a Snackbar
         setShowSnackbar(true);
@@ -89,37 +152,37 @@ const Login = () => {
     await setIsSubmitting(false);
   };
 
-  // Get user details based on token
-  const handleGetUserdata = async (bToken) => {
-    try {
-      const response = await axios.post(
-        userDetailsUrl,
-        {
-          username: email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${bToken}`,
-          },
-        }
-      );
-      // Update user data in global state
-      await setUserData(
-        response.data.userName,
-        // email
-        response.data.authStatus
-      );
-      await setCookie("ud", bToken, 7);
-      await setCookie("email", email, 0.1);
+  // // Get user details based on token
+  // const handleGetUserdata = async (bToken) => {
+  //   try {
+  //     const response = await axios.post(
+  //       userDetailsUrl,
+  //       {
+  //         username: email,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${bToken}`,
+  //         },
+  //       }
+  //     );
+  //     // Update user data in global state
+  //     await setUserData(
+  //       response.data.userName,
+  //       // email
+  //       response.data.authStatus
+  //     );
+  //     await setCookie("ud", bToken, 7);
+  //     await setCookie("email", email, 0.1);
 
-      // await getCookie("ud");
-    } catch (error) {
-      // Show error notification in a Snackbar
-      setShowSnackbar(true);
-      setSnackbarType("error");
-      setSnackbarMessage("Failed to retrieve user data");
-    }
-  };
+  //     // await getCookie("ud");
+  //   } catch (error) {
+  //     // Show error notification in a Snackbar
+  //     setShowSnackbar(true);
+  //     setSnackbarType("error");
+  //     setSnackbarMessage("Failed to retrieve user data");
+  //   }
+  // };
 
   return (
     <>
@@ -137,7 +200,9 @@ const Login = () => {
           >
             Login
           </Typography>
-          <Typography sx={{ color: theme.palette.grey[700], pt: 1 }}>
+          <Typography
+            sx={{ color: theme.palette.grey[700], pt: 1, textAlign: "center" }}
+          >
             Enter your details to access the account
           </Typography>
         </Box>
@@ -204,7 +269,7 @@ const Login = () => {
       <Typography py={2}>
         Forgot Password?{" "}
         <span
-          onClick={() => navigate("/forgotpassword")}
+          onClick={() => navigate("/resetpassword")}
           style={{ cursor: "pointer", color: "var(--links)" }}
         >
           Click Here

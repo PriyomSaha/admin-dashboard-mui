@@ -8,12 +8,10 @@ import ReviewTable from "./ReviewsTable";
 function Reports() {
   return (
     <>
-      <ComponentBody>
-        <Search />
-        <CardsHolder />
-        <CommissionReportHeadingExportButton />
-        <ReviewTable />
-      </ComponentBody>
+      <Search />
+      <CardsHolder />
+      <CommissionReportHeadingExportButton />
+      <ReviewTable />
     </>
   );
 }

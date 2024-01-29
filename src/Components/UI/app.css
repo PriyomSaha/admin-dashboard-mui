@@ -1,135 +1,151 @@
+/* Importing a separate palette.css file */
 @import "palette.css";
 
 /* Scroll Bar */
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
+  /* Hide the scrollbar */
 }
 
-.App{
-    font-family: 'Poppins', sans-serif;
-    background-color: var(--component-body-background);
+/* Base styles for the entire application */
+.App {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--component-body-background);
+  /* Use a background color from the palette */
 }
-.active{
+
+/* Styles for an active element */
+.active {
   background-color: var(--sidenav-active-background);
-}
-.table-icon{
-font-size: "25px";
+  /* Use an active background color from the palette */
 }
 
-.react-datepicker-popper{
+/* Common style for table icons */
+.table-icon {
+  font-size: "25px";
+}
+
+/* Styles for React Datepicker component */
+.react-datepicker-popper {
   z-index: 99999999999 !important;
+  /* Adjusting z-index for the datepicker popper */
 }
-    .react-datepicker__month-container {
-    border-left: 1px solid #c0bcbc;
-    z-index: 999999 !important;
-  }
 
+.react-datepicker__month-container {
+  border-left: 1px solid #c0bcbc;
+  /* Adding a border to the month container */
+  z-index: 999999 !important;
+  /* Adjusting z-index for the month container */
+}
 
-  .calender-container{ 
-    overflow: auto;
-    z-index: 999999 !important;
-    background:var(--calender-button-container-background);
-    color:var(--calender-button-contrast-text);
-    position: relative;
-    border-radius: 10px;
-    -webkit-box-shadow: -2px 6px 65px 2px var(--shadow);
-    -moz-box-shadow: -2px 6px 65px 2px var(--shadow);
-    box-shadow: -2px 6px 65px 2px var(--shadow);}
+.calender-container {
+  overflow: auto;
+  z-index: 999999 !important;
+  background: var(--calender-button-container-background);
+  /* Use a background color from the palette */
+  color: var(--calender-button-contrast-text);
+  /* Use a text color for contrast */
+  position: relative;
+  border-radius: 10px;
+  -webkit-box-shadow: -2px 6px 65px 2px var(--shadow);
+  /* Adding a box shadow */
+  -moz-box-shadow: -2px 6px 65px 2px var(--shadow);
+  box-shadow: -2px 6px 65px 2px var(--shadow);
+}
 
-
-  /* CSS fix for todays date getting highlited for all month - ignore if disabledKeyboardNavigation is true */
-  /* .react-datepicker__day--keyboard-selected {
-    background: none;
-    color: inherit;
-    &:focus {
-      background-color: #e1e1e1;
-      color: #000000;
-    }
-  } */
-select{
+/* Styles for select dropdown */
+select {
   border: 1px solid var(--shadow);
   cursor: pointer;
   padding: 0.3rem;
-  border-radius:5px;
+  border-radius: 5px;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  /* box-shadow: 0 10px 15px var(--shadow); */
 }
-select:hover{
+
+select:hover {
   opacity: 0.8;
 }
 
-.contained-dark:hover{
+/* Styles for buttons with the class 'contained-dark' when hovered */
+.contained-dark:hover {
   opacity: 0.8;
 }
 
-  .order-status-Completed{
-    background-color: var(--order-completed-background);
-      color: var(--order-completed-text);
-    }
-  
-    .order-status-Pending{
-      background-color: var(--order-pending-background);
-      color: var(--order-pending-text);
-    }
-  
-    .order-status-Accepted{
-      background-color: var(--order-accepted-background);
-      color: var(--order-accepted-text);
-    }
-    .order-status-Ready{
-      background-color: var(--order-ready-background);
-      color: var(--order-ready-text);
-    }
-    .order-status-Collected{
-      background-color: var(--order-collected-background);
-      color: var(--order-collected-text);
-    }
-    .order-status-Cancelled{
-      background-color: var(--order-cancelled-background);
-      color: var(--order-cancelled-text);
-    }
+/* Styles for different order statuses */
+.order-status-Completed {
+  background-color: var(--order-completed-background);
+  color: var(--order-completed-text);
+}
 
-    /* Phone input */
-    .react-tel-input .form-control{
-    /* font-size: 16px; */
-    height: 1.4375em;
-    background: transparent;
-    border-radius: 5px;
-    width: 100%;
-    outline: none;
-    }
-    .react-tel-input .form-control:focus {
-    background: transparent;
-    /* border: 1px solid var(--phone-input-border); */
-    }
+.order-status-Pending {
+  background-color: var(--order-pending-background);
+  color: var(--order-pending-text);
+}
 
-  @media only screen and (max-width: 685px) {
-    .react-datepicker__month-container {
-      float: none;
-    }
-    .calender-container{
-      position: absolute;
-    }
+.order-status-Accepted {
+  background-color: var(--order-accepted-background);
+  color: var(--order-accepted-text);
+}
+
+.order-status-Ready {
+  background-color: var(--order-ready-background);
+  color: var(--order-ready-text);
+}
+
+.order-status-Collected {
+  background-color: var(--order-collected-background);
+  color: var(--order-collected-text);
+}
+
+.order-status-Cancelled {
+  background-color: var(--order-cancelled-background);
+  color: var(--order-cancelled-text);
+}
+
+/* Styles for the Phone input component */
+.react-tel-input .form-control {
+  height: 1.4375em;
+  background: transparent;
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+}
+
+.react-tel-input .form-control:focus {
+  background: transparent;
+}
+
+/* Media queries for responsive design */
+@media only screen and (max-width: 685px) {
+  .react-datepicker__month-container {
+    float: none;
   }
 
-  /* For screen width 685+ min height of month container should be 40vh to have number of date rows */
-  @media only screen and (min-width: 685px) {
-    .react-datepicker__month-container {
+  .calender-container {
+    position: absolute;
+  }
+}
+
+@media only screen and (min-width: 685px) {
+
+  /* For screen width 685+ min height of month container should be 40vh to have a number of date rows */
+  .react-datepicker__month-container {
     border-bottom: none;
-    }
   }
-  
-  a{
-    text-decoration: none;
-    color: var(--links);
-    font-weight: 500;
-  }
-  
-  .graphContainer {
-    padding: 0.4rem;
-    height: 45vh;
-    width: 100%;
-  }
+}
 
-  
+/* Styles for anchor (link) elements */
+a {
+  text-decoration: none;
+  color: var(--links);
+  /* Use a link color from the palette */
+  font-weight: 500;
+}
+
+/* Styles for a graph container */
+.graphContainer {
+  padding: 0.4rem;
+  height: 45vh;
+  width: 100%;
+}

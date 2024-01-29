@@ -29,8 +29,30 @@ function UserDetails({ email, setEmail, userName, setUserName }) {
             fullWidth
             label="Enter receipient's name"
             value={userName}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => {
+              // Remove special characters and spaces from the input
+              const sanitizedInput = e.target.value.replace(
+                /[^a-zA-Z0-9]/g,
+                ""
+              );
+
+              // Limit the length to a maximum of 10 characters
+              const truncatedInput = sanitizedInput.slice(0, 20);
+
+              // Update the state only if the truncated input is different from the current value
+              if (truncatedInput !== userName) {
+                setUserName(truncatedInput);
+              }
+            }}
+            // helperText="No special characters or spaces are allowed."
           />
+          <Typography
+            variant="caption"
+            color={theme.palette.grey[600]}
+            style={{ display: "inline-block" }}
+          >
+            No special characters or spaces are allowed.
+          </Typography>
         </Grid>
       </Grid>
     </>

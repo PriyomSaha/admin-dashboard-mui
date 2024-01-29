@@ -24,6 +24,8 @@ const Register = () => {
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +
     process.env.REACT_APP_REGISTER_URL;
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   const location = useLocation();
 
   // State to hold user input values
@@ -31,6 +33,8 @@ const Register = () => {
   const [country, setCountry] = useState("IN");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [uniquecode, setUniqueCode] = useState("");
 
@@ -76,6 +80,8 @@ const Register = () => {
         // Call registration API with user data
         const requestBody = {
           // country: country,
+          firstName: firstName,
+          lastName: lastName,
           username: userName,
           password: password,
           email: email,
@@ -86,7 +92,7 @@ const Register = () => {
           // inviteCode: uniquecode,
         };
         const requestHeader = {
-          "X-API-Key": "b41447e6319d1cd467306735632ba733",
+          "X-API-Key": API_KEY,
         };
         await axios.post(registerUrl, requestBody, {
           headers: requestHeader,
@@ -127,29 +133,55 @@ const Register = () => {
             variant="h5"
             fontWeight={600}
             letterSpacing={1}
+            textAlign={"center"}
           >
             Create New Account
           </Typography>
-          <Typography sx={{ color: theme.palette.grey[700], pt: 1 }}>
+          <Typography
+            sx={{
+              color: theme.palette.grey[700],
+              pt: 1,
+              textAlign: "center",
+            }}
+          >
             Enter your details to accept the invitation
           </Typography>
+          <span
+            style={{
+              textAlign: "center",
+              cursor: "pointer",
+              color: "var(--links)",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            <Typography variant="caption" fontWeight={700}>
+              {email}
+            </Typography>
+          </span>
         </Box>
-        <Box noValidate sx={{ mt: 2 }}>
+        <Box noValidate sx={{ mt: 0.5 }}>
           {/* Input fields */}
+
           <TextField
             size="small"
             margin="normal"
             required
             fullWidth
-            label="Your Email"
-            value={email}
-            // onChange={(e) => setEmail(e.target.value)}
-            InputProps={{
-              readOnly: true,
-              disabled: true,
-            }}
+            label="Enter your First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
-
+          <TextField
+            size="small"
+            margin="normal"
+            required
+            fullWidth
+            label="Enter your Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
           <TextField
             size="small"
             margin="normal"
@@ -164,9 +196,9 @@ const Register = () => {
             setPassword={setPassword}
             needStrengthValidation={true}
           />
-          <Box m={2} />
           {/* Select Country */}
-          <Countries country={country} setCountry={setCountry} />
+          {/* <Box m={2} /> */}
+          {/* <Countries country={country} setCountry={setCountry} /> */}
           <Box m={2} />
           {/* Phone Input */}
           <PhoneInput
@@ -177,7 +209,6 @@ const Register = () => {
             onChange={(phone) => setPhoneNumber(phone)}
             placeHolder="Enter the phone number"
           />
-
           {/* Conditional Rendering based on form submission status */}
           {isSubmitting ? (
             // Display progress indicator while submitting

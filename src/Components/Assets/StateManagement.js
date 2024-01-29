@@ -11,9 +11,17 @@ export const useCustomersLoadingStore = create((set) => ({
     set((state) => ({ isCustomersLoading: !state.isCustomersLoading })),
 }));
 export const useAccountStore = create((set) => ({
-  userData: { userName: "", authStatus: false },
-  setUserData: (userName, authStatus) =>
-    set((state) => ({ userData: { userName, authStatus } })),
+  userData: {
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    authStatus: false,
+  },
+  setUserData: (userName, firstName, lastName, email, authStatus) =>
+    set((state) => ({
+      userData: { userName, firstName, lastName, email, authStatus },
+    })),
 }));
 
 export const useEditProfileStore = create((set) => ({

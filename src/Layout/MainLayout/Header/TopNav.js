@@ -126,7 +126,6 @@ export default function TopNav() {
     let hash = 0;
     let i;
 
-    /* eslint-disable no-bitwise */
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -137,19 +136,19 @@ export default function TopNav() {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
 
-    return color;
-  }
+    // Calculate color brightness (simple luminance formula)
+    const brightness =
+      0.299 * parseInt(color.substr(1, 2), 16) +
+      0.587 * parseInt(color.substr(3, 2), 16) +
+      0.114 * parseInt(color.substr(5, 2), 16);
 
-  function stringAvatar(name) {
     return {
-      sx: {
-        bgcolor: stringToColor(name),
-      },
-      children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+      bgColor: color,
+      textColor: brightness > 128 ? "#000000" : "#FFFFFF", // Choose white for light colors, black for dark colors
     };
   }
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -199,7 +198,9 @@ export default function TopNav() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={(e) => {
-                  setAnchorEl(e.currentTarget);
+                  setAnchorEl((prevAnchorEl) =>
+                    prevAnchorEl === null ? e.currentTarget : null
+                  );
                 }}
               >
                 <StyledBadge
@@ -207,13 +208,23 @@ export default function TopNav() {
                   anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                   variant="dot"
                 >
-                  {/* <MdAccountCircle /> */}
-                  <Avatar {...stringAvatar(userData.userName)} />
+                  <Avatar
+                    sx={{
+                      bgcolor: stringToColor(
+                        userData.firstName + userData.lastName
+                      ).bgColor,
+                      color: stringToColor(
+                        userData.firstName + userData.lastName
+                      ).textColor,
+                    }}
+                  >
+                    {`${userData.firstName[0]}${userData.lastName[0]}`}
+                  </Avatar>
                 </StyledBadge>
 
                 <Box sx={{ display: { xs: "none", md: "flex" } }}>
                   <Typography sx={{ marginLeft: "10px" }}>
-                    {userData.userName}
+                    {userData.firstName + " " + userData.lastName}
                   </Typography>
                 </Box>
               </ProfileButton>
@@ -221,13 +232,14 @@ export default function TopNav() {
                 MenuListProps={{
                   "aria-labelledby": "fade-button",
                 }}
+                onClose={() => setAnchorEl(null)}
+                TransitionComponent={Fade}
                 anchorEl={anchorEl}
                 open={open}
-                TransitionComponent={Fade}
                 PaperProps={{
                   elevation: 2,
                   style: {
-                    backgroundColor: theme.palette.grey[300],
+                    backgroundColor: theme.palette.grey[400],
                   },
                 }}
               >

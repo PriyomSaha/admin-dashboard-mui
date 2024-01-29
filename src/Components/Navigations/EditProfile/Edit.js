@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useEditProfileStore } from "Components/Assets/StateManagement";
+import {
+  useAccountStore,
+  useEditProfileStore,
+} from "Components/Assets/StateManagement";
 import {
   Box,
   Button,
+  Checkbox,
+  FormControlLabel,
   Grid,
   IconButton,
   Modal,
@@ -17,40 +22,83 @@ import {
 import { theme } from "Components/UI/themes";
 import { MdClose } from "react-icons/md";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
+import { PiPasswordDuotone, PiPasswordFill } from "react-icons/pi";
+import axios from "axios";
 
 function Edit() {
   const isEditProfile = useEditProfileStore((state) => state.isEditProfile);
   const setIsEditProfile = useEditProfileStore(
     (state) => state.setIsEditProfile
   );
-  const [password, setPassword] = useState("Iluvu@1234");
+  const userData = useAccountStore((state) => state.userData);
+
+  const [firstName, setFirstName] = useState(userData.firstName);
+  const [lastName, setLastName] = useState(userData.lastName);
+  const [email, setEmail] = useState(userData.email);
+  const [userName, setUserName] = useState(userData.userName);
+
+  const [newpassword, setNewPassword] = useState("");
+  const [confirmNewpassword, setConfirmNewPassword] = useState("");
+
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [changePassword, setChangePassword] = useState(false);
+
+  // password newPassword
 
   const matches = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPassMatch, setIsPassMatch] = useState(true);
 
+  // API endpoint for edit Profile
+  const editProfileURL =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    "/" +
+    process.env.REACT_APP_EDIT_PROFILE;
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
   useEffect(() => {
     setIsPassMatch(true);
-  }, [password, confirmPassword]);
+  }, [newpassword, confirmNewpassword]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (newpassword !== confirmNewpassword) {
       setIsPassMatch(false);
       setIsSubmitting(false); // Set it to false here
     } else {
       setIsSubmitting(true);
-      // Simulate an asynchronous operation with a delay
-      setTimeout(async () => {
-        // Perform your actual asynchronous operations here
-        // For example, API calls or other async tasks
-
-        setIsSubmitting(false); // Stop the circular progress
-      }, 2000); // Delay for 2 seconds (adjust as needed)
+      try {
+        // Call registration API with user data
+        const requestBody = {
+          // country: country,
+          firstName: firstName,
+          lastName: lastName,
+          username: userName,
+          password: confirmPassword,
+          newPassword: newpassword,
+          email: email,
+          // phone: phoneNumber,
+        };
+        const requestHeader = {
+          "X-API-Key": API_KEY,
+        };
+        await axios.post(editProfileURL, requestBody, {
+          headers: requestHeader,
+        });
+        // setShowSnackbar(true);
+        // setSnackbarType("success");
+        // setSnackbarMessage("User Created...Navigating to login page");
+      } catch (error) {
+        // setShowSnackbar(true);
+        // setSnackbarType("error");
+        // setSnackbarMessage("Some error occured!!");
+      }
     }
+    setIsSubmitting(false); // Set it to false here
   };
 
   return (
@@ -99,6 +147,8 @@ function Edit() {
                   label="First Name"
                   variant="outlined"
                   size="small"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -107,38 +157,12 @@ function Edit() {
                   label="Last Name"
                   variant="outlined"
                   size="small"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
             </Grid>
-            <Grid container spacing={2} display="flex" justifyContent="center">
-              <Grid item xs={12} sm={6}>
-                <PasswordInput
-                  password={password}
-                  setPassword={setPassword}
-                  disabled={true}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                sx={{
-                  marginTop: matches ? "-20px" : "0px",
-                }}
-              >
-                <PasswordInput
-                  password={confirmPassword}
-                  setPassword={setConfirmPassword}
-                  label="Confirm Password"
-                  needStrengthValidation={false}
-                />
-                {isPassMatch ? null : (
-                  <Typography color={"error"}>
-                    Passwords Not Matching
-                  </Typography>
-                )}
-              </Grid>
-            </Grid>
+
             <Grid container spacing={2} display="flex" justifyContent="start">
               <Grid
                 item
@@ -147,7 +171,7 @@ function Edit() {
                 display="flex"
                 alignSelf={"start"}
                 sx={{
-                  marginTop: "10px",
+                  marginTop: "15px",
                 }}
               >
                 <TextField
@@ -155,7 +179,8 @@ function Edit() {
                   label="Email"
                   variant="outlined"
                   size="small"
-                  value="priyom1499@gmail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   disabled
                   sx={{
                     "& .MuiInputBase-root.Mui-disabled": {
@@ -164,12 +189,104 @@ function Edit() {
                   }}
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  fullWidth
+                  label="User Name"
+                  variant="outlined"
+                  size="small"
+                  sx={{
+                    marginTop: matches ? "5px" : "15px",
+                  }}
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </Grid>
             </Grid>
+            <Grid container spacing={2} display="flex" justifyContent="start">
+              <Grid item xs={12}>
+                <FormControlLabel
+                  sx={{ mt: 2 }}
+                  control={
+                    <Checkbox
+                      value={changePassword}
+                      onChange={() => setChangePassword(!changePassword)}
+                    />
+                  }
+                  label="Want to change Password ?"
+                />
+              </Grid>
+            </Grid>
+            {changePassword ? (
+              <Grid
+                container
+                spacing={2}
+                display="flex"
+                justifyContent="center"
+              >
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  sx={{
+                    marginTop: "-10px",
+                  }}
+                >
+                  <PasswordInput
+                    password={newpassword}
+                    setPassword={setNewPassword}
+                    label="New Password"
+                    needStrengthValidation={true}
+                  />
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  sx={{
+                    marginTop: matches ? "-20px" : "-10px",
+                  }}
+                >
+                  <PasswordInput
+                    password={confirmNewpassword}
+                    setPassword={setConfirmNewPassword}
+                    label="Reenter New Password"
+                    needStrengthValidation={true}
+                  />
+                  {isPassMatch ? null : (
+                    <Typography color={"error"}>
+                      Passwords Not Matching
+                    </Typography>
+                  )}
+                </Grid>
+              </Grid>
+            ) : null}
+
+            <Typography variant="caption" fontWeight={600}>
+              Please confirm the current password to continue
+            </Typography>
+            <Grid container spacing={2} display="flex" justifyContent="start">
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                sx={{
+                  marginTop: "-10px",
+                }}
+              >
+                <PasswordInput
+                  password={confirmPassword}
+                  setPassword={setConfirmPassword}
+                  label="Current Password "
+                  needStrengthValidation={false}
+                />
+              </Grid>
+            </Grid>
+            {/* button */}
             <Box mt={4}>
               <>
                 {/* Horizontal line for visual separation */}
                 <hr />
-
                 {/* Container for the Update buttons */}
                 <Box>
                   {/* Save button */}

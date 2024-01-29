@@ -5,7 +5,7 @@ import LOGO from "Components/UI/Images/logo.gif";
 function AuthLoader() {
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Box
           sx={{

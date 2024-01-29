@@ -39,24 +39,27 @@ function InviteEditUser({ type }) {
   // State to store the type of Snackbar, which can be 'success' or 'error'
   const [snackbarType, setSnackbarType] = useState("success"); // 'success' or 'error'
 
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  // Endpoint for user invitation
+  const inviteUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_INVITE_USER_URL;
+
   //To set email to blank
   useEffect(() => {
     setEmail("");
   }, [isModalOpen]);
 
   // Function to handle the save action
-  const runOnSave = async (e) => {
-    // Use a Set to ensure unique permissions
-    // const uniqueElements = new Set(perms);
-    // const uniqueArray = [...uniqueElements];
-
+  const runOnSave = async () => {
+    // To get Unique array
     const uniqueArray = perms.map((permission) => {
       const category = Object.keys(permission)[0];
       const actions = permission[category];
 
       return { category, actions };
     });
-    // Show overlay while processing
     setShowOverlay(true);
 
     if (
@@ -77,12 +80,7 @@ function InviteEditUser({ type }) {
       setShowOverlay(false);
     } else {
       /* Update the user permissions via an API call */
-
-      // Endpoint for user invitation
-      const inviteUrl =
-        process.env.REACT_APP_BASE_URL_TEST_BACKEND +
-        process.env.REACT_APP_INVITE_USER_URL;
-
+      // Show overlay while processing
       const requestBody = {
         email: email,
         username: userName,
@@ -90,9 +88,10 @@ function InviteEditUser({ type }) {
           name: "Admin",
           permissions: uniqueArray,
         },
+        inviterID: "65a37ea8380d4ea0e51bbab0",
       };
       const requestHeader = {
-        "X-API-Key": "b41447e6319d1cd467306735632ba733",
+        "X-API-Key": API_KEY,
       };
       try {
         const resp = await axios.post(inviteUrl, requestBody, {
@@ -103,6 +102,7 @@ function InviteEditUser({ type }) {
           // Success message
           setSnackbarMessage("Invite Sent!!");
           setSnackbarType("success");
+          setIsModalOpen(false);
         } else {
           // Error message
           setSnackbarMessage("Oops!! Error");
@@ -115,7 +115,6 @@ function InviteEditUser({ type }) {
       } finally {
         // Hide the overlay and close the modal
         setShowOverlay(false);
-        setIsModalOpen(false);
         setShowSnackbar(true);
       }
     }

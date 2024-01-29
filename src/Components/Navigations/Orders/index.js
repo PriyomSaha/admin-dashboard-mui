@@ -8,8 +8,10 @@ import OrderFilterSearchBar from "Components/Navigations/Orders/OrderFilterSearc
 import OrderTable from "Components/Navigations/Orders/OrderTable";
 import OrderStatusFilter from "Components/Navigations/Orders/OrderStatusFilter";
 import { updateOrderCount } from "Components/Assets/UIServices";
-import { useOrdersStore } from "Components/Assets/StateManagement";
-
+import {
+  useOrdersStore,
+  useDrawerStore,
+} from "Components/Assets/StateManagement";
 // Functional component 'Orders' to manage the Orders page
 function Orders() {
   // State variables to hold orders data and counts
@@ -17,6 +19,7 @@ function Orders() {
   const [counts, setCounts] = React.useState({}); // Represents the counts of orders based on their status
 
   const ordersList = useOrdersStore((state) => state.allOrdersList);
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
 
   // useEffect hook to update 'counts' state with order counts on component mount
   React.useEffect(() => {
@@ -27,7 +30,7 @@ function Orders() {
   return (
     <>
       {/* ComponentHeader containing the title and date range picker */}
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           spacing={2}
           direction="row"
@@ -54,7 +57,7 @@ function Orders() {
       </ComponentHeader>
 
       {/* ComponentBody containing filter search bar, order status filter, and order table */}
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         {/* OrderFilterSearchBar component for filtering orders based on user input */}
         <OrderFilterSearchBar />
 

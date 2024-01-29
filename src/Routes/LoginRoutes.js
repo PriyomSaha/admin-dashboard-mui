@@ -8,11 +8,11 @@ import MinimalLayout from "Layout/MinimalLayout/index";
 const AuthLogin = Loadable(
   lazy(() => import("Components/Authentication/Login"))
 );
+const ChangePassword = Loadable(
+  lazy(() => import("Components/Authentication/ChangePassword"))
+);
 const ResetPassword = Loadable(
   lazy(() => import("Components/Authentication/ResetPassword"))
-);
-const ForgotPassword = Loadable(
-  lazy(() => import("Components/Authentication/ForgotPassword"))
 );
 const Register = Loadable(
   lazy(() => import("Components/Authentication/Register"))
@@ -29,12 +29,12 @@ const LoginRoutes = {
       element: <AuthLogin />,
     },
     {
-      path: "reset",
-      element: <ResetPassword />,
+      path: "changepassword/:token",
+      element: <ChangePassword />,
     },
     {
-      path: "forgotpassword",
-      element: <ForgotPassword />,
+      path: "resetpassword",
+      element: <ResetPassword />,
     },
     {
       path: "register/:token",

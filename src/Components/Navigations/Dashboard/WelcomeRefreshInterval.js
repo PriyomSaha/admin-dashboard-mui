@@ -29,7 +29,7 @@ function WelcomeRefreshInterval() {
           variant="h5"
           sx={{ fontWeight: 600, display: "inline-block" }}
         >
-          Hello {userData.userName.split(" ")[0]}. &nbsp;
+          Hello {userData.firstName}. &nbsp;
         </Typography>
         <Typography sx={{ fontWeight: 600, display: "inline-block" }}>
           Here's what happening with your store

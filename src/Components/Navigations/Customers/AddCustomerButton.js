@@ -104,24 +104,26 @@ function AddCustomerButton() {
 
             <Typography sx={{ mt: 2 }} fontSize="1.1rem">
               Email Address
-              <Grid item xs={12} sm={6} style={{ marginTop: "-11px" }}>
+              <Grid item xs={12} sm={6} style={{ marginTop: "5px" }}>
                 <EmailInput email={email} setEmail={setEmail} />
               </Grid>
             </Typography>
             <Typography sx={{ mt: 1 }} fontSize="1.1rem">
               Mobile Number*
-              <Grid container item xs={3} style={{ marginTop: "15px" }}>
-                <Countries country={country} setCountry={setCountry} />
-              </Grid>
-              <Grid container item sm={8.8} sx={{ mt: -5, ml: 20 }}>
-                <PhoneInput
-                  country={country.toLowerCase()}
-                  enableSearch={true}
-                  countryCodeEditable={false}
-                  value={phoneNumber}
-                  onChange={(phone) => setPhoneNumber(phone)}
-                  placeholder="Enter the phone Number"
-                />
+              <Grid container style={{ marginTop: "5px" }} spacing={1}>
+                <Grid item xs={12} sm={4}>
+                  <Countries country={country} setCountry={setCountry} />
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                  <PhoneInput
+                    country={country.toLowerCase()}
+                    enableSearch={true}
+                    countryCodeEditable={false}
+                    value={phoneNumber}
+                    onChange={(phone) => setPhoneNumber(phone)}
+                    placeHolder="Enter the phone number"
+                  />
+                </Grid>
               </Grid>
             </Typography>
 

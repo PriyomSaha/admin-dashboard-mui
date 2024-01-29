@@ -1,6 +1,7 @@
 // material-ui
 import { styled } from "@mui/material/styles";
 import LinearProgress from "@mui/material/LinearProgress";
+import AuthLoader from "./Authentication/AuthLoader";
 
 // loader style
 const LoaderWrapper = styled("div")(({ theme }) => ({
@@ -19,6 +20,7 @@ const LoaderWrapper = styled("div")(({ theme }) => ({
 const Loader = () => (
   <LoaderWrapper>
     <LinearProgress color="primary" />
+    {/* <AuthLoader /> */}
   </LoaderWrapper>
 );
 
