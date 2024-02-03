@@ -15,8 +15,11 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TbArrowBackUpDouble } from "react-icons/tb";
 import { theme } from "Components/UI/themes";
 import { useEffect } from "react";
+import { useDrawerStore } from "Components/Assets/StateManagement";
 
 function Settings() {
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
   const [list, setList] = useState(SettingsList);
 
   // Get the screen width
@@ -44,7 +47,7 @@ function Settings() {
   const subPathContainSetting = subPath[0].includes("settings");
   return (
     <>
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           spacing={2}
           direction="row"
@@ -100,7 +103,7 @@ function Settings() {
           ) : null}
         </Stack>
       </ComponentHeader>
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         <Box
           width="100%"
           display={"flex"}

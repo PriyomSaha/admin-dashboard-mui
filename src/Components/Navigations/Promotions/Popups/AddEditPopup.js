@@ -13,7 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
+import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import { usePopupStore } from "Components/Assets/StateManagement";
 import {

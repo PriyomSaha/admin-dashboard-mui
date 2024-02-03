@@ -14,6 +14,7 @@ import { MdClose } from "react-icons/md";
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
+  FullScreenModalHeader,
 } from "Components/UI/GlobalStyles";
 //import FirstLastNames from "Components/Assets/ReusableComp/FirstLastNames";
 import PhoneInput from "react-phone-input-2";
@@ -43,22 +44,7 @@ function AddCustomerButton() {
       </Button>
       <Modal open={isModalOpen} sx={FullScreenModalContainer}>
         <Box>
-          <Box
-            sx={{
-              position: "sticky",
-              top: 0,
-              left: "auto",
-              right: "auto",
-              minWidth: "50vw",
-              maxWidth: "100vw",
-              backgroundColor: theme.palette.background.paper,
-              padding: theme.spacing(1, 2),
-              zIndex: 1,
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-              borderBottom: `1px solid ${theme.palette.grey[400]}`,
-            }}
-          >
+          <Box sx={FullScreenModalHeader}>
             <Typography variant="h6"> Add Customer</Typography>
 
             <IconButton

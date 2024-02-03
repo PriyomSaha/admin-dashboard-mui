@@ -20,21 +20,30 @@ function MinimalLayout() {
   useEffect(() => {
     const fetchData = async () => {
       await setGettingUserdata(true);
-      if (getCookie("ud") !== null && getCookie("email") !== null) {
-        try {
-          const response = await axios.post(
-            userDetailsUrl,
-            {
-              username: getCookie("email"),
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${getCookie("ud")}`,
-              },
-            }
-          );
 
-          await setUserData(response.data.userName, response.data.authStatus);
+      // if (getCookie("ud") !== null && getCookie("email") !== null) {
+      if (getCookie("email") !== null) {
+        try {
+          // const response = await axios.post(
+          //   userDetailsUrl,
+          //   {
+          //     username: getCookie("email"),
+          //   },
+          //   {
+          //     headers: {
+          //       Authorization: `Bearer ${getCookie("ud")}`,
+          //     },
+          //   }
+          // );
+
+          await setUserData(
+            getCookie("username"),
+            getCookie("firstName"),
+            getCookie("lastName"),
+            getCookie("email"),
+            getCookie("permissions"),
+            true
+          );
         } catch (error) {
           console.log(error);
         }

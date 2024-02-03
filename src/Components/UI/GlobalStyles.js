@@ -89,7 +89,7 @@ export const SuperAdminLoginButton = styled("button")(({ theme }) => ({
   alignItems: "center",
 }));
 
-// Styling for the Modal component
+// Styling for the Modal component small
 export const ModalStyle = {
   position: "absolute",
   top: "30%",
@@ -109,7 +109,9 @@ export const FullScreenModalContainer = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  overflowX: "clip", // Add the overflow-x property here
 };
+
 export const FullScreenModalHeader = {
   position: "sticky",
   top: 0,
@@ -252,3 +254,43 @@ export const FloatingDivLink = styled("a")({
   position: "relative",
   fontFamily: "inherit",
 });
+export const cropContainer = {
+  position: "relative",
+  width: "100%",
+  height: 200,
+  [theme.breakpoints.up("sm")]: {
+    height: 400,
+  },
+};
+
+export const controls = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "stretch",
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+};
+export const sliderContainer = {
+  display: "flex",
+  flex: "1",
+  alignItems: "center",
+};
+export const sliderLabel = {
+  // fontSize: "2rem",
+  [theme.breakpoints.down("xs")]: {
+    minWidth: 65,
+  },
+};
+export const slider = {
+  padding: "22px 0px",
+  marginLeft: 10,
+  [theme.breakpoints.up("sm")]: {
+    flexDirection: "row",
+    alignItems: "center",
+    margin: "0 16px",
+  },
+  zIndex: 20,
+};

@@ -19,7 +19,7 @@ import { theme } from "Components/UI/themes";
 import React from "react";
 import { MdClose } from "react-icons/md";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
-import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
+import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload";
 import { useBannerStore } from "Components/Assets/StateManagement";
 
 function AddEditBanner() {
@@ -56,7 +56,6 @@ function AddEditBanner() {
               <MdClose />
             </IconButton>
           </Box>
-
           {/* Modal content */}
           <Box sx={FullScreenModalContent}>
             <Box>

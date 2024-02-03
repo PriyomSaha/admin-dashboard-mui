@@ -21,7 +21,7 @@ import {
   FullScreenModalHeader,
 } from "Components/UI/GlobalStyles";
 import { MdClose, MdExpandMore } from "react-icons/md";
-import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
+import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload";
 
 function CustomOrderTypeModal({ isModalOpen, setIsModalOpen }) {
   const [description, setDescription] = useState("");

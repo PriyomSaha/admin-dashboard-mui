@@ -19,11 +19,11 @@ import {
   TableImage,
 } from "Components/UI/GlobalStyles";
 import ShopFallBack from "Components/UI/Images/ShopFallBack.svg";
-import { FaAngleRight } from "react-icons/fa";
+import { FaAngleRight, FaRegEdit } from "react-icons/fa";
 import "Components/UI/app.css";
 import { getMerchants } from "Components/Assets/UIServices";
 import Delete from "Components/Assets/ReusableComp/Delete";
-import EditMerchant from "Components/Navigations/Merchants/Merchant/AddEditMerchant/index";
+import { useMerchantStore } from "Components/Assets/StateManagement";
 
 function MerchantTable() {
   const columns = [
@@ -59,6 +59,11 @@ function MerchantTable() {
       minWidth: 120,
     },
   ];
+
+  const setIsMerchantModalOpen = useMerchantStore(
+    (state) => state.setIsMerchantModalOpen
+  );
+  const setMerchantType = useMerchantStore((state) => state.setMerchantType);
 
   const [merchants, setMerchants] = React.useState([]);
 
@@ -163,14 +168,18 @@ function MerchantTable() {
                           },
                         }}
                       >
-                        <EditMerchant merchantName={value.name} />
-
+                        <FaRegEdit
+                          onClick={() => {
+                            setMerchantType("Edit");
+                            setIsMerchantModalOpen();
+                          }}
+                          style={{ fontSize: "25px", cursor: "pointer" }}
+                        />
                         <Divider
                           orientation="vertical"
                           variant="middle"
                           flexItem
                         />
-
                         <Delete name={value.name} type="Merchant" />
                       </Box>
                     </TableCell>

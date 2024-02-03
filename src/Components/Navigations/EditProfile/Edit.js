@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Checkbox,
+  CircularProgress,
   FormControlLabel,
   Grid,
   IconButton,
@@ -24,6 +25,7 @@ import { MdClose } from "react-icons/md";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import { PiPasswordDuotone, PiPasswordFill } from "react-icons/pi";
 import axios from "axios";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 function Edit() {
   const isEditProfile = useEditProfileStore((state) => state.isEditProfile);
@@ -44,17 +46,21 @@ function Edit() {
 
   const [changePassword, setChangePassword] = useState(false);
 
-  // password newPassword
-
   const matches = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPassMatch, setIsPassMatch] = useState(true);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // State to control whether the Snackbar is shown or hidden
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  // State to store the message displayed in the Snackbar
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  // State to store the type of Snackbar, which can be 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
 
   // API endpoint for edit Profile
   const editProfileURL =
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +
-    "/" +
     process.env.REACT_APP_EDIT_PROFILE;
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -86,16 +92,19 @@ function Edit() {
         const requestHeader = {
           "X-API-Key": API_KEY,
         };
-        await axios.post(editProfileURL, requestBody, {
+        const resp = await axios.post(editProfileURL, requestBody, {
           headers: requestHeader,
         });
-        // setShowSnackbar(true);
-        // setSnackbarType("success");
-        // setSnackbarMessage("User Created...Navigating to login page");
+        setShowSnackbar(true);
+        setSnackbarType("success");
+        setSnackbarMessage(resp.data.message);
+        setTimeout(() => {
+          setIsEditProfile(!isEditProfile);
+        }, 2000); // Adjust the delay time as needed
       } catch (error) {
-        // setShowSnackbar(true);
-        // setSnackbarType("error");
-        // setSnackbarMessage("Some error occured!!");
+        setShowSnackbar(true);
+        setSnackbarType("error");
+        setSnackbarMessage("Profile not updated!");
       }
     }
     setIsSubmitting(false); // Set it to false here
@@ -289,27 +298,55 @@ function Edit() {
                 <hr />
                 {/* Container for the Update buttons */}
                 <Box>
-                  {/* Save button */}
-                  <Button
-                    variant="contained"
-                    sx={{
-                      float: "right",
-                      position: "relative",
-                    }}
-                    // Click event handler to handle the "Update" action
-                    onClick={(e) => {
-                      // setIsEditProfile();
-                      handleSubmit(e);
-                    }}
-                  >
-                    Update
-                  </Button>
+                  {isSubmitting ? (
+                    // Display progress indicator while submitting
+                    <Button
+                      disabled
+                      variant="contained"
+                      sx={{
+                        float: "right",
+                        position: "relative",
+                      }}
+                    >
+                      Updating...
+                      <CircularProgress
+                        size={20}
+                        sx={{
+                          color: "var(--header-nav-text)",
+                          ml: 2,
+                        }}
+                      />
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      sx={{
+                        float: "right",
+                        position: "relative",
+                      }}
+                      // Click event handler to handle the "Update" action
+                      onClick={(e) => {
+                        // setIsEditProfile();
+                        handleSubmit(e);
+                      }}
+                    >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      &nbsp;
+                    </Button>
+                  )}
                 </Box>
               </>
             </Box>
           </Box>
         </Box>
       </Modal>
+      {/* Display error or success message in a Snackbar */}
+      <ToastAlert
+        showSnackbar={showSnackbar}
+        setShowSnackbar={setShowSnackbar}
+        snackbarType={snackbarType}
+        snackbarMessage={snackbarMessage}
+      />
     </>
   );
 }

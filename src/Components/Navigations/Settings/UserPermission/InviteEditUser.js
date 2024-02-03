@@ -85,7 +85,6 @@ function InviteEditUser({ type }) {
         email: email,
         username: userName,
         roles: {
-          name: "Admin",
           permissions: uniqueArray,
         },
         inviterID: "65a37ea8380d4ea0e51bbab0",

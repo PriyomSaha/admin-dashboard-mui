@@ -16,11 +16,26 @@ export const useAccountStore = create((set) => ({
     firstName: "",
     lastName: "",
     email: "",
+    permissions: [],
     authStatus: false,
   },
-  setUserData: (userName, firstName, lastName, email, authStatus) =>
+  setUserData: (
+    userName,
+    firstName,
+    lastName,
+    email,
+    permissions,
+    authStatus
+  ) =>
     set((state) => ({
-      userData: { userName, firstName, lastName, email, authStatus },
+      userData: {
+        userName,
+        firstName,
+        lastName,
+        email,
+        permissions,
+        authStatus,
+      },
     })),
 }));
 
@@ -82,9 +97,23 @@ export const useOrdersStore = create((set) => ({
   },
 }));
 
+export const useMerchantStore = create((set) => ({
+  isMerchantModalOpen: false,
+  merchantType: "", //Modal Type
+  setMerchantType: (value) =>
+    set(() => ({
+      merchantType: value,
+    })),
+  setIsMerchantModalOpen: () =>
+    set((state) => ({
+      isMerchantModalOpen: !state.isMerchantModalOpen,
+      merchantType: state.isMerchantModalOpen ? "" : state.merchantType,
+    })),
+}));
+
 export const useBannerStore = create((set) => ({
   isBannerModalOpen: false,
-  bannerType: "",
+  bannerType: "", //Modal Type
   setBannerType: (value) =>
     set(() => ({
       bannerType: value,
@@ -97,7 +126,7 @@ export const useBannerStore = create((set) => ({
 }));
 export const useCouponStore = create((set) => ({
   isCouponModalOpen: false,
-  couponType: "",
+  couponType: "", //Modal Type
   setCouponType: (value) =>
     set(() => ({
       couponType: value,
@@ -111,7 +140,7 @@ export const useCouponStore = create((set) => ({
 
 export const usePopupStore = create((set) => ({
   isPopupModalOpen: false,
-  popupType: "",
+  popupType: "", //Modal Type
   setPopupType: (value) =>
     set(() => ({
       popupType: value,

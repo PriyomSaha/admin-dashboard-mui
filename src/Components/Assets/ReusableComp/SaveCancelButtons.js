@@ -39,7 +39,9 @@ function SaveCancelButtons({ isModalOpen, setIsModalOpen, runOnSave }) {
             },
           }}
           // Click event handler to close the modal without saving
-          onClick={() => setIsModalOpen(!isModalOpen)}
+          onClick={() => {
+            setIsModalOpen(!isModalOpen);
+          }}
         >
           Close
         </Button>

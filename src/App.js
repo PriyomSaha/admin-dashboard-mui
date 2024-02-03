@@ -9,18 +9,14 @@ import { theme } from "Components/UI/themes";
 import { CssBaseline } from "@mui/material";
 import ScrollTop from "Components/ScrollTop";
 import ThemeRoutes from "Routes";
+import { useLocation } from "react-router-dom";
 
 // Import custom state management hook
 import { useAccountStore } from "Components/Assets/StateManagement";
+import { useEffect } from "react";
+import { hasPermissions } from "Components/Assets/UIServices";
 
 function App() {
-  // Use the custom state management hook to set user data
-  const setUserData = useAccountStore((state) => state.setUserData);
-
-  // Set user data with name "Priyom Saha" and a boolean value "true"
-  // This is an example of using the state management hook to manage user data.
-  // setUserData("Priyom Saha", "priyom1499@gmail.com", true);
-
   // The App component is the root component of the application.
   return (
     <ThemeProvider theme={theme}>

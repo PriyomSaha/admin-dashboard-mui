@@ -134,3 +134,23 @@ export const getCookie = (cookieName) => {
 export const deleteCookie = (cookieName) => {
   document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
+
+export const hasPermissions = (encodedPermissions, category, action) => {
+  // Decode and split the stored data
+  const decodedPermissions = decodeURIComponent(encodedPermissions);
+  const permissionStrings = decodedPermissions.split(";");
+
+  // Parse each string back into an object
+  const permissions = permissionStrings.map((permissionString) =>
+    JSON.parse(permissionString)
+  );
+  return permissions.some(
+    (permission) =>
+      permission.category.toLowerCase() === category.toLowerCase() &&
+      (action
+        ? permission.actions.some(
+            (pAction) => pAction.toLowerCase() === action.toLowerCase()
+          )
+        : true)
+  );
+};

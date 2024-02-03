@@ -99,14 +99,30 @@ const Login = () => {
         // }
 
         if (!resp.data.error) {
+          setShowSnackbar(true);
+          setSnackbarType("success");
+          setSnackbarMessage(resp.data.message);
+
           const respData = resp.data.data;
           sessionStorage.setItem("accessToken", respData.access_token);
+
+          setCookie("username", respData.user.username, 7);
+          setCookie("firstName", respData.user.profile.firstName, 7);
+          setCookie("lastName", respData.user.profile.lastName, 7);
+          setCookie("email", respData.user.email, 7);
+          const permissionsJson = respData.user.profile.roles.permissions.map(
+            (permission) => JSON.stringify(permission)
+          );
+          const joinedPermissions = permissionsJson.join(";");
+          const encodedPermissions = encodeURIComponent(joinedPermissions);
+          setCookie("permissions", encodedPermissions, 7);
 
           setUserData(
             respData.user.username,
             respData.user.profile.firstName,
             respData.user.profile.lastName,
             respData.user.email,
+            encodedPermissions,
             true
           );
         }
@@ -139,9 +155,6 @@ const Login = () => {
 
         // console.log(refreshTokenResp);
         // Show success notification in a Snackbar
-        setShowSnackbar(true);
-        setSnackbarType("success");
-        setSnackbarMessage(resp.data.message);
       } catch (error) {
         // Show error notification in a Snackbar
         setShowSnackbar(true);

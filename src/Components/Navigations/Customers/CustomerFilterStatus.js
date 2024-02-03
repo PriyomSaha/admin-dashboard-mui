@@ -6,6 +6,7 @@ import {
 } from "Components/Assets/StateManagement";
 import axios from "axios";
 import { getCookie } from "Components/Assets/UIServices";
+import { customers } from "Components/Assets/DummyData";
 
 // API endpoints
 const allCustomersUrl =
@@ -34,19 +35,19 @@ export default function CustomerFilterStatus({ counts, setCustomers }) {
     await setIsCustomersLoading();
 
     try {
-      const response = await axios.post(
-        allCustomersUrl,
-        {
-          username: getCookie("email"),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("ud")}`,
-          },
-        }
-      );
-
-      await setInitialCustomersList(response.data);
+      // const response = await axios.post(
+      //   allCustomersUrl,
+      //   {
+      //     username: getCookie("email"),
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${getCookie("ud")}`,
+      //     },
+      //   }
+      // );
+      // await setInitialCustomersList(response.data);
+      await setInitialCustomersList(customers);
     } catch (error) {
       console.log(error);
     }

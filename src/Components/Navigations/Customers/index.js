@@ -7,7 +7,10 @@ import AddCustomerButton from "./AddCustomerButton";
 import CustomerFilterStatus from "./CustomerFilterStatus";
 import CustomerTable from "./CustomerTable";
 import { updateCustomersCount } from "Components/Assets/UIServices";
-import { useCustomersStore } from "Components/Assets/StateManagement";
+import {
+  useCustomersStore,
+  useDrawerStore,
+} from "Components/Assets/StateManagement";
 
 function Customers() {
   const [customers, setCustomers] = React.useState([]);
@@ -15,13 +18,15 @@ function Customers() {
 
   const customerList = useCustomersStore((state) => state.customersList);
 
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
   React.useEffect(() => {
     setCounts(updateCustomersCount(customerList));
   }, [customerList]);
 
   return (
     <>
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           spacing={1}
           direction="row"
@@ -43,7 +48,7 @@ function Customers() {
           <AddNewImportExportButton />
         </Stack>
       </ComponentHeader>
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         <Stack direction="row" justifyContent="space-between">
           <CustomerSearchBar />
           <AddCustomerButton />

@@ -19,11 +19,15 @@ import { BsPeopleFill, BsGraphUpArrow } from "react-icons/bs";
 import { AiFillSetting } from "react-icons/ai";
 import { TbReportAnalytics } from "react-icons/tb";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDrawerStore } from "Components/Assets/StateManagement";
+import {
+  useAccountStore,
+  useDrawerStore,
+} from "Components/Assets/StateManagement";
 import { Collapse, useMediaQuery } from "@mui/material";
 import { VscGraphLine } from "react-icons/vsc";
 import { TbReport } from "react-icons/tb";
 import { theme } from "Components/UI/themes";
+import { hasPermissions } from "Components/Assets/UIServices";
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -82,7 +86,7 @@ export default function SideNav() {
   const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [analyticsOpen, setAnalyticsOpen] = React.useState(false);
-
+  const userPermission = useAccountStore((state) => state.userData.permissions);
   return (
     <>
       <CssBaseline />
@@ -90,6 +94,7 @@ export default function SideNav() {
         <DrawerHeader />
         <List>
           {/* ===== Dashboard ===== */}
+
           <ListItem
             disablePadding
             sx={{ display: "block" }}
@@ -119,33 +124,35 @@ export default function SideNav() {
           </ListItem>
 
           {/* ===== Orders ===== */}
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/orders");
-              if (isSmDown) {
-                setDrawerOpen();
-              }
-            }}
-            className={location.pathname === "/orders" ? "active" : null}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: isDrawerOpen ? "initial" : "center",
-                px: 2.5,
+          {hasPermissions(userPermission, "orders") ? (
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => {
+                navigate("/orders");
+                if (isSmDown) {
+                  setDrawerOpen();
+                }
               }}
+              className={location.pathname === "/orders" ? "active" : null}
             >
-              <NavIcon sx={{ mr: isDrawerOpen ? 3 : "auto" }}>
-                <BiSolidPackage />
-              </NavIcon>
-              <ListItemText
-                primary="Orders"
-                sx={{ opacity: isDrawerOpen ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </ListItem>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: isDrawerOpen ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <NavIcon sx={{ mr: isDrawerOpen ? 3 : "auto" }}>
+                  <BiSolidPackage />
+                </NavIcon>
+                <ListItemText
+                  primary="Orders"
+                  sx={{ opacity: isDrawerOpen ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+          ) : null}
 
           {/* ===== Merchants ===== */}
           <ListItem

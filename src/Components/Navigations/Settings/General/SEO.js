@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React, { forwardRef, useEffect, useState } from "react";
 import CompactChipInputTextField from "Components/Assets/ReusableComp/CompactChipInputTextField";
-import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
+import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload";
 
 function SEO({}, ref) {
   // State variables to manage SEO information

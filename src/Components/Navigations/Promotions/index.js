@@ -6,6 +6,7 @@ import PromotionNavigation from "Components/Navigations/Promotions/PromotionNavi
 import {
   useBannerStore,
   useCouponStore,
+  useDrawerStore,
   usePopupStore,
 } from "Components/Assets/StateManagement";
 
@@ -62,10 +63,12 @@ function Promotions() {
     }
   };
 
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
   return (
     <>
       {/* Header section for the Promotions component */}
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         {/* Stack component for layout */}
         <Stack
           spacing={2}
@@ -94,7 +97,7 @@ function Promotions() {
         </Stack>
       </ComponentHeader>
       {/* Body section for the Promotions component */}
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         {/* Navigation component specific to promotions */}
         <PromotionNavigation />
         {/* Outlet component to render nested routes */}

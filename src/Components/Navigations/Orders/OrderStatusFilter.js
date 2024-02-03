@@ -6,6 +6,7 @@ import { useOrdersStore } from "Components/Assets/StateManagement";
 import axios from "axios";
 import { getCookie } from "Components/Assets/UIServices";
 import { Button } from "@mui/material";
+import { orders } from "Components/Assets/DummyData";
 
 // API endpoints
 const allOrdersUrl =
@@ -36,18 +37,19 @@ export default function OrderStatusFilter({ counts, setOrders }) {
     await setIsOrderLoading();
 
     try {
-      const response = await axios.post(
-        allOrdersUrl,
-        {
-          username: getCookie("email"),
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${getCookie("ud")}`,
-          },
-        }
-      );
-      await setInitialOrdersList(response.data);
+      // const response = await axios.post(
+      //   allOrdersUrl,
+      //   {
+      //     username: getCookie("email"),
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${getCookie("ud")}`,
+      //     },
+      //   }
+      // );
+      // await setInitialOrdersList(response.data);
+      await setInitialOrdersList(orders);
     } catch (error) {
       console.log(error);
     }

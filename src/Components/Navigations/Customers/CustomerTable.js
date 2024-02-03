@@ -125,9 +125,9 @@ export default function CustomerTable() {
                           tabIndex={-1}
                           key={value.id}
                         >
-                          <TableCell>{value.name}</TableCell>
-                          <TableCell>{value.email}</TableCell>
-                          <TableCell>{value.phone}</TableCell>
+                          <TableCell>{value.Name}</TableCell>
+                          <TableCell>{value.Email}</TableCell>
+                          <TableCell>{value.Phone}</TableCell>
                           <TableCell>
                             <CustomerStatus status={value.status} />
                           </TableCell>

@@ -4,6 +4,7 @@ import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import { Outlet, useLocation } from "react-router-dom";
 import AddNewImportExportButton from "Components/Navigations/Merchants/Merchant/AddNewImportExportButton";
 import MerchantsNavigation from "./MerchantsNavigation";
+import { useDrawerStore } from "Components/Assets/StateManagement";
 
 function Merchants() {
   const location = useLocation();
@@ -11,9 +12,11 @@ function Merchants() {
 
   const subPathContainMerchant = subPath[0].includes("merchant");
 
+  const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
   return (
     <>
-      <ComponentHeader>
+      <ComponentHeader isDrawerOpen={isDrawerOpen}>
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -39,7 +42,7 @@ function Merchants() {
           ) : null}
         </Stack>
       </ComponentHeader>
-      <ComponentBody>
+      <ComponentBody isDrawerOpen={isDrawerOpen}>
         <MerchantsNavigation />
         <Outlet />
       </ComponentBody>

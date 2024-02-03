@@ -20,7 +20,7 @@ import React, { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
-import ImageUpload from "Components/Assets/ReusableComp/ImageUpload";
+import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload";
 
 function AddEditProduct() {
   // State to control the visibility of the modal

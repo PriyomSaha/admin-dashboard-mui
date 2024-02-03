@@ -12,24 +12,28 @@ import MerchantDetails from "./MerchantDetails";
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons";
 import CommissionConfiguration from "./CommissionConfiguration";
 import SearchEngineOptimization from "./SearchEngineOptimization";
+import { useMerchantStore } from "Components/Assets/StateManagement";
 
-const AddEditMerchant = ({ merchantName }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const AddEditMerchant = () => {
+  // Access state and functions from the banner store using custom hooks
+  const isMerchantModalOpen = useMerchantStore(
+    (state) => state.isMerchantModalOpen
+  );
+  const setIsMerchantModalOpen = useMerchantStore(
+    (state) => state.setIsMerchantModalOpen
+  );
+  const merchantType = useMerchantStore((state) => state.merchantType);
 
   return (
     <>
-      <FaRegEdit
-        onClick={() => setIsModalOpen(true)}
-        style={{ fontSize: "25px", cursor: "pointer" }}
-      />
-      <Modal open={isModalOpen} sx={FullScreenModalContainer}>
+      <Modal open={isMerchantModalOpen} sx={FullScreenModalContainer}>
         <Box>
           <Box sx={FullScreenModalHeader}>
-            <Typography variant="h6">Edit Merchant</Typography>
+            <Typography variant="h6">{merchantType} Merchant</Typography>
 
             <IconButton
               aria-label="close"
-              onClick={() => setIsModalOpen(!isModalOpen)}
+              onClick={() => setIsMerchantModalOpen()}
               sx={{
                 position: "absolute",
                 right: 10,
@@ -54,8 +58,8 @@ const AddEditMerchant = ({ merchantName }) => {
             </Box>
             <Box mt={4}>
               <SaveCancelButtons
-                isModalOpen={isModalOpen}
-                setIsModalOpen={setIsModalOpen}
+                isModalOpen={isMerchantModalOpen}
+                setIsModalOpen={setIsMerchantModalOpen}
               />
             </Box>
           </Box>
