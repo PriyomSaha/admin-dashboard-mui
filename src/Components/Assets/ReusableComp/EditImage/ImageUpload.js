@@ -26,10 +26,10 @@ import {
 import SaveCancelButtons from "../SaveCancelButtons";
 
 // Functional component 'ImageUpload' to handle image upload and display
-const ImageUpload = () => {
+const ImageUpload = ({ image, setImage }) => {
   // State variables
-  const [canvasImage, setCanvasImage] = useState(null);
-  const [imageSrc, setImageSrc] = useState(null);
+  const [canvasImage, setCanvasImage] = useState(image);
+  const [imageSrc, setImageSrc] = useState(image);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
@@ -116,9 +116,10 @@ const ImageUpload = () => {
         croppedAreaPixels,
         rotation
       );
-      console.log("donee", { croppedImage });
-      setCanvasImage(croppedImage);
-      setIsModalOpen(!isModalOpen);
+      await setCanvasImage(croppedImage);
+      await setIsModalOpen(!isModalOpen);
+      console.log(image);
+      await setImage(croppedImage.split(",")[1]);
     } catch (e) {
       console.error(e);
     }

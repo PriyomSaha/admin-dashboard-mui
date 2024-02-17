@@ -116,6 +116,8 @@ const Login = () => {
           const joinedPermissions = permissionsJson.join(";");
           const encodedPermissions = encodeURIComponent(joinedPermissions);
           setCookie("permissions", encodedPermissions, 7);
+          setCookie("role", respData.user.profile.roles.name);
+          setCookie("uid", respData.user.id);
 
           setUserData(
             respData.user.username,
@@ -123,6 +125,7 @@ const Login = () => {
             respData.user.profile.lastName,
             respData.user.email,
             encodedPermissions,
+            respData.user.profile.roles.name,
             true
           );
         }

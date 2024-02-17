@@ -1,8 +1,9 @@
-import React from "react";
-import { Box, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, CircularProgress } from "@mui/material";
 import { theme } from "Components/UI/themes";
 
 function SaveCancelButtons({ isModalOpen, setIsModalOpen, runOnSave }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <>
       {/* Horizontal line for visual separation */}
@@ -11,21 +12,43 @@ function SaveCancelButtons({ isModalOpen, setIsModalOpen, runOnSave }) {
       {/* Container for the Save and Close buttons */}
       <Box pb={4}>
         {/* Save button */}
-        <Button
-          variant="contained"
-          sx={{
-            float: "right",
-            position: "relative",
-          }}
-          // Click event handler to handle the "Save" action
-          onClick={() => {
-            // Perform the action to save the changes here...
-            runOnSave();
-            // setIsModalOpen(!isModalOpen);
-          }}
-        >
-          Save
-        </Button>
+        {isSubmitting ? (
+          <Button
+            disabled={true}
+            variant="contained"
+            sx={{
+              float: "right",
+              position: "relative",
+            }}
+          >
+            Saving...
+            <CircularProgress
+              size={20}
+              sx={{
+                color: "var(--header-nav-text)",
+                ml: 2,
+              }}
+            />
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            sx={{
+              float: "right",
+              position: "relative",
+            }}
+            // Click event handler to handle the "Save" action
+            onClick={async () => {
+              await setIsSubmitting(true);
+              // Perform the action to save the changes here...
+              await runOnSave();
+              // setIsModalOpen(!isModalOpen);
+              await setIsSubmitting(false);
+            }}
+          >
+            Save
+          </Button>
+        )}
 
         {/* Close button */}
         <Button

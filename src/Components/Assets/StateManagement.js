@@ -5,11 +5,45 @@ export const useDrawerStore = create((set) => ({
   setDrawerOpen: () => set((state) => ({ isDrawerOpen: !state.isDrawerOpen })),
 }));
 
-export const useCustomersLoadingStore = create((set) => ({
-  isCustomersLoading: false,
-  setIsCustomersLoading: () =>
-    set((state) => ({ isCustomersLoading: !state.isCustomersLoading })),
+// export const useSnackbarStore = create((set) => ({
+//   showSnackbar: false,
+//   setShowSnackbar: set((state) => ({ showSnackbar: !state.showSnackbar })),
+//   snackbarMessage: "",
+//   setSnackbarMessage: set((value) => ({
+//     snackbarMessage: value,
+//   })),
+//   snackbarType: "info",
+//   setSnackbarType: set((value) => ({
+//     snackbarType: value,
+//   })),
+// }));
+
+export const useInvitedUserStore = create((set) => ({
+  isInvitedUsersLoading: false,
+  setIsInvitedUsersLoading: () =>
+    set((state) => ({ isInvitedUsersLoading: !state.isInvitedUsersLoading })),
+  allInvitedUsers: [],
+  setAllInvitedUsers: (invitedUsers) =>
+    set({
+      allInvitedUsers: invitedUsers,
+    }),
+
+  // Array to hold selected permissions
+  invitedUserType: "", //Modal Type
+  setInvitedUserType: (value) =>
+    set(() => ({
+      invitedUserType: value,
+    })),
+  isInvitedUserModalOpen: false,
+  setIsInvitedUserModalOpen: () =>
+    set((state) => ({
+      isInvitedUserModalOpen: !state.isInvitedUserModalOpen,
+      invitedUserType: state.isInvitedUserModalOpen
+        ? ""
+        : state.invitedUserType,
+    })),
 }));
+
 export const useAccountStore = create((set) => ({
   userData: {
     userName: "",
@@ -17,6 +51,7 @@ export const useAccountStore = create((set) => ({
     lastName: "",
     email: "",
     permissions: [],
+    role: "",
     authStatus: false,
   },
   setUserData: (
@@ -25,6 +60,7 @@ export const useAccountStore = create((set) => ({
     lastName,
     email,
     permissions,
+    role,
     authStatus
   ) =>
     set((state) => ({
@@ -34,6 +70,7 @@ export const useAccountStore = create((set) => ({
         lastName,
         email,
         permissions,
+        role,
         authStatus,
       },
     })),
@@ -45,6 +82,7 @@ export const useEditProfileStore = create((set) => ({
     set((state) => ({ isEditProfile: !state.isEditProfile })),
 }));
 
+// TODO: Merge useCustomersStore useCustomersLoadingStore
 export const useCustomersStore = create((set) => ({
   isCustomersLoading: false,
   setIsCustomersLoading: () =>
@@ -69,6 +107,11 @@ export const useCustomersStore = create((set) => ({
       }));
     }
   },
+}));
+export const useCustomersLoadingStore = create((set) => ({
+  isCustomersLoading: false,
+  setIsCustomersLoading: () =>
+    set((state) => ({ isCustomersLoading: !state.isCustomersLoading })),
 }));
 
 export const useOrdersStore = create((set) => ({
@@ -111,6 +154,50 @@ export const useMerchantStore = create((set) => ({
     })),
 }));
 
+export const useCategoryStore = create((set) => ({
+  isCategoriesLoading: false,
+  setIsCategoriesLoading: () =>
+    set((state) => ({ isCategoriesLoading: !state.isCategoriesLoading })),
+  allCategories: [],
+  setAllCategories: (categories) =>
+    set({
+      allCategories: categories,
+    }),
+  isCategoryModalOpen: false,
+  categoryType: "", //Modal Type
+  setCategoryType: (value) =>
+    set(() => ({
+      categoryType: value,
+    })),
+  setIsCategoryModalOpen: () =>
+    set((state) => ({
+      isCategoryModalOpen: !state.isCategoryModalOpen,
+      categoryType: state.isCategoryModalOpen ? "" : state.categoryType,
+    })),
+}));
+
+export const useProductStore = create((set) => ({
+  isProductsLoading: false,
+  setIsProductsLoading: () =>
+    set((state) => ({ isProductsLoading: !state.isProductsLoading })),
+  allProducts: [],
+  setAllProducts: (products) =>
+    set({
+      allProducts: products,
+    }),
+  isProductModalOpen: false,
+  productType: "", //Modal Type
+  setProductType: (value) =>
+    set(() => ({
+      productType: value,
+    })),
+  setIsProductModalOpen: () =>
+    set((state) => ({
+      isProductModalOpen: !state.isProductModalOpen,
+      productType: state.isProductModalOpen ? "" : state.productType,
+    })),
+}));
+
 export const useBannerStore = create((set) => ({
   isBannerModalOpen: false,
   bannerType: "", //Modal Type
@@ -124,6 +211,7 @@ export const useBannerStore = create((set) => ({
       bannerType: state.isBannerModalOpen ? "" : state.bannerType,
     })),
 }));
+
 export const useCouponStore = create((set) => ({
   isCouponModalOpen: false,
   couponType: "", //Modal Type

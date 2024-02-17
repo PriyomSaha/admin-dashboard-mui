@@ -42,6 +42,7 @@ function MinimalLayout() {
             getCookie("lastName"),
             getCookie("email"),
             getCookie("permissions"),
+            getCookie("role"),
             true
           );
         } catch (error) {

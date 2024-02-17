@@ -6,8 +6,6 @@ export const readFile = (file) => {
   });
 };
 
-
-
 export const createImage = (url) =>
   new Promise((resolve, reject) => {
     const image = new Image();
@@ -103,14 +101,14 @@ export async function getCroppedImg(
   );
 
   // As Base64 string
-  // return croppedCanvas.toDataURL('image/jpeg');
+  return croppedCanvas.toDataURL("image/jpeg");
 
   // As a blob
-  return new Promise((resolve, reject) => {
-    croppedCanvas.toBlob((file) => {
-      resolve(URL.createObjectURL(file));
-    }, "image/jpeg");
-  });
+  // return new Promise((resolve, reject) => {
+  //   croppedCanvas.toBlob((file) => {
+  //     resolve(URL.createObjectURL(file));
+  //   }, "image/jpeg");
+  // });
 }
 
 export async function getRotatedImage(imageSrc, rotation = 0) {

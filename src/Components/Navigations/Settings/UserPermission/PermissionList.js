@@ -1,19 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ParentChildCheckbox from "./ParentChildCheckbox"; // Importing a custom component for handling parent-child checkboxes
 import { Checkbox, FormControlLabel, Typography } from "@mui/material"; // Importing Material-UI components
 import { theme } from "Components/UI/themes"; // Importing a theme
+import { useInvitedUserStore } from "Components/Assets/StateManagement";
 
 function PermissionList({ perms, setPerms }) {
   // Define a list of permissions with parent and child items
   const list = {
     Merchants: ["Merchants", "Category", "Product"], // Example: "Merchants" is a parent category with child items
     Orders: ["Orders"], // Example: "Orders" is a parent category with no child items
-    Dashboard: ["Dashboard"], // Example: "Dashboard" is another parent category
     Reports: ["Reports", "Export Reports"], // Example: "Reports" with child items
   };
 
   // State to track if "Select All" is checked or not
-  const [isSelectAll, setIsSelectAll] = useState(!false);
+  const [isSelectAll, setIsSelectAll] = useState(true);
+
+  const isInvitedUserModalOpen = useInvitedUserStore(
+    (state) => state.isInvitedUserModalOpen
+  );
+
+  const totalPermsCount = Object.keys(list).length;
 
   // Function to handle the "Select All" checkbox
   const handleSelectAll = async () => {
@@ -46,6 +52,14 @@ function PermissionList({ perms, setPerms }) {
       setPerms([]);
     }
   };
+
+  useEffect(() => {
+    if (perms.length === totalPermsCount) handleSelectAll();
+
+    return () => {
+      if (perms.length === totalPermsCount) handleSelectAll();
+    };
+  }, [isInvitedUserModalOpen]);
 
   return (
     <>

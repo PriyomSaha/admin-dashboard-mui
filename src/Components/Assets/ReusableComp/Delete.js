@@ -12,7 +12,7 @@ import { TiWarning } from "react-icons/ti";
 import { ModalStyle } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 
-const Delete = ({ name, type }) => {
+const Delete = ({ name, type, runOnDelete }) => {
   // State to track whether the delete modal is open or not
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -76,7 +76,7 @@ const Delete = ({ name, type }) => {
             // Click event handler to confirm the deletion
             onClick={() => {
               setIsDeleteModalOpen(!isDeleteModalOpen);
-              // Perform the actual deletion action here...
+              runOnDelete();
             }}
           >
             Delete

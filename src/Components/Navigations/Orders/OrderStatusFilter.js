@@ -7,6 +7,7 @@ import axios from "axios";
 import { getCookie } from "Components/Assets/UIServices";
 import { Button } from "@mui/material";
 import { orders } from "Components/Assets/DummyData";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 // API endpoints
 const allOrdersUrl =
@@ -89,9 +90,14 @@ export default function OrderStatusFilter({ counts, setOrders }) {
                 height: "auto",
                 display: "flex",
                 alignItems: "center",
+                cursor: "pointer",
               }}
             >
-              {direction === "left" ? "<" : ">"}
+              {direction === "left" ? (
+                <FaAngleLeft size={25} />
+              ) : (
+                <FaAngleRight size={25} />
+              )}
             </Box>
           )}
         >

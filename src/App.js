@@ -12,9 +12,7 @@ import ThemeRoutes from "Routes";
 import { useLocation } from "react-router-dom";
 
 // Import custom state management hook
-import { useAccountStore } from "Components/Assets/StateManagement";
-import { useEffect } from "react";
-import { hasPermissions } from "Components/Assets/UIServices";
+import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 
 function App() {
   // The App component is the root component of the application.
@@ -28,6 +26,8 @@ function App() {
           <ThemeRoutes />
         </ScrollTop>
       </div>
+      {/* Render the ToastAlert component to display notifications */}
+      {/* <ToastAlert /> */}
     </ThemeProvider>
   );
 }

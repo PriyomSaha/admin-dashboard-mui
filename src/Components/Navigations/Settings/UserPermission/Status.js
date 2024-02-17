@@ -15,7 +15,7 @@ import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 
-function Status({ oldStatus }) {
+function Status({ oldStatus, resendInvite }) {
   // State to control the visibility of the status update modal
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
 
@@ -52,6 +52,7 @@ function Status({ oldStatus }) {
               cursor: "pointer",
               color: "var(--links)",
             }}
+            onClick={() => resendInvite()}
           >
             (Resend Invite)
           </span>

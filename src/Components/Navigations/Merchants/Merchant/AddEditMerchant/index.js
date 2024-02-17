@@ -15,7 +15,7 @@ import SearchEngineOptimization from "./SearchEngineOptimization";
 import { useMerchantStore } from "Components/Assets/StateManagement";
 
 const AddEditMerchant = () => {
-  // Access state and functions from the banner store using custom hooks
+  // Access state and functions from the merchant store using custom hooks
   const isMerchantModalOpen = useMerchantStore(
     (state) => state.isMerchantModalOpen
   );

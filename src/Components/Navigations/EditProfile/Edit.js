@@ -75,6 +75,10 @@ function Edit() {
     if (newpassword !== confirmNewpassword) {
       setIsPassMatch(false);
       setIsSubmitting(false); // Set it to false here
+    } else if (confirmPassword.length <= 0) {
+      setShowSnackbar(true);
+      setSnackbarType("error");
+      setSnackbarMessage("Please confirm your Password!");
     } else {
       setIsSubmitting(true);
       try {

@@ -11,7 +11,7 @@ function ChangePassword() {
   // State to store the message displayed in the Snackbar
   const [snackbarMessage, setSnackbarMessage] = useState("");
   // State to store the type of Snackbar, which can be 'success' or 'error'
-  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
+  const [snackbarType, setSnackbarType] = useState("info"); // 'success' or 'error'
 
   return (
     <>

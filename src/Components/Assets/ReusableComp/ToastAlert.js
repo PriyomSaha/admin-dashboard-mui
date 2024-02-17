@@ -7,6 +7,10 @@ function ToastAlert({
   snackbarType,
   snackbarMessage,
 }) {
+  // const showSnackbar = useSnackbarStore((state) => state.showSnackbar);
+  //   const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  //   const snackbarType = useSnackbarStore((state) => state.snackbarType);
+  //   const snackbarMessage = useSnackbarStore((state) => state.snackbarMessage);
   return (
     <Snackbar
       open={showSnackbar}

@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import Edit from "Components/Navigations/EditProfile/Edit";
 import { theme } from "Components/UI/themes";
 import { deleteCookie } from "Components/Assets/UIServices";
+import axios from "axios";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -149,6 +150,34 @@ export default function TopNav() {
     };
   }
 
+  const getProfileUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_USER_DETAILS_URL;
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  const updateProfile = async () => {
+    try {
+      const requestBody = new URLSearchParams();
+      requestBody.append("identifier", userData.email);
+
+      const requestHeader = {
+        "X-API-Key": API_KEY,
+      };
+
+      // Call authentication API to get token
+      const resp = await axios.post(getProfileUrl, requestBody, {
+        headers: requestHeader,
+        withCredentials: true,
+      });
+      console.log(resp);
+      await setAnchorEl(null);
+      await setIsEditProfile();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -243,12 +272,7 @@ export default function TopNav() {
                   },
                 }}
               >
-                <MenuItem
-                  onClick={() => {
-                    setAnchorEl(null);
-                    setIsEditProfile();
-                  }}
-                >
+                <MenuItem onClick={() => updateProfile()}>
                   <Box
                     sx={{
                       display: "flex",

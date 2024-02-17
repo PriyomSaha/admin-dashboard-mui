@@ -4,7 +4,12 @@ import { ComponentBody, ComponentHeader } from "Components/UI/GlobalStyles";
 import { Outlet, useLocation } from "react-router-dom";
 import AddNewImportExportButton from "Components/Navigations/Merchants/Merchant/AddNewImportExportButton";
 import MerchantsNavigation from "./MerchantsNavigation";
-import { useDrawerStore } from "Components/Assets/StateManagement";
+import {
+  useAccountStore,
+  useCategoryStore,
+  useDrawerStore,
+  useProductStore,
+} from "Components/Assets/StateManagement";
 
 function Merchants() {
   const location = useLocation();
@@ -13,6 +18,17 @@ function Merchants() {
   const subPathContainMerchant = subPath[0].includes("merchant");
 
   const isDrawerOpen = useDrawerStore((state) => state.isDrawerOpen);
+
+  const setCategoryType = useCategoryStore((state) => state.setCategoryType);
+  const setIsCategoryModalOpen = useCategoryStore(
+    (state) => state.setIsCategoryModalOpen
+  );
+
+  const setIsProductModalOpen = useProductStore(
+    (state) => state.setIsProductModalOpen
+  );
+  const setProductType = useProductStore((state) => state.setProductType);
+  const userRole = useAccountStore((state) => state.userData.role);
 
   return (
     <>
@@ -38,7 +54,25 @@ function Merchants() {
           {subPathContainMerchant ? (
             <AddNewImportExportButton />
           ) : subPath[0].includes("category") ? (
-            <Button variant="contained">Add New</Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                setCategoryType("Add");
+                setIsCategoryModalOpen();
+              }}
+            >
+              Add New
+            </Button>
+          ) : userRole.toUpperCase() === "MANAGER" ? (
+            <Button
+              variant="contained"
+              onClick={() => {
+                setProductType("Add");
+                setIsProductModalOpen();
+              }}
+            >
+              Add New
+            </Button>
           ) : null}
         </Stack>
       </ComponentHeader>

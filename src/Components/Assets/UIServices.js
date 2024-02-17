@@ -15,6 +15,7 @@ import {
   reviews,
   commissionReport,
 } from "Components/Assets/DummyData";
+import dayjs from "dayjs";
 
 // Function 'updateOrderCount' to update the counts of orders for each status in 'orderCount'
 export const updateOrderCount = (orders) => {
@@ -130,11 +131,12 @@ export const getCookie = (cookieName) => {
   // console.log(null);
   return null;
 };
-
+//delete cookies
 export const deleteCookie = (cookieName) => {
   document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
 
+//check for permissions of the user
 export const hasPermissions = (encodedPermissions, category, action) => {
   // Decode and split the stored data
   const decodedPermissions = decodeURIComponent(encodedPermissions);
@@ -153,4 +155,33 @@ export const hasPermissions = (encodedPermissions, category, action) => {
           )
         : true)
   );
+};
+
+//Table Component update value
+export const updateDataInTable = async (dataList, updates, id) => {
+  // Find the index of the array list with the given ID
+  const index = dataList.findIndex((data) => data.id === id);
+
+  // If data with the given ID is found
+  if (index !== -1) {
+    // Update the data with the new key-value pairs
+    dataList[index] = {
+      ...dataList[index],
+      ...updates,
+    };
+  } else {
+    console.log("Mentioned ID not found.");
+  }
+};
+
+//Table Component Delete data
+export const deleteDataFromTable = async (dataList, id) => {
+  const updated = dataList.filter((obj) => obj.id !== id);
+  return updated;
+};
+
+//Day JS date formatter
+
+export const getFormattedDate = (dateString) => {
+  return dayjs(dateString).format("ddd DD MMM, hh:mm A");
 };
