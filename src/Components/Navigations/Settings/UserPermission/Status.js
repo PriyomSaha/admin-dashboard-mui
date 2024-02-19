@@ -14,16 +14,65 @@ import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons"
 import { theme } from "Components/UI/themes";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
+import { useInvitedUserStore } from "Components/Assets/StateManagement";
+import axios from "axios";
 
-function Status({ oldStatus, resendInvite }) {
+function Status({
+  value,
+  resendInvite,
+  setShowSnackbar,
+  setSnackbarMessage,
+  setSnackbarType,
+}) {
   // State to control the visibility of the status update modal
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
 
   // State to manage the current status
-  const [status, setStatus] = useState(oldStatus);
+  const [status, setStatus] = useState(value.profile.accountStatus);
 
   // State to store the updated status
-  const [updatedstatus, setUdateStatus] = useState(oldStatus);
+  const [updatedstatus, setUdateStatus] = useState(value.profile.accountStatus);
+
+  const updatePermissionsUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_UPDATE_PERMS;
+
+  const API_KEY = process.env.REACT_APP_API_KEY;
+
+  const editUserStatus = async () => {
+    const requestBody = {
+      email: value.email,
+      username: value.username,
+      type: 2,
+      profile: {
+        accountStatus: status,
+      },
+    };
+    const requestHeader = {
+      "X-API-Key": API_KEY,
+    };
+    try {
+      const resp = await axios.post(updatePermissionsUrl, requestBody, {
+        headers: requestHeader,
+      });
+      if (!resp.error) {
+        setUdateStatus(status);
+        // Success message
+        setShowSnackbar(true);
+        setSnackbarMessage(resp.data.message);
+        setSnackbarType("success");
+        setIsStatusModalOpen();
+      }
+    } catch (error) {
+      console.log(error);
+      setShowSnackbar(true);
+      // Error message in case of API failure
+      setSnackbarMessage("Oops!! Error");
+      setSnackbarType("error");
+    }
+  };
+
+  console.log(updatedstatus);
 
   return (
     <>
@@ -112,7 +161,7 @@ function Status({ oldStatus, resendInvite }) {
             isModalOpen={isStatusModalOpen}
             setIsModalOpen={setIsStatusModalOpen}
             runOnSave={() => {
-              setUdateStatus(status);
+              editUserStatus();
             }}
           />
         </Box>

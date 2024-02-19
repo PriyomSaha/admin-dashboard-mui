@@ -71,10 +71,9 @@ function InviteEditUser({
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +
     process.env.REACT_APP_INVITED_USERS_LIST;
 
-  //To set email to blank
-  // useEffect(() => {
-  //   setEmail("");
-  // }, [isInvitedUserModalOpen]);
+  const updatePermissionsUrl =
+    process.env.REACT_APP_BASE_URL_TEST_BACKEND +
+    process.env.REACT_APP_UPDATE_PERMS;
 
   const getUsers = async () => {
     await setIsInvitedUsersLoading();
@@ -97,13 +96,8 @@ function InviteEditUser({
     getUsers();
   }, []);
 
-  useEffect(() => {
-    console.log(permissions);
-  }, [isInvitedUserModalOpen]);
-
   // Function to handle the save action
   const runOnSave = async () => {
-    console.log(permissions);
     // To get Unique array
     const uniqueArray = permissions.map((permission) => {
       const category = Object.keys(permission)[0];
@@ -131,8 +125,7 @@ function InviteEditUser({
         setSnackbarType("error");
         setShowSnackbar(true);
       } else {
-        /* Update the user permissions via an API call */
-        // Show overlay while processing
+        /* Add the user permissions via an API call */
         const requestBody = {
           email: email,
           username: userName,
@@ -148,12 +141,11 @@ function InviteEditUser({
           const resp = await axios.post(inviteUrl, requestBody, {
             headers: requestHeader,
           });
-
+          console.log(resp);
           if (!resp.error) {
             // Success message
             setSnackbarMessage("Invite Sent!!");
             setSnackbarType("success");
-            setIsInvitedUserModalOpen();
             await getUsers();
           } else {
             // Error message
@@ -177,11 +169,50 @@ function InviteEditUser({
         setSnackbarType("error");
         setShowSnackbar(true);
       } else {
+        const requestBody = {
+          email: email,
+          username: userName,
+          type: 1,
+          profile: {
+            roles: {
+              permissions: uniqueArray,
+            },
+          },
+        };
+        const requestHeader = {
+          "X-API-Key": API_KEY,
+        };
+        try {
+          const resp = await axios.post(updatePermissionsUrl, requestBody, {
+            headers: requestHeader,
+          });
+          if (!resp.error) {
+            // Success message
+            setShowSnackbar(true);
+            setSnackbarMessage(resp.data.message);
+            setSnackbarType("success");
+            await getUsers();
+          }
+        } catch (error) {
+          console.log(error);
+          setShowSnackbar(true);
+          // Error message in case of API failure
+          setSnackbarMessage("Oops!! Error");
+          setSnackbarType("error");
+        } finally {
+          // Hide the overlay and close the modal
+        }
       }
-      setShowOverlay(false);
-      setEmail("");
-      setUserName("");
     }
+    await handleModalClose();
+  };
+
+  const handleModalClose = async () => {
+    await setShowOverlay(false);
+    await setEmail("");
+    await setUserName("");
+    await setPermissions([]);
+    await setIsInvitedUserModalOpen();
   };
 
   return (
@@ -213,7 +244,7 @@ function InviteEditUser({
             <IconButton
               aria-label="close"
               onClick={() => {
-                setIsInvitedUserModalOpen();
+                handleModalClose();
               }}
               sx={{
                 position: "absolute",
@@ -240,7 +271,10 @@ function InviteEditUser({
             ) : null}
 
             {/* Component for selecting user permissions */}
-            <PermissionList perms={permissions} setPerms={setPermissions} />
+            <PermissionList
+              permissions={permissions}
+              setPermissions={setPermissions}
+            />
             <Box mt={4}>
               {/* Component with save and cancel buttons */}
               <SaveCancelButtons

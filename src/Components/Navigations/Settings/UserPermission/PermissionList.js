@@ -1,66 +1,62 @@
-import React, { useEffect, useState } from "react";
-import ParentChildCheckbox from "./ParentChildCheckbox"; // Importing a custom component for handling parent-child checkboxes
-import { Checkbox, FormControlLabel, Typography } from "@mui/material"; // Importing Material-UI components
-import { theme } from "Components/UI/themes"; // Importing a theme
+import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import { useInvitedUserStore } from "Components/Assets/StateManagement";
+import { theme } from "Components/UI/themes";
+import React, { useEffect, useState } from "react";
+import CheckboxList from "./CheckboxList";
 
-function PermissionList({ perms, setPerms }) {
+function PermissionList({ permissions, setPermissions }) {
   // Define a list of permissions with parent and child items
-  const list = {
-    Merchants: ["Merchants", "Category", "Product"], // Example: "Merchants" is a parent category with child items
-    Orders: ["Orders"], // Example: "Orders" is a parent category with no child items
-    Reports: ["Reports", "Export Reports"], // Example: "Reports" with child items
-  };
+  const list = [
+    { Merchants: ["Merchants", "Category", "Product"] }, // Example: "Merchants" is a parent category with child items
+    { Orders: ["Orders"] }, // Example: "Orders" is a parent category with no child items
+    { Reports: ["Reports", "Export Reports"] }, // Example: "Reports" with child items
+  ];
 
   // State to track if "Select All" is checked or not
-  const [isSelectAll, setIsSelectAll] = useState(true);
+  const [isSelectAll, setIsSelectAll] = useState(false);
 
   const isInvitedUserModalOpen = useInvitedUserStore(
     (state) => state.isInvitedUserModalOpen
   );
 
   const totalPermsCount = Object.keys(list).length;
-
-  // Function to handle the "Select All" checkbox
-  const handleSelectAll = async () => {
-    await setIsSelectAll(!isSelectAll); // Toggle the "Select All" state
-
-    if (isSelectAll) {
+  const handleSelectAll = () => {
+    if (!isSelectAll) {
       // If "Select All" was checked
       const updatedPerms = [];
 
       // Loop through each parent permission category
-      for (const parent in list) {
-        const children = list[parent];
+      list.forEach((item) => {
+        const [parent, children] = Object.entries(item)[0];
         const parentPermissions = [];
 
         children.forEach((child) => {
           const childPermission = `${parent}-${child}`;
-          if (!perms.includes(childPermission)) {
+          if (!permissions.includes(childPermission)) {
             // If the child permission is not in the selected permissions, add it
-            setPerms((prevPerms) => [...prevPerms, childPermission]);
+            setPermissions((prevPerms) => [...prevPerms, childPermission]);
           }
           parentPermissions.push(child);
         });
 
         updatedPerms.push({ [parent]: parentPermissions }); // Add an object with parent and child permissions to the array
-      }
+      });
 
-      setPerms(updatedPerms); // Set the modified permissions structure as an array of objects
+      setPermissions(updatedPerms); // Set the modified permissions structure as an array of objects
     } else {
-      // If "Select All" was unchecked, clear all permissions
-      setPerms([]);
+      setPermissions([]);
     }
+    setIsSelectAll(!isSelectAll);
   };
 
   useEffect(() => {
-    if (perms.length === totalPermsCount) handleSelectAll();
-
-    return () => {
-      if (perms.length === totalPermsCount) handleSelectAll();
-    };
+    if (permissions.length === totalPermsCount) handleSelectAll();
   }, [isInvitedUserModalOpen]);
 
+  useEffect(() => {
+    if (permissions.length === totalPermsCount) setIsSelectAll(true);
+  }, [permissions.length]);
+  // if (permissions.length === null) setPermissions([]);
   return (
     <>
       {/* Section Title */}
@@ -77,23 +73,26 @@ function PermissionList({ perms, setPerms }) {
       {/* "Select All" checkbox */}
       <FormControlLabel
         control={
-          <Checkbox checked={!isSelectAll} onChange={() => handleSelectAll()} />
+          <Checkbox checked={isSelectAll} onChange={() => handleSelectAll()} />
         }
-        label={isSelectAll ? <b>Select All</b> : <b>DeSelect All</b>}
+        label={!isSelectAll ? <b>Select All</b> : <b>DeSelect All</b>}
       />
-
       {/* Map through each permission category and render ParentChildCheckbox */}
-      {Object.keys(list).map((key) => (
-        <div key={key}>
-          <ParentChildCheckbox
-            parent={key}
-            children={list[key]}
-            perms={perms}
-            setPerms={setPerms}
-            defaultChecked={isSelectAll}
-          />
-        </div>
-      ))}
+
+      {list.map((item, index) => {
+        const [parent, children] = Object.entries(item)[0];
+        return (
+          <div key={index}>
+            <CheckboxList
+              parent={parent}
+              children={children}
+              perms={permissions}
+              setPerms={setPermissions}
+              defaultChecked={!isSelectAll}
+            />
+          </div>
+        );
+      })}
     </>
   );
 }

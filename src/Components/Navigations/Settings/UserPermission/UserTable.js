@@ -158,34 +158,23 @@ function UserTable({
     await setShowOverlay(false);
   };
   let perms = [];
-  const transformedArray = (value) => {
-    value.map((item) => {
-      const newObj = {};
-      newObj[item.category] = item.actions;
-      perms.push(newObj);
-    });
-    console.log(perms);
-    return perms;
-  };
+
   const editUserPermissions = async (value) => {
-    // setPermissions(transformedArray(value.profile.roles.permissions));
+    if (value.profile.roles.permissions !== null) {
+      const transformedArray = value.profile.roles.permissions.map((item) => {
+        const newObj = {};
+        newObj[item.category] = item.actions;
+        return newObj;
+      });
+      perms = transformedArray;
+    } else perms = [];
+
+    await setPermissions(perms);
     // Update permissions using the callback version of setPermissions
-    await setPermissions([
-      {
-        Merchants: ["Merchants", "Category", "Product"],
-      },
-      {
-        Orders: ["Orders"],
-      },
-      {
-        Reports: ["Reports", "Export Reports"],
-      },
-    ]);
     await setEmail(value.email);
     await setUserName(value.username);
     await setIsInvitedUserModalOpen();
     await setInvitedUserType("Edit");
-    // setPermissions();
   };
 
   return (
@@ -272,8 +261,11 @@ function UserTable({
                         </TableCell>
                         <TableCell align="center">
                           <Status
-                            oldStatus={value.profile.accountStatus}
+                            value={value}
                             resendInvite={() => resendInvite(value.email)}
+                            setShowSnackbar={setShowSnackbar}
+                            setSnackbarMessage={setSnackbarMessage}
+                            setSnackbarType={setSnackbarType}
                           />
                         </TableCell>
                         <TableCell>
