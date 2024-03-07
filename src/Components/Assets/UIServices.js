@@ -59,9 +59,6 @@ export const updateCustomersCount = (customers) => {
   return customersCount;
 };
 
-export const getMerchants = () => {
-  return merchants;
-};
 
 export const getCategories = () => {
   return categories;

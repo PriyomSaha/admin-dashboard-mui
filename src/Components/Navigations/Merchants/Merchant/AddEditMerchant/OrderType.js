@@ -3,9 +3,7 @@ import CompactChipInputSelect from "Components/Assets/ReusableComp/CompactChipIn
 
 const types = ["Delivery", "Pickup", "Custom"];
 
-export default function OrderType() {
-  const [orderType, setOrderType] = React.useState([]);
-
+export default function OrderType({ orderType, setOrderType }) {
   return (
     <CompactChipInputSelect
       totalList={types}

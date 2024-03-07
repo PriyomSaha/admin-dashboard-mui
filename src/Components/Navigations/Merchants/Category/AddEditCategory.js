@@ -26,7 +26,10 @@ import { MdClose } from "react-icons/md"; // Importing close icon from react-ico
 import SaveCancelButtons from "Components/Assets/ReusableComp/SaveCancelButtons"; // Importing SaveCancelButtons component
 import ImageUpload from "Components/Assets/ReusableComp/EditImage/ImageUpload"; // Importing ImageUpload component
 import axios from "axios"; // Importing Axios for HTTP requests
-import { useCategoryStore } from "Components/Assets/StateManagement"; // Importing custom hook for state management
+import {
+  useCategoryStore,
+  useSnackbarStore,
+} from "Components/Assets/StateManagement"; // Importing custom hook for state management
 import { useEffect } from "react"; // Importing useEffect hook for side effects
 import { updateDataInTable } from "Components/Assets/UIServices"; // Importing function to update data in a table
 
@@ -42,13 +45,14 @@ function AddEditCategory({
   setCategoryImage,
   categoryGroup,
   setCategoryGroup,
-  showSnackbar,
-  setShowSnackbar,
-  snackbarMessage,
-  setSnackbarMessage,
-  snackbarType,
-  setSnackbarType,
 }) {
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
   // State to manage the visibility of the modal
   const isCategoryModalOpen = useCategoryStore(
     (state) => state.isCategoryModalOpen
@@ -131,7 +135,7 @@ function AddEditCategory({
           setCategoryStatus("0");
           setCategoryImage(null);
           setCategoryType("");
-          setCategoryGroup("V")
+          setCategoryGroup("V");
           // Update list of categories
           getCategories();
         }

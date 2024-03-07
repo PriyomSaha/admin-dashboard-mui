@@ -15,7 +15,10 @@ import {
 } from "@mui/material";
 import { CustomSwitch, TableImage } from "Components/UI/GlobalStyles";
 import CategoryFallBack from "Components/UI/Images/CategoriesFallBack.jpg";
-import { useCategoryStore } from "Components/Assets/StateManagement";
+import {
+  useCategoryStore,
+  useSnackbarStore,
+} from "Components/Assets/StateManagement";
 import { FaRegEdit } from "react-icons/fa";
 import axios from "axios";
 import {
@@ -37,13 +40,14 @@ function CategoryTable({
   setCategoryImage,
   categoryGroup,
   setCategoryGroup,
-  showSnackbar,
-  setShowSnackbar,
-  snackbarMessage,
-  setSnackbarMessage,
-  snackbarType,
-  setSnackbarType,
 }) {
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
   // State variables and functions from custom hooks
   const isCategoriesLoading = useCategoryStore(
     (state) => state.isCategoriesLoading

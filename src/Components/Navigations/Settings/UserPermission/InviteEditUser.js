@@ -23,15 +23,12 @@ import axios from "axios";
 import Overlay from "Components/Assets/ReusableComp/Overlay";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 import { getCookie } from "Components/Assets/UIServices";
-import { useInvitedUserStore } from "Components/Assets/StateManagement";
+import {
+  useInvitedUserStore,
+  useSnackbarStore,
+} from "Components/Assets/StateManagement";
 
 function InviteEditUser({
-  showSnackbar,
-  setShowSnackbar,
-  snackbarMessage,
-  setSnackbarMessage,
-  snackbarType,
-  setSnackbarType,
   email,
   setEmail,
   userName,
@@ -39,8 +36,7 @@ function InviteEditUser({
   permissions,
   setPermissions,
 }) {
-  // State to control the visibility of the modal, selected permissions, and email input
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false); // While sending invite
 
   const setIsInvitedUserModalOpen = useInvitedUserStore(
     (state) => state.setIsInvitedUserModalOpen
@@ -58,7 +54,12 @@ function InviteEditUser({
     (state) => state.setIsInvitedUsersLoading
   );
 
-  const [showOverlay, setShowOverlay] = useState(false); // While sending invite
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 

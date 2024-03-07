@@ -6,17 +6,20 @@ import {
   Typography,
 } from "@mui/material";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
+import { useSnackbarStore } from "Components/Assets/StateManagement";
 import { theme } from "Components/UI/themes";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-function NewPasswordInput({
-  setShowSnackbar,
-  setSnackbarType,
-  setSnackbarMessage,
-}) {
+function NewPasswordInput() {
   const navigate = useNavigate();
+
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
 
   const passwordChangeUrl =
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +

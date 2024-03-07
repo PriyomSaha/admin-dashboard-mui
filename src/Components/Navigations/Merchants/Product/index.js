@@ -12,11 +12,6 @@ function Product() {
   const [productImage, setProductImage] = useState(null);
   const [selectedCategories, setSelectedCategory] = useState([]);
 
-  // State variables to manage Snackbar
-  const [showSnackbar, setShowSnackbar] = useState(false); // Whether to show Snackbar or not
-  const [snackbarMessage, setSnackbarMessage] = useState(""); // Message displayed in Snackbar
-  const [snackbarType, setSnackbarType] = useState("info"); // Type of Snackbar: 'success' or 'error'
-
   return (
     <>
       <ProductTable
@@ -34,12 +29,6 @@ function Product() {
         setProductImage={setProductImage}
         selectedCategories={selectedCategories}
         setSelectedCategory={setSelectedCategory}
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarMessage={snackbarMessage}
-        setSnackbarMessage={setSnackbarMessage}
-        snackbarType={snackbarType}
-        setSnackbarType={setSnackbarType}
       />
       <AddEditProduct
         productId={productId}
@@ -55,20 +44,6 @@ function Product() {
         setProductImage={setProductImage}
         selectedCategories={selectedCategories}
         setSelectedCategory={setSelectedCategory}
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarMessage={snackbarMessage}
-        setSnackbarMessage={setSnackbarMessage}
-        snackbarType={snackbarType}
-        setSnackbarType={setSnackbarType}
-      />
-
-      {/* Render the ToastAlert component to display notifications */}
-      <ToastAlert
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarType={snackbarType}
-        snackbarMessage={snackbarMessage}
       />
     </>
   );

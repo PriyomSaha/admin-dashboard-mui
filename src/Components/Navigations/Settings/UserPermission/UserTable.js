@@ -26,17 +26,12 @@ import axios from "axios";
 import {
   useAccountStore,
   useInvitedUserStore,
+  useSnackbarStore,
 } from "Components/Assets/StateManagement";
 import { FaRegEdit } from "react-icons/fa";
 import Overlay from "Components/Assets/ReusableComp/Overlay";
 
 function UserTable({
-  showSnackbar,
-  setShowSnackbar,
-  snackbarMessage,
-  setSnackbarMessage,
-  snackbarType,
-  setSnackbarType,
   email,
   setEmail,
   userName,
@@ -74,7 +69,6 @@ function UserTable({
   // State variables for pagination
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  // const [permissions, setPermissions] = useState([]);
 
   // Function to handle page change event
   const handleChangePage = (event, newPage) => {
@@ -99,11 +93,17 @@ function UserTable({
     (state) => state.setAllInvitedUsers
   );
   const users = useInvitedUserStore((state) => state.allInvitedUsers);
-  // const setPermissions = useInvitedUserStore((state) => state.setPermissions);
 
   const inviterEmail = useAccountStore((state) => state.userData.email);
-  // API endpoint and API key
 
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
+  // API endpoint and API key
   const resendInviteUrl =
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +
     process.env.REACT_APP_RESEND_INVITE;
@@ -128,7 +128,9 @@ function UserTable({
 
       if (!resp.error) {
         await setShowSnackbar(true);
-        await setSnackbarMessage("Invite Re-sent!!");
+        // await setSnackbarMessage("Invite Re-sent!!");
+        await setSnackbarMessage(resp.data.message);
+
         await setSnackbarType("success");
       }
     } catch (error) {
@@ -148,7 +150,7 @@ function UserTable({
 
       if (!resp.error) {
         await setShowSnackbar(true);
-        await setSnackbarMessage("Deleted Successfully !!");
+        await setSnackbarMessage(resp.data.message);
         await setSnackbarType("success");
         await setAllInvitedUsers(await deleteDataFromTable(users, id));
       }

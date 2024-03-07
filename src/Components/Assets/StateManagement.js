@@ -5,18 +5,21 @@ export const useDrawerStore = create((set) => ({
   setDrawerOpen: () => set((state) => ({ isDrawerOpen: !state.isDrawerOpen })),
 }));
 
-// export const useSnackbarStore = create((set) => ({
-//   showSnackbar: false,
-//   setShowSnackbar: set((state) => ({ showSnackbar: !state.showSnackbar })),
-//   snackbarMessage: "",
-//   setSnackbarMessage: set((value) => ({
-//     snackbarMessage: value,
-//   })),
-//   snackbarType: "info",
-//   setSnackbarType: set((value) => ({
-//     snackbarType: value,
-//   })),
-// }));
+export const useSnackbarStore = create((set) => ({
+  showSnackbar: false,
+  setShowSnackbar: () =>
+    set((state) => ({ showSnackbar: !state.showSnackbar })),
+  snackbarMessage: "",
+  setSnackbarMessage: (value) =>
+    set((state) => ({
+      snackbarMessage: value,
+    })),
+  snackbarType: "info",
+  setSnackbarType: (value) =>
+    set((state) => ({
+      snackbarType: value,
+    })),
+}));
 
 export const useInvitedUserStore = create((set) => ({
   isInvitedUsersLoading: false,
@@ -141,6 +144,14 @@ export const useOrdersStore = create((set) => ({
 }));
 
 export const useMerchantStore = create((set) => ({
+  isMerchantsLoading: false,
+  setIsMerchantsLoading: () =>
+    set((state) => ({ isMerchantsLoading: !state.isMerchantsLoading })),
+  allMerchants: [],
+  setAllMerchants: (merchants) =>
+    set({
+      allMerchants: merchants,
+    }),
   isMerchantModalOpen: false,
   merchantType: "", //Modal Type
   setMerchantType: (value) =>

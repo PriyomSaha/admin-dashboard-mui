@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   useAccountStore,
   useEditProfileStore,
+  useSnackbarStore,
 } from "Components/Assets/StateManagement";
 import {
   Box,
@@ -51,12 +52,13 @@ function Edit() {
   const [isPassMatch, setIsPassMatch] = useState(true);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // State to control whether the Snackbar is shown or hidden
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  // State to store the message displayed in the Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  // State to store the type of Snackbar, which can be 'success' or 'error'
-  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
+
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
 
   // API endpoint for edit Profile
   const editProfileURL =
@@ -99,9 +101,9 @@ function Edit() {
         const resp = await axios.post(editProfileURL, requestBody, {
           headers: requestHeader,
         });
-        setShowSnackbar(true);
-        setSnackbarType("success");
-        setSnackbarMessage(resp.data.message);
+        await setShowSnackbar(true);
+        await setSnackbarType("success");
+        await setSnackbarMessage(resp.data.message);
         setTimeout(() => {
           setIsEditProfile(!isEditProfile);
         }, 2000); // Adjust the delay time as needed
@@ -344,13 +346,6 @@ function Edit() {
           </Box>
         </Box>
       </Modal>
-      {/* Display error or success message in a Snackbar */}
-      <ToastAlert
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarType={snackbarType}
-        snackbarMessage={snackbarMessage}
-      />
     </>
   );
 }

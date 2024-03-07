@@ -15,10 +15,36 @@ import { theme } from "Components/UI/themes";
 import Countries from "Components/Assets/ReusableComp/Countries";
 import MerchantCategory from "./MerchantCategory";
 import OrderType from "./OrderType";
+import EmailInput from "Components/Assets/ReusableComp/EmailInput";
 
-function MerchantDetails() {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [country, setCountry] = useState("IN");
+function MerchantDetails({
+  email,
+  setEmail,
+  name,
+  setName,
+  address,
+  setAddress,
+  phoneNumber,
+  setPhoneNumber,
+  country,
+  setCountry,
+  state,
+  setState,
+  city,
+  setCity,
+  postalCode,
+  setPostalCode,
+  status,
+  setStatus,
+  orderType,
+  setOrderType,
+  deliveryBy,
+  setDeliveryBy,
+  merchantCategory,
+  setMerchantCategory,
+  businessType,
+  setBusinessType,
+}) {
   return (
     <>
       <Typography variant="h6"> Merchant Details</Typography>
@@ -36,21 +62,29 @@ function MerchantDetails() {
       >
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth variant="outlined" size="small">
+            {/* <FormControl fullWidth variant="outlined" size="small">
               <InputLabel>Select Language</InputLabel>
-              <Select label="Select Language">
+              <Select
+                label="Select Language"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+              >
                 <MenuItem value="english">English</MenuItem>
                 <MenuItem value="spanish">Spanish</MenuItem>
                 <MenuItem value="french">French</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
+            <TextField
+              fullWidth
+              label="Merchant Name*"
+              variant="outlined"
+              size="small"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{ marginTop: "5px" }}
+            />
             <Grid container item xs={12} style={{ marginTop: "20px" }}>
-              <TextField
-                fullWidth
-                label="Merchant Name*"
-                variant="outlined"
-                size="small"
-              />
+              <EmailInput email={email} setEmail={setEmail} />
             </Grid>
           </Grid>
           <Grid item xs={12} sm={6} rowSpan={2}>
@@ -61,6 +95,8 @@ function MerchantDetails() {
               multiline
               rows={4}
               size="small"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -84,6 +120,8 @@ function MerchantDetails() {
               label="Merchant State"
               variant="outlined"
               size="small"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -92,12 +130,59 @@ function MerchantDetails() {
               label="Merchant City"
               variant="outlined"
               size="small"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Postal Code*"
+              variant="outlined"
+              size="small"
+              inputProps={{
+                type: "number",
+                min: "1",
+                max: "999999",
+                step: "1",
+              }}
+              value={postalCode}
+              onChange={(e) => {
+                const input = e.target.value;
+                // Check if input is a number and within the specified range
+                if (
+                  // !isNaN(input) &&
+                  parseInt(input) >= 1 &&
+                  parseInt(input) <= 999999
+                ) {
+                  setPostalCode(input);
+                }
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth variant="outlined" size="small">
+              <InputLabel>Select Business Type</InputLabel>
+              <Select
+                label="Select Business Type"
+                value={businessType}
+                onChange={(e) => setBusinessType(e.target.value)}
+              >
+                <MenuItem value="groceries">Groceries</MenuItem>
+                <MenuItem value="resturant">Resturant</MenuItem>
+                <MenuItem value="general">General</MenuItem>
+                <MenuItem value="stationary">Stationary</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth variant="outlined" size="small">
               <InputLabel>Delivery By</InputLabel>
-              <Select label="Delivery By">
+              <Select
+                label="Delivery By"
+                value={deliveryBy}
+                onChange={(e) => setDeliveryBy(e.target.value)}
+              >
                 <MenuItem value="merchant">Merchant</MenuItem>
                 <MenuItem value="admin">Admin</MenuItem>
               </Select>
@@ -106,17 +191,24 @@ function MerchantDetails() {
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth variant="outlined" size="small">
               <InputLabel>Status</InputLabel>
-              <Select label="Status">
+              <Select
+                label="Status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <MenuItem value="active">Active</MenuItem>
                 <MenuItem value="inactive">Inactive</MenuItem>
               </Select>
             </FormControl>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <MerchantCategory />
+            <MerchantCategory
+              merchantCategory={merchantCategory}
+              setMerchantCategory={setMerchantCategory}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <OrderType />
+            <OrderType orderType={orderType} setOrderType={setOrderType} />
           </Grid>
         </Grid>
       </Paper>

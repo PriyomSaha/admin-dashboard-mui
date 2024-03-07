@@ -15,6 +15,7 @@ import Countries from "Components/Assets/ReusableComp/Countries";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
+import { useSnackbarStore } from "Components/Assets/StateManagement";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -55,13 +56,11 @@ const Register = () => {
   // // State to indicate whether there's an error in the form
   // const [havingError, setHavingError] = useState(false);
 
-  // State to control whether the Snackbar is shown or hidden
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  // State to store the message displayed in the Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  // State to store the type of Snackbar, which can be 'success' or 'error'
-  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
-
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
   // Handle user registration
   const handleRegister = async () => {
     await setIsSubmitting(true);
@@ -256,13 +255,7 @@ const Register = () => {
           )}
         </Box>
       </Paper>
-      {/* Display error or success message in a Snackbar */}
-      <ToastAlert
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarType={snackbarType}
-        snackbarMessage={snackbarMessage}
-      />
+      
     </>
   );
 };

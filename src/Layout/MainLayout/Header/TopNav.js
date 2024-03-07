@@ -21,12 +21,17 @@ import {
   useAccountStore,
   useDrawerStore,
   useEditProfileStore,
+  useSnackbarStore,
 } from "Components/Assets/StateManagement";
 import { Avatar, Badge, Fade } from "@mui/material";
 import { useEffect } from "react";
 import Edit from "Components/Navigations/EditProfile/Edit";
 import { theme } from "Components/UI/themes";
-import { deleteCookie } from "Components/Assets/UIServices";
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "Components/Assets/UIServices";
 import axios from "axios";
 
 const AppBar = styled(MuiAppBar)(({ theme }) => ({
@@ -156,7 +161,17 @@ export default function TopNav() {
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
   const updateProfile = async () => {
+    await setSnackbarMessage("Please wait while we fetch your details");
+    await setSnackbarType("info");
+    await setShowSnackbar(true);
+
     try {
       const requestBody = new URLSearchParams();
       requestBody.append("identifier", userData.email);
@@ -170,11 +185,29 @@ export default function TopNav() {
         headers: requestHeader,
         withCredentials: true,
       });
-      console.log(resp);
+      const respData = resp.data.data;
+      if (!resp.error) {
+        setCookie("username", respData.username, 7);
+        setCookie("firstName", respData.profile.firstName, 7);
+        setCookie("lastName", respData.profile.lastName, 7);
+        setUserData(
+          respData.username,
+          respData.profile.firstName,
+          respData.profile.lastName,
+          respData.email,
+          getCookie("permissions"),
+          getCookie("role"),
+          true
+        );
+      }
+
       await setAnchorEl(null);
       await setIsEditProfile();
     } catch (error) {
       console.log(error);
+      await setSnackbarMessage("Error fetching details !! Please try again.");
+      await setSnackbarType("error");
+      await setShowSnackbar(true);
     }
   };
 

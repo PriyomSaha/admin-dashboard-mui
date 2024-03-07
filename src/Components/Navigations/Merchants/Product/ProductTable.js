@@ -27,6 +27,7 @@ import { FaRegEdit } from "react-icons/fa";
 import {
   useAccountStore,
   useProductStore,
+  useSnackbarStore,
 } from "Components/Assets/StateManagement";
 import axios from "axios";
 
@@ -45,13 +46,14 @@ function ProductTable({
   setProductImage,
   selectedCategories,
   setSelectedCategory,
-  showSnackbar,
-  setShowSnackbar,
-  snackbarMessage,
-  setSnackbarMessage,
-  snackbarType,
-  setSnackbarType,
 }) {
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
   const userRole = useAccountStore((state) => state.userData.role);
 
   // State variables and functions from custom hooks

@@ -4,6 +4,8 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Paper,
@@ -16,12 +18,28 @@ import {
 import { orderStatus } from "Components/Assets/NavigationsProvider";
 import { theme } from "Components/UI/themes";
 import React from "react";
+import { MdClear } from "react-icons/md";
 
-function CommissionConfiguration() {
-  const [value, setValue] = React.useState("percentage");
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
+function CommissionConfiguration({
+  commisionType,
+  setCommisionType,
+  commisionValue,
+  setCommisionValue,
+  commisionCondition,
+  setCommisionCondition,
+}) {
+  const handleCommisionValueChange = (event) => {
+    const input = event.target.value;
+    // Check if input is a number and within the specified range (1-100 for Percentage and 1-999 for fixed)
+    if (commisionType === "percentage") {
+      if (!isNaN(input) && parseInt(input) >= 0 && parseInt(input) <= 100) {
+        setCommisionValue(input);
+      }
+    } else {
+      if (!isNaN(input) && parseInt(input) >= 0 && parseInt(input) <= 999) {
+        setCommisionValue(input);
+      }
+    }
   };
 
   return (
@@ -43,7 +61,13 @@ function CommissionConfiguration() {
           Commission Type*
         </Typography>
         <FormControl>
-          <RadioGroup value={value} onChange={handleChange}>
+          <RadioGroup
+            value={commisionType}
+            onChange={(e) => {
+              setCommisionType(e.target.value);
+              setCommisionValue(0);
+            }}
+          >
             <Grid container spacing={1}>
               <Grid item xs={6}>
                 <FormControlLabel
@@ -53,16 +77,31 @@ function CommissionConfiguration() {
                 />
               </Grid>
               <Grid item xs={6}>
-                {value === "percentage" ? (
+                {commisionType === "percentage" ? (
                   <TextField
+                    fullWidth
                     variant="outlined"
                     size="small"
-                    type="number"
-                    sx={{ float: "right", width: "80px" }}
-                    inputProps={{
-                      min: "1",
-                      max: "100",
-                      step: 1, // The increment/decrement step for the input value
+                    sx={{ float: "right", width: "100px" }}
+                    InputProps={{
+                      // type: "number",
+                      min: "0",
+                      max: "999",
+                      step: "1",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            edge="end"
+                            onClick={() => setCommisionValue(0)}
+                          >
+                            <MdClear />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    value={commisionValue}
+                    onChange={(e) => {
+                      handleCommisionValueChange(e);
                     }}
                   />
                 ) : null}
@@ -75,16 +114,31 @@ function CommissionConfiguration() {
                 />
               </Grid>
               <Grid item xs={6}>
-                {value === "fixed" ? (
+                {commisionType === "fixed" ? (
                   <TextField
+                    fullWidth
                     variant="outlined"
                     size="small"
-                    type="number"
-                    sx={{ float: "right", width: "80px" }}
-                    inputProps={{
-                      min: "1",
+                    sx={{ float: "right", width: "100px" }}
+                    InputProps={{
+                      // type: "number",
+                      min: "0",
                       max: "999",
-                      step: 1, // The increment/decrement step for the input value
+                      step: "1",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            edge="end"
+                            onClick={() => setCommisionValue(0)}
+                          >
+                            <MdClear />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    value={commisionValue}
+                    onChange={(e) => {
+                      handleCommisionValueChange(e);
                     }}
                   />
                 ) : null}
@@ -104,7 +158,11 @@ function CommissionConfiguration() {
               sx={{ mt: 2 }}
             >
               <InputLabel>Calculate On Status</InputLabel>
-              <Select label="Calculate On Status">
+              <Select
+                label="Calculate On Status"
+                value={commisionCondition}
+                onChange={(e) => setCommisionCondition(e.target.value)}
+              >
                 {orderStatus.map((value, index) => (
                   <MenuItem value={value} key={index}>
                     {value}

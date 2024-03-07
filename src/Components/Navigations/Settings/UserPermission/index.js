@@ -17,13 +17,6 @@ import { useInvitedUserStore } from "Components/Assets/StateManagement";
 import { theme } from "Components/UI/themes";
 
 function UserPermisson() {
-  // State to control whether the Snackbar is shown or hidden
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  // State to store the message displayed in the Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  // State to store the type of Snackbar, which can be 'success' or 'error'
-  const [snackbarType, setSnackbarType] = useState("success"); // 'success' or 'error'
-
   const [email, setEmail] = useState(""); // State to store the email input value
   const [userName, setUserName] = useState(""); // State State to store the user name for email
   const [permissions, setPermissions] = useState([]);
@@ -116,12 +109,6 @@ function UserPermisson() {
       </Stack>
 
       <InviteEditUser
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarMessage={snackbarMessage}
-        setSnackbarMessage={setSnackbarMessage}
-        snackbarType={snackbarType}
-        setSnackbarType={setSnackbarType}
         email={email}
         setEmail={setEmail}
         userName={userName}
@@ -130,25 +117,12 @@ function UserPermisson() {
         setPermissions={setPermissions}
       />
       <UserTable
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarMessage={snackbarMessage}
-        setSnackbarMessage={setSnackbarMessage}
-        snackbarType={snackbarType}
-        setSnackbarType={setSnackbarType}
         email={email}
         setEmail={setEmail}
         userName={userName}
         setUserName={setUserName}
         permissions={permissions}
         setPermissions={setPermissions}
-      />
-      {/* Display error or success message in a Snackbar */}
-      <ToastAlert
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarType={snackbarType}
-        snackbarMessage={snackbarMessage}
       />
     </Box>
   );

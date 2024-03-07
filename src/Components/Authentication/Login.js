@@ -11,7 +11,10 @@ import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
 import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import EmailInput from "Components/Assets/ReusableComp/EmailInput";
-import { useAccountStore } from "Components/Assets/StateManagement";
+import {
+  useAccountStore,
+  useSnackbarStore,
+} from "Components/Assets/StateManagement";
 import axios from "axios";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
 import { getCookie, setCookie } from "Components/Assets/UIServices";
@@ -23,18 +26,18 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // State to control whether the Snackbar is shown or hidden
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  // State to store the message displayed in the Snackbar
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  // State to store the type of Snackbar, which can be 'success' or 'error'
-  const [snackbarType, setSnackbarType] = useState(""); // 'success' or 'error'
-
   // State to track form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Accessing user data from global state
   const setUserData = useAccountStore((state) => state.setUserData);
+
+  // Accessing alert snackbar data from global state
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
 
   // API endpoints
 
@@ -47,11 +50,6 @@ const Login = () => {
     process.env.REACT_APP_REFRESH_TOKEN_URL;
 
   const API_KEY = process.env.REACT_APP_API_KEY;
-
-  // Clear error status when password or email changes
-  useEffect(() => {
-    setShowSnackbar(false);
-  }, [password, email]);
 
   // Handle user login
   const handleLogin = async () => {
@@ -69,8 +67,6 @@ const Login = () => {
       );
     } else {
       try {
-        await setShowSnackbar(false);
-
         const requestBody = {
           email: email,
           password: password,
@@ -79,7 +75,6 @@ const Login = () => {
           "X-API-Key": API_KEY,
         };
 
-        // Call authentication API to get token
         const resp = await axios.post(loginUrl, requestBody, {
           headers: requestHeader,
           withCredentials: true,
@@ -129,10 +124,10 @@ const Login = () => {
             true
           );
         }
-        const refreshTokenResp = await axios.get(refreshTokenUrl, {
-          withCredentials: true,
-          headers: requestHeader,
-        });
+        // const refreshTokenResp = await axios.get(refreshTokenUrl, {
+        //   withCredentials: true,
+        //   headers: requestHeader,
+        // });
 
         // let i = async () => {
         //   const requestOptions = {
@@ -291,14 +286,6 @@ const Login = () => {
           Click Here
         </span>
       </Typography>
-
-      {/* Display error or success message in a Snackbar */}
-      <ToastAlert
-        showSnackbar={showSnackbar}
-        setShowSnackbar={setShowSnackbar}
-        snackbarType={snackbarType}
-        snackbarMessage={snackbarMessage}
-      />
     </>
   );
 };

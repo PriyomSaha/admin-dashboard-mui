@@ -21,8 +21,10 @@ const categories = [
   "Mother & Child Care",
 ];
 
-export default function MerchantCategory() {
-  const [merchantCategory, setMerchantCategory] = React.useState([]);
+export default function MerchantCategory({
+  merchantCategory,
+  setMerchantCategory,
+}) {
   return (
     <div>
       <CompactChipInputSelect

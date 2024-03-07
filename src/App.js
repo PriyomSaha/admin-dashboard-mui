@@ -9,7 +9,6 @@ import { theme } from "Components/UI/themes";
 import { CssBaseline } from "@mui/material";
 import ScrollTop from "Components/ScrollTop";
 import ThemeRoutes from "Routes";
-import { useLocation } from "react-router-dom";
 
 // Import custom state management hook
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
@@ -27,7 +26,7 @@ function App() {
         </ScrollTop>
       </div>
       {/* Render the ToastAlert component to display notifications */}
-      {/* <ToastAlert /> */}
+      <ToastAlert />
     </ThemeProvider>
   );
 }

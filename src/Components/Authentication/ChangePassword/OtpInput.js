@@ -12,13 +12,15 @@ import { theme } from "Components/UI/themes";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { useSnackbarStore } from "Components/Assets/StateManagement";
 
-const OtpInput = ({
-  setisOtpValidated,
-  setShowSnackbar,
-  setSnackbarType,
-  setSnackbarMessage,
-}) => {
+const OtpInput = ({ setisOtpValidated }) => {
+  const setShowSnackbar = useSnackbarStore((state) => state.setShowSnackbar);
+  const setSnackbarMessage = useSnackbarStore(
+    (state) => state.setSnackbarMessage
+  );
+  const setSnackbarType = useSnackbarStore((state) => state.setSnackbarType);
+
   const otpValidationUrl =
     process.env.REACT_APP_BASE_URL_TEST_BACKEND +
     process.env.REACT_APP_OTP_VALIDATION_URL;
@@ -37,7 +39,6 @@ const OtpInput = ({
 
   useEffect(() => {
     const decode = atob(token);
-    // const decode = "atob(token)";
 
     const decodeArray = decode.split(" ");
     setEmail(decodeArray[0]);
