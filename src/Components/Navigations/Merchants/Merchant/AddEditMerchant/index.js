@@ -150,7 +150,7 @@ const AddEditMerchant = ({
           setCommisionCondition("Collected");
 
           // // Update list of merchants
-          // getCategories();
+          getMerchants();
         }
       } catch (error) {
         // Show error message if request fails

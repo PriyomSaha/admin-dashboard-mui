@@ -28,7 +28,11 @@ import {
   useSnackbarStore,
 } from "Components/Assets/StateManagement";
 import axios from "axios";
-import { deleteDataFromTable } from "Components/Assets/UIServices";
+import {
+  deleteDataFromTable,
+  getCookie,
+  updateDataInTable,
+} from "Components/Assets/UIServices";
 
 function MerchantTable({
   id,
@@ -163,6 +167,36 @@ function MerchantTable({
     await setCommisionType(value.commissionType.type);
     await setCommisionValue(value.commissionType.value);
     await setCommisionCondition(value.commissionType.condition);
+  };
+
+  const editMerchantStatus = async (value) => {
+    await setIsMerchantsLoading();
+
+    try {
+      const requestHeader = { "X-API-Key": API_KEY };
+      // const status = value.categoryStatus === "0" ? "1" : "0";
+      const requestBody = {
+        status: value.status === "inactive" ? "active" : "inactive",
+      };
+
+      const resp = await axios.put(`${merchantsUrl}/${value.id}`, requestBody, {
+        headers: requestHeader,
+      });
+
+      if (!resp.error) {
+        await setShowSnackbar(true);
+        await setSnackbarType("success");
+        await setSnackbarMessage(resp.data.message);
+
+        // Update the table data
+        await updateDataInTable(merchants, requestBody, value.id);
+      }
+    } catch (error) {
+      setShowSnackbar(true);
+      setSnackbarType("error");
+      setSnackbarMessage("Error in Updating Merchant Status...");
+    }
+    await setIsMerchantsLoading();
   };
 
   const deleteMerchant = async (id) => {
@@ -311,7 +345,7 @@ function MerchantTable({
                         <TableCell>
                           <CustomSwitch
                             checked={value.status === "active" ? true : false}
-                            // onChange={() => setEnabled(!enabled)}
+                            onChange={() => editMerchantStatus(value)}
                             inputProps={{ "aria-label": "ant design" }}
                           />
                         </TableCell>

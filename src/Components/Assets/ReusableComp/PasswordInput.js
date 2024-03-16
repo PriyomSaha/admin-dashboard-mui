@@ -32,6 +32,10 @@ function PasswordInput({
     setPassword(newPassword);
     setIsValidPassword(validatePassword(newPassword));
   };
+  const handlePasswordCopyPaste = (event) => {
+    event.preventDefault();
+    alert("Copying and pasting is not allowed in this field");
+  };
   return (
     <>
       <TextField
@@ -40,6 +44,8 @@ function PasswordInput({
         required
         fullWidth
         disabled={disabled}
+        onPaste={(event) => handlePasswordCopyPaste(event)}
+        onCopy={(event) => handlePasswordCopyPaste(event)}
         sx={
           disabled
             ? {

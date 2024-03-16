@@ -20,6 +20,7 @@ import {
 import {
   FullScreenModalContainer,
   FullScreenModalContent,
+  FullScreenModalHeader,
 } from "Components/UI/GlobalStyles";
 import { theme } from "Components/UI/themes";
 import { MdClose } from "react-icons/md";
@@ -27,6 +28,8 @@ import PasswordInput from "Components/Assets/ReusableComp/PasswordInput";
 import { PiPasswordDuotone, PiPasswordFill } from "react-icons/pi";
 import axios from "axios";
 import ToastAlert from "Components/Assets/ReusableComp/ToastAlert";
+import { getCookie, setCookie } from "Components/Assets/UIServices";
+import { useNavigate } from "react-router-dom";
 
 function Edit() {
   const isEditProfile = useEditProfileStore((state) => state.isEditProfile);
@@ -34,6 +37,8 @@ function Edit() {
     (state) => state.setIsEditProfile
   );
   const userData = useAccountStore((state) => state.userData);
+
+  const setUserData = useAccountStore((state) => state.setUserData);
 
   const [firstName, setFirstName] = useState(userData.firstName);
   const [lastName, setLastName] = useState(userData.lastName);
@@ -104,9 +109,24 @@ function Edit() {
         await setShowSnackbar(true);
         await setSnackbarType("success");
         await setSnackbarMessage(resp.data.message);
-        setTimeout(() => {
+
+        setCookie("username", userName, 7);
+        setCookie("firstName", firstName, 7);
+        setCookie("lastName", lastName, 7);
+        setUserData(
+          userName,
+          firstName,
+          lastName,
+          email,
+          getCookie("permissions"),
+          getCookie("role"),
+          true
+        );
+
+        await setTimeout(() => {
           setIsEditProfile(!isEditProfile);
         }, 2000); // Adjust the delay time as needed
+        // await window.location.reload();
       } catch (error) {
         setShowSnackbar(true);
         setSnackbarType("error");
@@ -120,23 +140,7 @@ function Edit() {
     <>
       <Modal open={isEditProfile} sx={FullScreenModalContainer}>
         <Box>
-          <Box
-            sx={{
-              position: "sticky",
-              top: 0,
-              left: "auto",
-              right: "auto",
-              minWidth: "50vw",
-              maxWidth: "100vw",
-
-              backgroundColor: theme.palette.background.paper,
-              padding: theme.spacing(1, 2),
-              zIndex: 1,
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-              borderBottom: `1px solid ${theme.palette.grey[400]}`,
-            }}
-          >
+          <Box sx={FullScreenModalHeader}>
             <Typography variant="h6">Edit Profile</Typography>
 
             <IconButton
